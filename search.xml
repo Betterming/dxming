@@ -56,9 +56,9 @@
         <category>Algorithm</category>
       </categories>
       <tags>
-        <tag>AVL</tag>
         <tag>Traversal</tag>
         <tag>Order</tag>
+        <tag>AVL</tag>
       </tags>
   </entry>
   <entry>
@@ -206,10 +206,10 @@
         <category>Algorithm</category>
       </categories>
       <tags>
-        <tag>Traversal</tag>
-        <tag>Order</tag>
         <tag>BST</tag>
         <tag>PAT</tag>
+        <tag>Traversal</tag>
+        <tag>Order</tag>
       </tags>
   </entry>
   <entry>

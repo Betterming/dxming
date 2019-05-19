@@ -1860,7 +1860,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #33f550;
+  background: #fe2ad0;
 }
 .feed-link,
 .chat {
@@ -2634,7 +2634,7 @@ embed {
   margin-top: 10px;
   padding: 20px 20px 20px 20px;
   background: #fff;
-  opacity: 0.75;
+  opacity: 0.8;
   min-height: 500px;
 }
 .container .header-inner {
