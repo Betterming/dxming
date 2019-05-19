@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="markdown 使用指南一 目录:  基本操作 专用操作 Markdow工具">
+<meta name="keywords" content="markdown,Atom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown 使用指南一">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/57d30a97.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="markdown 使用指南一 目录:  基本操作 专用操作 Markdow工具">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg">
+<meta property="og:image" content="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg">
+<meta property="og:updated_time" content="2019-02-06T14:05:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="markdown 使用指南一">
+<meta name="twitter:description" content="markdown 使用指南一 目录:  基本操作 专用操作 Markdow工具">
+<meta name="twitter:image" content="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/57d30a97">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>markdown 使用指南一 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/57d30a97.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">markdown 使用指南一
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-16 12:56:00" itemprop="dateCreated datePublished" datetime="2018-09-16T12:56:00+08:00">2018-09-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-06 22:05:50" itemprop="dateModified" datetime="2019-02-06T22:05:50+08:00">2019-02-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Technique/" itemprop="url" rel="index"><span itemprop="name">Technique</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/57d30a97.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/57d30a97.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/57d30a97.html" class="leancloud_visitors" data-flag-title="markdown 使用指南一">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="markdown-使用指南一"><a href="#markdown-使用指南一" class="headerlink" title="markdown 使用指南一"></a><center>markdown 使用指南一</center></h1><blockquote>
+<p><strong>目录</strong>:</p>
+<ol>
+<li>基本操作</li>
+<li>专用操作</li>
+<li>Markdow工具<a id="more"></a>
+</li>
+</ol>
+</blockquote>
+<h2 id="1-基本语法："><a href="#1-基本语法：" class="headerlink" title="1. 基本语法："></a>1. 基本语法：</h2><ul>
+<li>字体常见设置：下划线，加粗，删除线</li>
+<li>字体深度设置：字体，字号，颜色，背景色</li>
+<li>分级标题</li>
+<li>分割线</li>
+<li>链接</li>
+<li>引用</li>
+<li>列表</li>
+<li>Todo列表</li>
+<li>行首缩进，换行</li>
+<li>特殊字符输入</li>
+</ul>
+<h3 id="1-字体常见设置：斜体，加粗，删除线"><a href="#1-字体常见设置：斜体，加粗，删除线" class="headerlink" title="(1) 字体常见设置：斜体，加粗，删除线"></a>(1) 字体常见设置：斜体，加粗，删除线</h3><p>&emsp;&emsp; 用一对单星号把要处理的文字包起来就会呈现斜体；用一对双星号把要处理的文字包起来就会呈现加粗；用一对双波浪线把要处理的文字包起来就会呈现斜体。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*感觉萌萌哒*</span><br><span class="line">**感觉萌萌哒**</span><br><span class="line">***感觉萌萌哒***</span><br><span class="line">~~ 感觉萌萌哒~~</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<p><em>感觉萌萌哒</em><br><strong>感觉萌萌哒</strong><br><strong><em>感觉萌萌哒</em></strong><br><del>感觉萌萌哒</del></p>
+<h3 id="2-字体深度设置：字体，字号，颜色，背景色"><a href="#2-字体深度设置：字体，字号，颜色，背景色" class="headerlink" title="(2) 字体深度设置：字体，字号，颜色，背景色"></a>(2) 字体深度设置：字体，字号，颜色，背景色</h3><p>markdown本身不支持修改字体、字号与颜色等功能，但是使用内嵌HTML的方法来实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;感觉萌萌哒&lt;/font&gt;</span><br><span class="line">&lt;font color=#0000ff size=5 face=&quot;黑体&quot;&gt;感觉萌萌哒&lt;/font&gt;</span><br><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;感觉萌萌哒&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<p><font face="微软雅黑">感觉萌萌哒</font></p>
+<p><font color="#0000ff" size="5" face="黑体">感觉萌萌哒</font></p>
+<table><tr><td bgcolor="yellow">感觉萌萌哒</td></tr></table>
+
+<p><strong>注意</strong>：Size：字体大小，范围是1到7，浏览器默认值是3。</p>
+<h3 id="3-分级标题"><a href="#3-分级标题" class="headerlink" title="(3) 分级标题"></a>(3) 分级标题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用#来实现分级标题，使用&lt;center&gt;&lt;/center&gt;来居中</span><br><span class="line"># 感觉萌萌哒</span><br><span class="line">## 感觉萌萌哒</span><br><span class="line">### 感觉萌萌哒</span><br><span class="line">### &lt;center&gt;感觉萌萌哒&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<h1 id="感觉萌萌哒"><a href="#感觉萌萌哒" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h1><h2 id="感觉萌萌哒-1"><a href="#感觉萌萌哒-1" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h2><h3 id="感觉萌萌哒-2"><a href="#感觉萌萌哒-2" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h3><h3 id="感觉萌萌哒-3"><a href="#感觉萌萌哒-3" class="headerlink" title="感觉萌萌哒"></a><center>感觉萌萌哒</center></h3><h3 id="4-分割线"><a href="#4-分割线" class="headerlink" title="(4) 分割线"></a>(4) 分割线</h3><p>三个连续星号(*)、减号(-)、底线(_)来实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">---</span><br><span class="line">___</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<hr>
+<hr>
+<hr>
+<h3 id="5-链接"><a href="#5-链接" class="headerlink" title="(5) 链接"></a>(5) 链接</h3><p>a. 插入图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：![图片描述](图片本地或互联网url)</span><br><span class="line">例如：![女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" alt="刘亦菲"></p>
+<p>b. 文字加链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[文字或(本地图片位置)](url)</span><br><span class="line">例如：[女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><a href="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" target="_blank" rel="noopener">女神刘亦菲</a></p>
+<p>c. 图片加链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[![图片描述](图片互联网url或这本地相对链接)](url)</span><br><span class="line">例如：[![女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><a href="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" target="_blank" rel="noopener"><img src="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" alt="女神刘亦菲"></a></p>
+<h3 id="6-引用"><a href="#6-引用" class="headerlink" title="(6) 引用"></a>(6) 引用</h3><p> 在正文前使用&gt;符号和空格<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 感觉萌萌哒</span><br><span class="line">&gt;&gt; 感觉萌萌哒</span><br><span class="line">&gt;&gt;&gt; 感觉萌萌哒</span><br></pre></td></tr></table></figure></p>
+<p> 效果如下：</p>
+<blockquote>
+<p>感觉萌萌哒</p>
+<blockquote>
+<p>感觉萌萌哒</p>
+<blockquote>
+<p>感觉萌萌哒</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="7-列表"><a href="#7-列表" class="headerlink" title="(7) 列表"></a>(7) 列表</h3><p> 列表有两种：无序列表和有序列表<br> a. 无序列表: 使用 *，+，-，再加上一个空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是无序列表：</span><br><span class="line">- 萌萌哒一遍</span><br><span class="line">- 萌萌哒二遍</span><br><span class="line">- 萌萌哒三遍</span><br></pre></td></tr></table></figure></p>
+<p>我是无序列表：</p>
+<ul>
+<li>萌萌哒一遍</li>
+<li>萌萌哒二遍</li>
+<li>萌萌哒三遍</li>
+</ul>
+<p>c. 有序列表：使用数字和一个英文句点，再加上一个空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是有序列表：</span><br><span class="line">1. 萌萌大</span><br><span class="line">2. 萌萌中</span><br><span class="line">3. 萌萌小</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<p>我是有序列表：</p>
+<ol>
+<li>萌萌大</li>
+<li>萌萌中</li>
+<li>萌萌小</li>
+</ol>
+<h3 id="8-Todo列表"><a href="#8-Todo列表" class="headerlink" title="(8) Todo列表"></a>(8) Todo列表</h3><p> 用- [ ]，- [X]表示事件有没有完成(减号空格左中括号空格右中括号，减号空格左中括号x大写或小写右中括号。都这么直接了，应该不会用错了吧)<br> 如图</p>
+<p> 今天要做的事：</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 吃饭</li>
+<li style="list-style: none"><input type="checkbox" checked> 看剧</li>
+<li style="list-style: none"><input type="checkbox"> 写代码</li>
+<li style="list-style: none"><input type="checkbox"> 上课</li>
+</ul>
+<h3 id="9-行首缩进，换行"><a href="#9-行首缩进，换行" class="headerlink" title="(9) 行首缩进，换行"></a>(9) 行首缩进，换行</h3><p>直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，&ensp; 代表半角空格，&emsp; 代表全角空格。换行：连续两个以上空格+回车或者<br><br>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;你爱不爱我，我都是萌萌哒。&lt;br&gt;感觉萌萌哒&lt;br/&gt;萌萌哒</span><br></pre></td></tr></table></figure></p>
+<p>示例效果：</p>
+<p>&emsp;&emsp;你爱不爱我，我都是萌萌哒。<br>感觉萌萌哒<br>萌萌哒</p>
+<h3 id="10-特殊字符输入"><a href="#10-特殊字符输入" class="headerlink" title="(10) 特殊字符输入"></a>(10) 特殊字符输入</h3><p>a. 前面加反斜线\ 即可显示符号本身。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\\</span><br><span class="line">\*</span><br><span class="line">\.</span><br><span class="line">\_</span><br><span class="line">\-</span><br><span class="line">\#</span><br><span class="line">\&#123;\&#125;</span><br><span class="line">\!</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br>\<br>*<br>.<br>_<br>-<br>#<br>{}<br>!<br>b. 特殊的转义字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">符号	说明	对应编码</span><br><span class="line">¶	段落符号   &amp;para;</span><br><span class="line">§	章节符	    &amp;sect;</span><br><span class="line">±	加减号	    &amp;plusmn;</span><br><span class="line">ƒ	function  &amp;fnof;</span><br><span class="line">√	根号	     &amp;radic;</span><br><span class="line">∞	无穷大	    &amp;infin;</span><br><span class="line">°	度	        &amp;deg;</span><br><span class="line">≠	不等号  	  &amp;ne;</span><br><span class="line">≡	恒等于	    &amp;equiv;</span><br><span class="line">≤	小于等于 	&amp;le;</span><br><span class="line">≥	大于等于 	&amp;ge;</span><br><span class="line">♠	黑桃      &amp;spades;</span><br><span class="line">♥	红桃  	  &amp;hearts;</span><br><span class="line">♣	梅花 	   &amp;clubs;</span><br><span class="line">♦	方块	   &amp;diams;</span><br><span class="line">举个栗子：</span><br><span class="line">黑桃&amp;spades;大于红桃&amp;hearts;大于梅花&amp;clubs;方块&amp;diams;</span><br><span class="line">不管是人民币&amp;yen;、欧元&amp;euro;、英磅&amp;pound;还是美元 &amp;dollar;，我都喜欢。</span><br></pre></td></tr></table></figure></p>
+<p>效果：<br>黑桃&spades;大于红桃&hearts;大于梅花&clubs;方块&diams;<br>不管是人民币&yen;、欧元&euro;、英磅&pound;还是美元 &dollar;，我都喜欢。<br><strong>本特殊符号来源自该<a href="https://blog.csdn.net/vola9527/article/details/69948411" target="_blank" rel="noopener">博文</a></strong></p>
+<p>&emsp;&emsp;终于写完了第一个博客，作为一个糙老爷们用了这么多萌萌哒，我先吐会儿。。。。</p>
+<p>&emsp;&emsp;等我吐完了再来接着写第二篇哈。。。。</p>
+<p>本文参考文章：</p>
+<ul>
+<li><a href="https://blog.csdn.net/jaywon/article/details/77992082" target="_blank" rel="noopener">https://blog.csdn.net/jaywon/article/details/77992082</a></li>
+<li><a href="https://www.jianshu.com/p/c0a2897ad4eb" target="_blank" rel="noopener">https://www.jianshu.com/p/c0a2897ad4eb</a></li>
+<li><a href="https://blog.csdn.net/u010177286/article/details/50358720" target="_blank" rel="noopener">https://blog.csdn.net/u010177286/article/details/50358720</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag"># markdown</a>
+          
+            <a href="/tags/Atom/" rel="tag"># Atom</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/72b78552.html" rel="prev" title="Exercise_1">
+                Exercise_1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#markdown-使用指南一"><span class="nav-text">markdown 使用指南一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本语法："><span class="nav-text">1. 基本语法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-字体常见设置：斜体，加粗，删除线"><span class="nav-text">(1) 字体常见设置：斜体，加粗，删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字体深度设置：字体，字号，颜色，背景色"><span class="nav-text">(2) 字体深度设置：字体，字号，颜色，背景色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-分级标题"><span class="nav-text">(3) 分级标题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感觉萌萌哒"><span class="nav-text">感觉萌萌哒</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感觉萌萌哒-1"><span class="nav-text">感觉萌萌哒</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#感觉萌萌哒-2"><span class="nav-text">感觉萌萌哒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感觉萌萌哒-3"><span class="nav-text">感觉萌萌哒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-分割线"><span class="nav-text">(4) 分割线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-链接"><span class="nav-text">(5) 链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-引用"><span class="nav-text">(6) 引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-列表"><span class="nav-text">(7) 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Todo列表"><span class="nav-text">(8) Todo列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-行首缩进，换行"><span class="nav-text">(9) 行首缩进，换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-特殊字符输入"><span class="nav-text">(10) 特殊字符输入</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

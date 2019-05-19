@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;这是我们老师布置的作业，以下是我的一些总结。 1. Programming Exercise Modify the cannonball simulation from the chapter so that it also calculates the maximum height achieved by the cannonball.">
+<meta name="keywords" content="graphics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exercise5">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/12ef2f97.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;这是我们老师布置的作业，以下是我的一些总结。 1. Programming Exercise Modify the cannonball simulation from the chapter so that it also calculates the maximum height achieved by the cannonball.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/FirstVersione9cf6.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/cannonball1a396b.png">
+<meta property="og:image" content="https://miao.su/images/2019/05/19/moveb87b9.gif">
+<meta property="og:updated_time" content="2019-05-19T13:05:03.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Exercise5">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;这是我们老师布置的作业，以下是我的一些总结。 1. Programming Exercise Modify the cannonball simulation from the chapter so that it also calculates the maximum height achieved by the cannonball.">
+<meta name="twitter:image" content="https://miao.su/images/2019/02/06/FirstVersione9cf6.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/12ef2f97">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Exercise5 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/12ef2f97.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Exercise5
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-28 11:00:25" itemprop="dateCreated datePublished" datetime="2018-10-28T11:00:25+08:00">2018-10-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-19 21:05:03" itemprop="dateModified" datetime="2019-05-19T21:05:03+08:00">2019-05-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python-Exercise/" itemprop="url" rel="index"><span itemprop="name">Python Exercise</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/12ef2f97.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/12ef2f97.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/12ef2f97.html" class="leancloud_visitors" data-flag-title="Exercise5">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;这是我们老师布置的作业，以下是我的一些总结。</p>
+<h2 id="1-Programming-Exercise"><a href="#1-Programming-Exercise" class="headerlink" title="1. Programming Exercise"></a>1. Programming Exercise</h2><ul>
+<li>Modify the cannonball simulation from the chapter so that it also calculates the maximum height achieved by the cannonball.<a id="more"></a></li>
+<li>Program Specification<ul>
+<li>Suppose we want to write a program that simulates the flight of a cannonball (or any other projectile such as a bullet, baseball, or shot put). We are particularly interested in finding out how far the cannonball will travel when fired at various launch angles and initial velocities. The input to the program will be the launch angle (in degrees), the initial velocity (in meters per second), and the initial height (in meters) of the cannonball. The output will be the distance that the projectile travels before striking the ground (in meters).</li>
+<li>In addition, the program also can calculate the maximum height.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Code-and-Analysis"><a href="#2-Code-and-Analysis" class="headerlink" title="2. Code and Analysis"></a>2. Code and Analysis</h2><h3 id="2-1-The-First-Version"><a href="#2-1-The-First-Version" class="headerlink" title="2.1 The First Version"></a>2.1 The First Version</h3><p>&ensp;&ensp;Let’s start by designing an algorithm. Given the problem statement, it’s clear that we need to consider the flight of the cannonball in two dimensions: height, so we know when it hits the ground; and distance, to keep track of how far it goes. We can think of the position of the cannonball as a point ( x, y) in a 2D graph where the value of y gives the height above the ground and the value of x gives the distance from the starting point.</p>
+<p>&ensp;&ensp;The Projectile class must have an <strong> init </strong> method that uses these values to initialize the instance variables of cball. But what should the instance variables be? Of course, they will be the four pieces of information that characterize the flight of the cannonball: xpos, ypos, xvel, yvel and MaxHeight.</p>
+<p>&ensp;&ensp; Notice how we have created five instance variables inside the object using the self dot notation. The value of theta is not needed after <strong> ini t </strong> terminates, so it is just a normal (local) function variable. The methods for accessing the position of our projectiles are straightforward; the current position is given by the instance variables xpos, ypos and MaxHeight. We just need a couple of methods that return these values.</p>
+<p>&ensp;&ensp;Finally, we come to the update method. This method takes a single normal parameter that represents an interval of time. We need to update the state of the projectile to account for the passage of that much time. Here’s the code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">from math import sin, cos, radians</span><br><span class="line"></span><br><span class="line">class Projectile:</span><br><span class="line">    def __init__(self, angle, velocity, height):</span><br><span class="line">        self.xpos = 0.0</span><br><span class="line">        self.ypos = height</span><br><span class="line">        theta = radians(angle)</span><br><span class="line">        self.xvel = velocity * cos(theta)</span><br><span class="line">        self.yvel = velocity * sin(theta)</span><br><span class="line">        self.MaxHeight = self.ypos</span><br><span class="line"></span><br><span class="line">    def update(self, time):</span><br><span class="line">        self.xpos = self.xpos + time * self.xvel</span><br><span class="line">        yvel1 = self.yvel - 9.8 * time</span><br><span class="line">        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0</span><br><span class="line">        self.yvel = yvel1</span><br><span class="line">        if self.ypos &gt; self.MaxHeight:</span><br><span class="line">            self.MaxHeight = self.ypos</span><br><span class="line"></span><br><span class="line">    def getY(self):</span><br><span class="line">        return self.ypos</span><br><span class="line"></span><br><span class="line">    def getX(self):</span><br><span class="line">        return self.xpos</span><br><span class="line"></span><br><span class="line">    def getMaxHeight(self):</span><br><span class="line">        return self.MaxHeight</span><br><span class="line"></span><br><span class="line">def getInputs():</span><br><span class="line">    a = float(input(&quot;Enter the launch angle (in degrees): &quot;))</span><br><span class="line">    v = float(input(&quot;Enter the initial velocity (in meters/sec): &quot;))</span><br><span class="line">    h = float(input(&quot;Enter the initial height (in meters): &quot;))</span><br><span class="line">    t = float(input(&quot;Enter the time interval between position calculations: &quot;))</span><br><span class="line"></span><br><span class="line">    return a, v, h, t</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line"></span><br><span class="line">    angle, vel, h0, time = getInputs()</span><br><span class="line">    cball = Projectile(angle, vel, h0)</span><br><span class="line">    cball.update(time)</span><br><span class="line">    while cball.getY() &gt;= 0:</span><br><span class="line">        cball.update(time)</span><br><span class="line">    print(&quot;\nDistance traveled: &#123;0:0.1f&#125; meters.&quot;. format(cball.getX()))</span><br><span class="line">    print(cball.xvel)</span><br><span class="line">    print(cball.getMaxHeight())</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p><img src="https://miao.su/images/2019/02/06/FirstVersione9cf6.png" alt="FirstVersione9cf6.png"></p>
+<h3 id="2-2-The-Second-Version"><a href="#2-2-The-Second-Version" class="headerlink" title="2.2 The Second Version"></a>2.2 The Second Version</h3><p>&ensp;&ensp;Based on the first version,  let’s use our new object ideas to add a nicer interface to the cannonball example that started the chapter. Instead of having a boring text -based interface, the program would be more fun to use if it had a graphical interface. It would be nice to actually “see” where the canonball ends up and how it gets there. Figure 10.4 shows what I have in mind. Here you can see a cannonball currently in flight as well as where two previous shots ended.</p>
+<h4 id="2-2-1-Creating-a-Graphics-Window"><a href="#2-2-1-Creating-a-Graphics-Window" class="headerlink" title="2.2.1 Creating a Graphics Window"></a>2.2.1 Creating a Graphics Window</h4><p>&ensp;&ensp;The first step in the program is to create a graphics window and draw the appropriate scale line across the bottom. Using our graphics library; this is straightforward. Here’s the start of the program:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def main():</span><br><span class="line">    # create animation window</span><br><span class="line">    win = GraphWin(&quot;Projectile Animation&quot;, 640, 480, autoflush = False)</span><br><span class="line">    win.setCoords(-10, -10, 210, 155)</span><br><span class="line"></span><br><span class="line">    # draw baseline</span><br><span class="line">    Line(Point(-10, 0), Point(210, 0)).draw(win)</span><br><span class="line"></span><br><span class="line">    # draw labeled tricks every 50 meters</span><br><span class="line">    for x in range(0, 210, 50):</span><br><span class="line">        Text(Point(x, -5), str(x)).draw(win)</span><br><span class="line">        Line(Point(x, 0), Point(x, 2)).draw(win)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://miao.su/images/2019/02/06/cannonball1a396b.png" alt="cannonball1a396b.png"></p>
+<p><br></p>
+<h4 id="2-2-2-ShotTracker-Class"><a href="#2-2-2-ShotTracker-Class" class="headerlink" title="2.2.2 ShotTracker Class"></a>2.2.2 ShotTracker Class</h4><p>&ensp;&ensp;The next thing we need is a graphical object that acts like a cannonball. We can use our existing Projectile class to model the flight of a cannonball, but a Projectile is not a graphics object; we can’t draw it in the window. On the other hand, a Circle is a good candidate for the graphical representation of the cannonball, but it does not know how to model projectile flight. What we really want is something that has elements of both. We can create this new hybrid circle-projectile by defining a suitable class for it. Let’s call it a ShotTracker.</p>
+<p>&ensp;&ensp;Our Shot Tracker will contain both a Projectile and a Circle. Its job is to make sure that these instance variables stay in sync with each other.</p>
+<p>&ensp;&ensp;Notice how the parameters provide all of the information needed to create both a Projectile and a Circle, which are stored in the instance variables proj and marker, respectively. I used the name marker because the circle is graphically marking the projectile’s current location. I chose the radius 3 because it shows up nicely in the animation. Realistically, a 3-meter radius would be way too large for an actual cannonball. Now that we have a suitable projectile and circle, we just need to ensure that whenever an update occurs, both the projectile and the position of the circle are modified appropriately. We can do that by giving our ShotTracker an update method that handles both pieces. Updating the Projectile object is a simple matter of calling its own update method with the appropriate time interval. For the circle, we calculate the distance it must move in the x and y directions to put the center of the circle where the updated projectile is located.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class ShotTracker(object):</span><br><span class="line">    def __init__(self, win, angle, velocity, height):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        win is the GraphWin to display the shot. angle, velocity,</span><br><span class="line">        and height are initial projectile parameters.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.proj = Projectile(angle, velocity, height)</span><br><span class="line">        self.marker = Circle(Point(0, height), 3)</span><br><span class="line">        self.marker.setFill(&quot;red&quot;)</span><br><span class="line">        self.marker.setOutline(&quot;red&quot;)</span><br><span class="line">        self.marker.draw(win)</span><br><span class="line"></span><br><span class="line">    def update(self, dt):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Move the shot dt seconds farther along its flight</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        # update the projectile</span><br><span class="line">        self.proj.update(dt)</span><br><span class="line"></span><br><span class="line">        # move the circle to the new projectile location</span><br><span class="line">        center = self.marker.getCenter()</span><br><span class="line">        dx = self.proj.getX() - center.getX()</span><br><span class="line">        dy = self.proj.getY() - center.getY()</span><br><span class="line">        self.marker.move(dx, dy)</span><br><span class="line"></span><br><span class="line">    def getX(self):</span><br><span class="line">        return self.proj.getX()</span><br><span class="line"></span><br><span class="line">    def getY(self):</span><br><span class="line">        return self.proj.getY()</span><br><span class="line"></span><br><span class="line">    def getMaxHeight(self):</span><br><span class="line">        return self.proj.getMaxHeight()</span><br><span class="line"></span><br><span class="line">    def undraw(self):</span><br><span class="line">        self.marker.undraw()</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-Creating-a-Button-Class"><a href="#2-2-3-Creating-a-Button-Class" class="headerlink" title="2.2.3 Creating a Button Class"></a>2.2.3 Creating a Button Class</h4><p>&ensp;&ensp;Our buttons will support the following methods:</p>
+<ul>
+<li><strong>constructor</strong> Creates a button in a window. We will have to specify the window in which the button will be displayed, the location/size of the button, and the label that will be on the button.</li>
+<li><strong>activate</strong> Sets the state of the button to active.</li>
+<li><strong>deactivate</strong> Sets the state of the button to inactive.</li>
+<li><strong>clicked</strong> Indicates whether the button was clicked. If the button is active, this method will determine if the point clicked is inside the button region. The point will have to be sent as a parameter to the method.</li>
+<li><strong>getLabel</strong> Returns the label string of the button. This is provided so that we can identify a particular button.<br>Here’s the code:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Button:</span><br><span class="line">    def __init__(self, win, center, width, height, label):</span><br><span class="line"></span><br><span class="line">        w,h = width/2.0, height/2.0</span><br><span class="line">        x = center.getX()</span><br><span class="line">        y = center.getY()</span><br><span class="line">        self.xmax, self.xmin = x + w, x - w</span><br><span class="line">        self.ymax, self.ymin = y + h, y - h</span><br><span class="line">        p1 = Point(self.xmin, self.ymin)</span><br><span class="line">        p2 = Point(self.xmax, self.ymax)</span><br><span class="line">        self.rect = Rectangle(p1, p2)</span><br><span class="line">        self.rect.setFill(&apos;gray&apos;)</span><br><span class="line">        self.rect.draw(win)</span><br><span class="line">        self.label = Text(center, label)</span><br><span class="line">        self.label.draw(win)</span><br><span class="line">        self.deactivate()</span><br><span class="line"></span><br><span class="line">    def clicked(self, p):</span><br><span class="line">        return (self.active and self.xmin &lt;= p.getX() &lt;= self.xmax and self.ymin &lt;= p.getY() &lt;= self.ymax)</span><br><span class="line"></span><br><span class="line">    def getLabel(self):</span><br><span class="line">        return self.label.getText()</span><br><span class="line"></span><br><span class="line">    def activate(self):</span><br><span class="line">        self.label.setFill(&apos;black&apos;)</span><br><span class="line">        self.rect.setWidth(2)</span><br><span class="line">        self.active = True</span><br><span class="line"></span><br><span class="line">    def deactivate(self):</span><br><span class="line">        self.label.setFill(&quot;gray&quot;)</span><br><span class="line">        self.rect.setWidth(1)</span><br><span class="line">        self.active = False</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-2-4-Creating-an-Input-Dialog"><a href="#2-2-4-Creating-an-Input-Dialog" class="headerlink" title="2.2.4 Creating an Input Dialog"></a>2.2.4 Creating an Input Dialog</h4><p>&ensp;&ensp;Before we actually put a cannonball in flight, we’ll need to get the projectile parameters angle, velocity, and initial height from the user. We could do this using input, just as in the original program. But as long as we’re designing a graphical interface, we may as well handle the input in a more graphical fashion as well. A common way of getting user input in a GUI is to use a dialog box. For example, in Chapter 5 I discussed using pre-built system dialogs that allow users to select file names. Using the graphics library, we can easily create our own simple dialogs to get information from the user. A dialog box is a sort of miniGUI that serves as an independent component of a larger program. Something like Figure 10.5 will do the trick. The user can change the input values and select either “Fire!” to launch the cannonball or “Quit” to exit the program. As you can see, this is just a Graph Win containing a few Text, Entry, and Button objects.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">class InputDialog:</span><br><span class="line">    def __init__(self, angle, vel, height):</span><br><span class="line"></span><br><span class="line">        self.win = GraphWin(&quot;Initial Values&quot;, 200, 300)</span><br><span class="line">        win = self.win</span><br><span class="line">        win.setCoords(0, 5.5, 4, .5)</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 1), &quot;Angle&quot;).draw(win)</span><br><span class="line">        self.angle = Entry(Point(3, 1), 5).draw(win)</span><br><span class="line">        self.angle.setText(str(angle))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 2), &quot;Velocity&quot;).draw(win)</span><br><span class="line">        self.vel = Entry(Point(3, 2), 5).draw(win)</span><br><span class="line">        self.vel.setText(str(vel))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 3), &quot;Height&quot;).draw(win)</span><br><span class="line">        self.height = Entry(Point(3, 3), 5).draw(win)</span><br><span class="line">        self.height.setText(str(height))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 4), &quot;MaxHeight&quot;).draw(win)</span><br><span class="line">        self.maxheight = Entry(Point(3, 4), 5).draw(win)</span><br><span class="line"></span><br><span class="line">        self.fire = Button(win, Point(1, 5), 1.25, .5, &quot;Fire!&quot;)</span><br><span class="line">        self.fire.activate()</span><br><span class="line"></span><br><span class="line">        self.quit = Button(win, Point(3, 5), 1.25, .5, &quot;Quit&quot;)</span><br><span class="line">        self.quit.activate()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def interact(self):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        wait for user to click Quit or Fire button</span><br><span class="line">        Returns a string indicating which button was clicked</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        while True:</span><br><span class="line">            pt = self.win.getMouse()</span><br><span class="line">            if self.quit.clicked(pt):</span><br><span class="line">                return &quot;Quit&quot;</span><br><span class="line">            if self.fire.clicked(pt):</span><br><span class="line">                return &quot;Fire!&quot;</span><br><span class="line"></span><br><span class="line">    def getValues(self):</span><br><span class="line">        a = float(self.angle.getText())</span><br><span class="line">        v = float(self.vel.getText())</span><br><span class="line">        h = float(self.height.getText())</span><br><span class="line"></span><br><span class="line">        return a, v, h</span><br><span class="line"></span><br><span class="line">    def close(self):</span><br><span class="line">        self.win.close()</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-5-The-Main-Event-Loop"><a href="#2-2-5-The-Main-Event-Loop" class="headerlink" title="2.2.5 The Main Event Loop"></a>2.2.5 The Main Event Loop</h4><p>&ensp;&ensp;Now we are ready to finish our program by filling in the main event loop. Here’s the completed main function:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">def main():</span><br><span class="line">    # create animation window</span><br><span class="line">    win = GraphWin(&quot;Projectile Animation&quot;, 640, 480, autoflush = False)</span><br><span class="line">    win.setCoords(-10, -10, 210, 155)</span><br><span class="line"></span><br><span class="line">    # draw baseline</span><br><span class="line">    Line(Point(-10, 0), Point(210, 0)).draw(win)</span><br><span class="line">    # draw labeled tricks every 50 meters</span><br><span class="line">    for x in range(0, 210, 50):</span><br><span class="line">        Text(Point(x, -5), str(x)).draw(win)</span><br><span class="line">        Line(Point(x, 0), Point(x, 2)).draw(win)</span><br><span class="line"></span><br><span class="line">    angle, vel, height = 45.0, 40.0, 2.0</span><br><span class="line">    inputwin = InputDialog(angle, vel, height)</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        # interact with the user</span><br><span class="line"></span><br><span class="line">        choice = inputwin.interact()</span><br><span class="line">        #inputwin.close()</span><br><span class="line"></span><br><span class="line">        if choice == &quot;Quit&quot;:  # loop exit break</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">        angle, vel, height = inputwin.getValues()</span><br><span class="line">        shot = ShotTracker(win, angle, vel, height)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        while 0 &lt;= shot.getY() &lt;=155 and -10 &lt; shot.getX() &lt;= 210:</span><br><span class="line">            shot.update(1 / 50)</span><br><span class="line">            update(50)</span><br><span class="line">            inputwin.maxheight.setText(str(shot.getMaxHeight()))</span><br><span class="line"></span><br><span class="line">        #inputwin.close()</span><br><span class="line"></span><br><span class="line">    win.close()</span><br></pre></td></tr></table></figure></p>
+<p><strong>The completed program looks like this</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><span class="line">from math import *</span><br><span class="line">import math</span><br><span class="line">from turtle import *</span><br><span class="line">from graphics import *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Projectile(object):</span><br><span class="line">    def __init__(self, angle, velocity, height):</span><br><span class="line">        self.xpos = 0.0</span><br><span class="line">        self.ypos = height</span><br><span class="line">        theta = math.pi * angle / 180</span><br><span class="line">        self.xvel = velocity * cos(theta)</span><br><span class="line">        self.yvel = velocity * sin(theta)</span><br><span class="line">        self.MaxHeight = self.ypos   #保存最大高度</span><br><span class="line"></span><br><span class="line">    def update(self, time):</span><br><span class="line">        self.xpos = self.xpos + time * self.xvel</span><br><span class="line">        yvel1 = self.yvel - 9.8 * time</span><br><span class="line">        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0</span><br><span class="line">        self.yvel = yvel1</span><br><span class="line"></span><br><span class="line">        # 获取最大高度保存到Self.MaxHeight中</span><br><span class="line">        if self.ypos &gt; self.MaxHeight:</span><br><span class="line">            self.MaxHeight = self.ypos</span><br><span class="line"></span><br><span class="line">    def getY(self):</span><br><span class="line">        return self.ypos</span><br><span class="line"></span><br><span class="line">    def getX(self):</span><br><span class="line">        return self.xpos</span><br><span class="line"></span><br><span class="line">    def getMaxHeight(self):</span><br><span class="line">        return self.MaxHeight</span><br><span class="line"></span><br><span class="line"># def getInputs():</span><br><span class="line">#     a = float(input(&quot;Enter the launch angle (in degrees): &quot;))</span><br><span class="line">#     v = float(input(&quot;Enter the initial velocity (in meters/sec): &quot;))</span><br><span class="line">#     h = float(input(&quot;Enter the initial height (in meters): &quot;))</span><br><span class="line">#     t = float(input(&quot;Enter the time interval between position calculations: &quot;))</span><br><span class="line">#</span><br><span class="line">#     return a, v, h, t</span><br><span class="line"></span><br><span class="line">class ShotTracker(object):</span><br><span class="line">    def __init__(self, win, angle, velocity, height):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        win is the GraphWin to display the shot. angle, velocity,</span><br><span class="line">        and height are initial projectile parameters.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.proj = Projectile(angle, velocity, height)</span><br><span class="line">        self.marker = Circle(Point(0, height), 3)</span><br><span class="line">        self.marker.setFill(&quot;red&quot;)</span><br><span class="line">        self.marker.setOutline(&quot;red&quot;)</span><br><span class="line">        self.marker.draw(win)</span><br><span class="line"></span><br><span class="line">    def update(self, dt):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Move the shot dt seconds farther along its flight</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        # update the projectile</span><br><span class="line">        self.proj.update(dt)</span><br><span class="line"></span><br><span class="line">        # move the circle to the new projectile location</span><br><span class="line">        center = self.marker.getCenter()</span><br><span class="line">        dx = self.proj.getX() - center.getX()</span><br><span class="line">        dy = self.proj.getY() - center.getY()</span><br><span class="line">        self.marker.move(dx, dy)</span><br><span class="line"></span><br><span class="line">    def getX(self):</span><br><span class="line">        return self.proj.getX()</span><br><span class="line"></span><br><span class="line">    def getY(self):</span><br><span class="line">        return self.proj.getY()</span><br><span class="line"></span><br><span class="line">    def getMaxHeight(self):</span><br><span class="line">        return self.proj.getMaxHeight()</span><br><span class="line"></span><br><span class="line">    def undraw(self):</span><br><span class="line">        self.marker.undraw()</span><br><span class="line"></span><br><span class="line">class Button:</span><br><span class="line">    def __init__(self, win, center, width, height, label):</span><br><span class="line"></span><br><span class="line">        w,h = width/2.0, height/2.0</span><br><span class="line">        x = center.getX()</span><br><span class="line">        y = center.getY()</span><br><span class="line">        self.xmax, self.xmin = x + w, x - w</span><br><span class="line">        self.ymax, self.ymin = y + h, y - h</span><br><span class="line">        p1 = Point(self.xmin, self.ymin)</span><br><span class="line">        p2 = Point(self.xmax, self.ymax)</span><br><span class="line">        self.rect = Rectangle(p1, p2)</span><br><span class="line">        self.rect.setFill(&apos;gray&apos;)</span><br><span class="line">        self.rect.draw(win)</span><br><span class="line">        self.label = Text(center, label)</span><br><span class="line">        self.label.draw(win)</span><br><span class="line">        self.deactivate()</span><br><span class="line"></span><br><span class="line">    def clicked(self, p):</span><br><span class="line">        return (self.active and self.xmin &lt;= p.getX() &lt;= self.xmax and self.ymin &lt;= p.getY() &lt;= self.ymax)</span><br><span class="line"></span><br><span class="line">    def getLabel(self):</span><br><span class="line">        return self.label.getText()</span><br><span class="line"></span><br><span class="line">    def activate(self):</span><br><span class="line">        self.label.setFill(&apos;black&apos;)</span><br><span class="line">        self.rect.setWidth(2)</span><br><span class="line">        self.active = True</span><br><span class="line"></span><br><span class="line">    def deactivate(self):</span><br><span class="line">        self.label.setFill(&quot;gray&quot;)</span><br><span class="line">        self.rect.setWidth(1)</span><br><span class="line">        self.active = False</span><br><span class="line"></span><br><span class="line">class InputDialog:</span><br><span class="line">    def __init__(self, angle, vel, height):</span><br><span class="line">        self.win = GraphWin(&quot;Initial Values&quot;, 200, 300)</span><br><span class="line">        win = self.win</span><br><span class="line">        win.setCoords(0, 5.5, 4, .5)</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 1), &quot;Angle&quot;).draw(win)</span><br><span class="line">        self.angle = Entry(Point(3, 1), 5).draw(win)</span><br><span class="line">        self.angle.setText(str(angle))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 2), &quot;Velocity&quot;).draw(win)</span><br><span class="line">        self.vel = Entry(Point(3, 2), 5).draw(win)</span><br><span class="line">        self.vel.setText(str(vel))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 3), &quot;Height&quot;).draw(win)</span><br><span class="line">        self.height = Entry(Point(3, 3), 5).draw(win)</span><br><span class="line">        self.height.setText(str(height))</span><br><span class="line"></span><br><span class="line">        Text(Point(1, 4), &quot;MaxHeight&quot;).draw(win)</span><br><span class="line">        self.maxheight = Entry(Point(3, 4), 5).draw(win)</span><br><span class="line"></span><br><span class="line">        self.fire = Button(win, Point(1, 5), 1.25, .5, &quot;Fire!&quot;)</span><br><span class="line">        self.fire.activate()</span><br><span class="line"></span><br><span class="line">        self.quit = Button(win, Point(3, 5), 1.25, .5, &quot;Quit&quot;)</span><br><span class="line">        self.quit.activate()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def interact(self):</span><br><span class="line">        &quot;&quot;&quot; wait for user to click Quit or Fire button</span><br><span class="line">        Returns a string indicating which button was clicked</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        while True:</span><br><span class="line">            pt = self.win.getMouse()</span><br><span class="line">            if self.quit.clicked(pt):</span><br><span class="line">                return &quot;Quit&quot;</span><br><span class="line">            if self.fire.clicked(pt):</span><br><span class="line">                return &quot;Fire!&quot;</span><br><span class="line"></span><br><span class="line">    def getValues(self):</span><br><span class="line">        a = float(self.angle.getText())</span><br><span class="line">        v = float(self.vel.getText())</span><br><span class="line">        h = float(self.height.getText())</span><br><span class="line"></span><br><span class="line">        return a, v, h</span><br><span class="line"></span><br><span class="line">    def close(self):</span><br><span class="line">        self.win.close()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # create animation window</span><br><span class="line">    win = GraphWin(&quot;Projectile Animation&quot;, 640, 480, autoflush = False)</span><br><span class="line">    win.setCoords(-10, -10, 210, 155)</span><br><span class="line"></span><br><span class="line">    # draw baseline</span><br><span class="line">    Line(Point(-10, 0), Point(210, 0)).draw(win)</span><br><span class="line">    # draw labeled tricks every 50 meters</span><br><span class="line">    for x in range(0, 210, 50):</span><br><span class="line">        Text(Point(x, -5), str(x)).draw(win)</span><br><span class="line">        Line(Point(x, 0), Point(x, 2)).draw(win)</span><br><span class="line"></span><br><span class="line">    angle, vel, height = 45.0, 40.0, 2.0</span><br><span class="line">    inputwin = InputDialog(angle, vel, height)</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        # interact with the user</span><br><span class="line"></span><br><span class="line">        choice = inputwin.interact()</span><br><span class="line">        #inputwin.close()</span><br><span class="line"></span><br><span class="line">        if choice == &quot;Quit&quot;:  # loop exit break</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">        angle, vel, height = inputwin.getValues()</span><br><span class="line">        shot = ShotTracker(win, angle, vel, height)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        while 0 &lt;= shot.getY() &lt;=155 and -10 &lt; shot.getX() &lt;= 210:</span><br><span class="line">            shot.update(1 / 50)</span><br><span class="line">            update(50)</span><br><span class="line">            inputwin.maxheight.setText(str(shot.getMaxHeight()))</span><br><span class="line"></span><br><span class="line">        #inputwin.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    win.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p><img src="https://miao.su/images/2019/05/19/moveb87b9.gif" alt="moveb87b9.gif"></p>
+<p><strong>Appendix</strong>:</p>
+<ul>
+<li>The graphics library summary: <a href="https://blog.csdn.net/winycg/article/details/78066044?locationNum=4&amp;fps=1" target="_blank" rel="noopener">https://blog.csdn.net/winycg/article/details/78066044?locationNum=4&amp;fps=1</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/graphics/" rel="tag"># graphics</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/7e551515.html" rel="next" title="连续子向量中最大和的四种算法">
+                <i class="fa fa-chevron-left"></i> 连续子向量中最大和的四种算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/fdb1de24.html" rel="prev" title="BST Summary">
+                BST Summary <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Programming-Exercise"><span class="nav-text">1. Programming Exercise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Code-and-Analysis"><span class="nav-text">2. Code and Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-The-First-Version"><span class="nav-text">2.1 The First Version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-The-Second-Version"><span class="nav-text">2.2 The Second Version</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Creating-a-Graphics-Window"><span class="nav-text">2.2.1 Creating a Graphics Window</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-ShotTracker-Class"><span class="nav-text">2.2.2 ShotTracker Class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-Creating-a-Button-Class"><span class="nav-text">2.2.3 Creating a Button Class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-Creating-an-Input-Dialog"><span class="nav-text">2.2.4 Creating an Input Dialog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-The-Main-Event-Loop"><span class="nav-text">2.2.5 The Main Event Loop</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python项目之2048小游戏&amp;emsp;&amp;emsp;2048是一个非常简单的小游戏，对于刚学python的萌新来说，用来练练手也是非常不错的选择。下面利用python自带的tkinter来实现2048的界面设计。">
+<meta name="keywords" content="tkinter,2048">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exercise4">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/65e81f01.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="python项目之2048小游戏&amp;emsp;&amp;emsp;2048是一个非常简单的小游戏，对于刚学python的萌新来说，用来练练手也是非常不错的选择。下面利用python自带的tkinter来实现2048的界面设计。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/204896631.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/d6d958343036c3a306ab0.png">
+<meta property="og:updated_time" content="2019-05-19T12:53:21.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Exercise4">
+<meta name="twitter:description" content="python项目之2048小游戏&amp;emsp;&amp;emsp;2048是一个非常简单的小游戏，对于刚学python的萌新来说，用来练练手也是非常不错的选择。下面利用python自带的tkinter来实现2048的界面设计。">
+<meta name="twitter:image" content="https://miao.su/images/2019/02/06/204896631.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/65e81f01">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Exercise4 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/65e81f01.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Exercise4
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-03 12:34:39" itemprop="dateCreated datePublished" datetime="2018-10-03T12:34:39+08:00">2018-10-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-19 20:53:21" itemprop="dateModified" datetime="2019-05-19T20:53:21+08:00">2019-05-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python-Exercise/" itemprop="url" rel="index"><span itemprop="name">Python Exercise</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/65e81f01.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/65e81f01.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/65e81f01.html" class="leancloud_visitors" data-flag-title="Exercise4">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python项目之2048小游戏<br>&emsp;&emsp;2048是一个非常简单的小游戏，对于刚学python的萌新来说，用来练练手也是非常不错的选择。下面利用python自带的tkinter来实现2048的界面设计。<br><a id="more"></a></p>
+<h2 id="一、总体框架设计"><a href="#一、总体框架设计" class="headerlink" title="一、总体框架设计"></a>一、总体框架设计</h2><p><img src="https://miao.su/images/2019/02/06/204896631.png" alt="204896631.png"><br><br></p>
+<ol>
+<li>首先设计大的窗口，然后是4x4小格子</li>
+<li>然后在下面显示分数，上下左右，重置，退出。通过鼠标点击来实现操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 大窗口</span><br><span class="line">window=tk.Tk()</span><br><span class="line">window.title(&apos;2048&apos;)</span><br><span class="line">window.geometry(&apos;330x560&apos;)</span><br><span class="line"></span><br><span class="line"> # 绘制初始的界面</span><br><span class="line">lab = &#123;&#125;</span><br><span class="line">Ox, Oy = 10, 10</span><br><span class="line">for i in range(4):</span><br><span class="line">    for j in range(4):</span><br><span class="line">        tlx=Ox+j*80</span><br><span class="line">        tly=Oy+i*80</span><br><span class="line">        num = i * 4 + j</span><br><span class="line">        key = str(board[i][j])</span><br><span class="line">        # height，width值按字符来设置</span><br><span class="line">        l = tk.Label(window, text=board[i][j], bg=color[key], font=(&apos;Arial&apos;, 20), height=2, width=4)</span><br><span class="line">        lab[num] = l</span><br><span class="line">        l.place(x=tlx,y=tly)</span><br><span class="line"></span><br><span class="line"># 下面的控制，分数显示窗口，分数用数组中最大值表示</span><br><span class="line">tk.Label(window,text=&apos;分数:&apos;,bg=&apos;gray96&apos;,font=(&apos;微软雅黑&apos;,15)).place(x=10,y=330)</span><br><span class="line">tk.Label(window, textvariable=va, bg=&apos;gray96&apos;, font=(&apos;微软雅黑&apos;, 15)).place(x=70, y=330)</span><br><span class="line">tk.Button(window, text=&apos;上&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=up_op).place(x=130, y=360)</span><br><span class="line">tk.Button(window, text=&apos;下&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=down_op).place(x=130, y=465)</span><br><span class="line">tk.Button(window, text=&apos;左&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=left_op).place(x=55, y=410)</span><br><span class="line">tk.Button(window, text=&apos;右&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=right_op).place(x=205, y=410)</span><br><span class="line">tk.Button(window, text=&apos;重置&apos;, bg=&apos;gray86&apos;, font=(&apos;微软雅黑&apos;, 15), width=4, height=1, command=restart_op).place(x=20,y=510)</span><br><span class="line">tk.Button(window, text=&apos;退出&apos;, bg=&apos;gray86&apos;, font=(&apos;微软雅黑&apos;, 15), width=4, height=1, command=exit_op).place(x=245,y=510)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="二、功能具体实现"><a href="#二、功能具体实现" class="headerlink" title="二、功能具体实现"></a>二、功能具体实现</h2><ol>
+<li>初始化操作：随机在数组中找两个位置，然后各随机分配2或4,2概率为75%，initi之前应该将数组清零。</li>
+<li><p>状态机：<br> <img src="https://miao.su/images/2019/02/06/d6d958343036c3a306ab0.png" alt="d6d958343036c3a306ab0.png"><br>初始化后游戏进入game状态，然后游戏可能进入win，gameover这两种状态，还可以人为的重置退出。而在win，gameover状态也可以人为的重置退出。<br>那怎样判断win，gameover呢？当分数值为2048时进入win状态，当数组中非零个数为16且没有两个相同数字相邻时进入gameover状态<br>代码实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">def is_same_neibor(a):</span><br><span class="line">     for i in range(4):</span><br><span class="line">         for j in range(4):</span><br><span class="line">             if i &lt; 3 and j &lt; 3:</span><br><span class="line">                 if a[i][j] == a[i][j+1] or a[i][j] == a[i+1][j]:</span><br><span class="line">                     return True</span><br><span class="line">             elif i == 3 and j &lt; 3:</span><br><span class="line">                 if a[i][j] == a[i][j+1]:</span><br><span class="line">                     return True</span><br><span class="line">             elif j == 3 and i &lt; 3:</span><br><span class="line">                 if a[i][j] == a[i+1][j]:</span><br><span class="line">                     return True</span><br><span class="line">     return False</span><br><span class="line"></span><br><span class="line"> def judge_state(a): # 判定数组此时状态，max_num记录数组中最大值且为当前分值</span><br><span class="line">     count = update(a)</span><br><span class="line">     max_num=np.max(a)</span><br><span class="line">     va.set(max_num)</span><br><span class="line">     if max_num == 2048:</span><br><span class="line">         round_over=True</span><br><span class="line">         var1 = tk.messagebox.askyesno(title=&apos;闯关成功！&apos;, message=&apos;你想再来一次吗？&apos;)</span><br><span class="line">         if var1:</span><br><span class="line">             for i in range(4):</span><br><span class="line">                 for j in range(4):</span><br><span class="line">                     a[i][j]=0</span><br><span class="line">             initi(a)</span><br><span class="line">             round_over=False</span><br><span class="line">             update(a)</span><br><span class="line">         else:</span><br><span class="line">             window.destroy()</span><br><span class="line"></span><br><span class="line">     if count == 16 and is_same_neibor(a) == False:</span><br><span class="line">         round_over=True</span><br><span class="line">         var2 = tk.messagebox.askyesno(title=&apos;闯关失败！&apos;, message=&apos;  Game Over!\n你想再试一次吗？&apos;)</span><br><span class="line">         if var2:</span><br><span class="line">             for i in range(4):</span><br><span class="line">                 for j in range(4):</span><br><span class="line">                     a[i][j]=0</span><br><span class="line">             initi(a)</span><br><span class="line">             round_over=False</span><br><span class="line">             update(a)</span><br><span class="line">         else:</span><br><span class="line">             window.destroy()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>六种运算操作：</p>
+<ul>
+<li>向左移动且合并</li>
+<li>向右移动且合并</li>
+<li>向上移动且合并</li>
+<li>向下移动且合并</li>
+<li>重置</li>
+<li>退出<br>以向左移动且合并为例，向右移动且合并可以根据向左操作模仿操作，向上向下可通过转置和向左来实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> def left_move(a): # 将非零数字左移</span><br><span class="line">      k = 0</span><br><span class="line">      for i in range(4):</span><br><span class="line">          if a[i] != 0:</span><br><span class="line">              a[k] = a[i]</span><br><span class="line">              k += 1</span><br><span class="line">      if k &lt; 4:</span><br><span class="line">          for j in range(k, 4):</span><br><span class="line">              a[j] = 0</span><br><span class="line">def left_add(a): #将非零相同数字左合并</span><br><span class="line">      for i in range(3):</span><br><span class="line">          if a[i] == a[i + 1]:</span><br><span class="line">              a[i] = a[i] * 2</span><br><span class="line">              if i + 1 &lt; 3:</span><br><span class="line">                  for k in range(i + 1, 3):</span><br><span class="line">                      a[k] = a[k + 1]</span><br><span class="line">              a[3] = 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>重置和退出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def restart_op():</span><br><span class="line">    for i in range(4):</span><br><span class="line">        for j in range(4):</span><br><span class="line">            board[i][j] = 0</span><br><span class="line">    initi(board)</span><br><span class="line">    update(board)</span><br><span class="line"></span><br><span class="line">def exit_op():</span><br><span class="line">    window.destroy()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>game状态随机数产生和产生时机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> def compare(a,b): #  数组移动前后比较，若不同则产生随机数，否则不产生</span><br><span class="line">      n_equal=False</span><br><span class="line">      for i in range(4):</span><br><span class="line">          for j in range(4):</span><br><span class="line">              if a[i][j]!=b[i][j]:</span><br><span class="line">                  n_equal=True</span><br><span class="line">                  break</span><br><span class="line">      return n_equal</span><br><span class="line">def produce_rand(a): #在随机为零的位置随机产生一个数</span><br><span class="line">      p = random.randint(0, 3)</span><br><span class="line">      q = random.randint(0, 3)</span><br><span class="line">      while (board[p][q] != 0):</span><br><span class="line">          p = random.randint(0, 3)</span><br><span class="line">          q = random.randint(0, 3)</span><br><span class="line">      board[p][q] = random.choice([2, 2, 2, 4])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动后更新：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def update(a): #更新，统计数组中非零元素个数且返回，用于后面判断数组状态。并更新颜色</span><br><span class="line">    count = 0</span><br><span class="line">    for i in range(4):</span><br><span class="line">        for j in range(4):</span><br><span class="line">            if a[i][j]:</span><br><span class="line">                count += 1</span><br><span class="line">            num = i * 4 + j</span><br><span class="line">            c_key = str(a[i][j])</span><br><span class="line">            lab[num].config(text=a[i][j], bg=color[c_key])</span><br><span class="line">    return count</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br></pre></td><td class="code"><pre><span class="line">from tkinter import messagebox</span><br><span class="line">import tkinter as tk</span><br><span class="line">import numpy as np</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    # 初始化，创造一个窗口，显示title，窗口大小</span><br><span class="line">    window=tk.Tk()</span><br><span class="line">    window.title(&apos;2048&apos;)</span><br><span class="line">    window.geometry(&apos;330x560&apos;)</span><br><span class="line">    # 不同的分数不同的颜色</span><br><span class="line">    round_over=False</span><br><span class="line">    color = &#123;&apos;0&apos;: &apos;gray86&apos;, &apos;2&apos;: &apos;green1&apos;, &apos;4&apos;: &apos;cyan&apos;, &apos;8&apos;: &apos;blue1&apos;, &apos;16&apos;: &apos;pink4&apos;, &apos;32&apos;: &apos;yellow1&apos;, &apos;64&apos;: &apos;yellow4&apos;,</span><br><span class="line">             &apos;128&apos;: &apos;pink&apos;,&apos;256&apos;: &apos;green4&apos;, &apos;512&apos;: &apos;yellow4&apos;, &apos;1024&apos;: &apos;orange4&apos;, &apos;2048&apos;: &apos;red&apos;&#125;</span><br><span class="line">    # 初始化，随机在数组中找两个位置，然后各随机分配2或4,2概率为75%，initi之前应该将数组清零。</span><br><span class="line">    def initi(a):</span><br><span class="line">        m1 = random.randint(0, 3)    #从0到3之间产生一个随机整数（包含端点）</span><br><span class="line">        n1 = random.randint(0, 3)</span><br><span class="line">        m2 = random.randint(0, 3)</span><br><span class="line">        n2 = random.randint(0, 3)</span><br><span class="line">        while ((m1 == m2) and (n1 == n2)):</span><br><span class="line">            m2 = random.randint(0, 3)</span><br><span class="line">            n2 = random.randint(0, 3)</span><br><span class="line">        a[m1][n1] = random.choice([2, 2, 2, 4])   #从列表中随机选中一个数</span><br><span class="line">        a[m2][n2] = random.choice([2, 2, 2, 4])</span><br><span class="line"></span><br><span class="line">    # 创建原始数组</span><br><span class="line">    board = np.zeros((4, 4), dtype=np.int16)</span><br><span class="line">    initi(board)</span><br><span class="line"></span><br><span class="line">    # 绘制初始的界面</span><br><span class="line">    lab = &#123;&#125;</span><br><span class="line">    Ox, Oy = 10, 10</span><br><span class="line">    for i in range(4):</span><br><span class="line">        for j in range(4):</span><br><span class="line">            tlx=Ox+j*80</span><br><span class="line">            tly=Oy+i*80</span><br><span class="line">            num = i * 4 + j</span><br><span class="line">            key = str(board[i][j])</span><br><span class="line">            # height，width值按字符来设置</span><br><span class="line">            l = tk.Label(window, text=board[i][j], bg=color[key], font=(&apos;Arial&apos;, 20), height=2, width=4)</span><br><span class="line">            lab[num] = l</span><br><span class="line">            l.place(x=tlx,y=tly)</span><br><span class="line"></span><br><span class="line">    # 定义各种操作函数</span><br><span class="line">    def left_move(a): # 将非零数字左移</span><br><span class="line">        k = 0</span><br><span class="line">        for i in range(4):</span><br><span class="line">            if a[i] != 0:</span><br><span class="line">                a[k] = a[i]</span><br><span class="line">                k += 1</span><br><span class="line">        if k &lt; 4:</span><br><span class="line">            for j in range(k, 4):</span><br><span class="line">                a[j] = 0</span><br><span class="line"></span><br><span class="line">    def right_move(a):</span><br><span class="line">        k = 3</span><br><span class="line">        for i in range(4):</span><br><span class="line">            if a[3 - i] != 0:</span><br><span class="line">                a[k] = a[3 - i]</span><br><span class="line">                k -= 1</span><br><span class="line">        if k &gt; 0:</span><br><span class="line">            for j in range(0, k + 1):</span><br><span class="line">                a[j] = 0</span><br><span class="line"></span><br><span class="line">    def left_add(a): #将非零相同数字左合并</span><br><span class="line">        for i in range(3):</span><br><span class="line">            if a[i] == a[i + 1]:</span><br><span class="line">                a[i] = a[i] * 2</span><br><span class="line">                if i + 1 &lt; 3:</span><br><span class="line">                    for k in range(i + 1, 3):</span><br><span class="line">                        a[k] = a[k + 1]</span><br><span class="line">                a[3] = 0</span><br><span class="line"></span><br><span class="line">    def right_add(a):</span><br><span class="line">        for i in range(3):</span><br><span class="line">            if a[3 - i] == a[2 - i]:</span><br><span class="line">                a[3 - i] = a[3 - i] * 2</span><br><span class="line">                if 2 - i &gt; 0:</span><br><span class="line">                    for k in range(1, 3 - i):</span><br><span class="line">                        a[3 - i - k] = a[2 - i - k]</span><br><span class="line">                a[0] = 0</span><br><span class="line"></span><br><span class="line">    def produce_rand(a): #在随机为零的位置随机产生一个数</span><br><span class="line">        p = random.randint(0, 3)</span><br><span class="line">        q = random.randint(0, 3)</span><br><span class="line">        while (board[p][q] != 0):</span><br><span class="line">            p = random.randint(0, 3)</span><br><span class="line">            q = random.randint(0, 3)</span><br><span class="line">        board[p][q] = random.choice([2, 2, 2, 4])</span><br><span class="line"></span><br><span class="line">    def update(a): #更新，统计数组中非零元素个数且返回，用于后面判断数组状态。并更新颜色</span><br><span class="line">        count = 0</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                if a[i][j]:</span><br><span class="line">                    count += 1</span><br><span class="line">                num = i * 4 + j</span><br><span class="line">                c_key = str(a[i][j])</span><br><span class="line">                lab[num].config(text=a[i][j], bg=color[c_key])</span><br><span class="line">        return count</span><br><span class="line"></span><br><span class="line">    def is_same_neibor(a):</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                if i &lt; 3 and j &lt; 3:</span><br><span class="line">                    if a[i][j] == a[i][j+1] or a[i][j] == a[i+1][j]:</span><br><span class="line">                        return True</span><br><span class="line">                elif i == 3 and j &lt; 3:</span><br><span class="line">                    if a[i][j] == a[i][j+1]:</span><br><span class="line">                        return True</span><br><span class="line">                elif j == 3 and i &lt; 3:</span><br><span class="line">                    if a[i][j] == a[i+1][j]:</span><br><span class="line">                        return True</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">    def judge_state(a): # 判定数组此时状态，max_num记录数组中最大值且为当前分值</span><br><span class="line">        count = update(a)</span><br><span class="line">        max_num=np.max(a)</span><br><span class="line">        va.set(max_num)</span><br><span class="line">        if max_num == 2048:</span><br><span class="line">            round_over=True</span><br><span class="line">            var1 = tk.messagebox.askyesno(title=&apos;闯关成功！&apos;, message=&apos;你想再来一次吗？&apos;)</span><br><span class="line">            if var1:</span><br><span class="line">                for i in range(4):</span><br><span class="line">                    for j in range(4):</span><br><span class="line">                        a[i][j]=0</span><br><span class="line">                initi(a)</span><br><span class="line">                round_over=False</span><br><span class="line">                update(a)</span><br><span class="line">            else:</span><br><span class="line">                window.destroy()</span><br><span class="line"></span><br><span class="line">        if count == 16 and is_same_neibor(a) == False:</span><br><span class="line">            round_over=True</span><br><span class="line">            var2 = tk.messagebox.askyesno(title=&apos;闯关失败！&apos;, message=&apos;  Game Over!\n你想再试一次吗？&apos;)</span><br><span class="line">            if var2:</span><br><span class="line">                for i in range(4):</span><br><span class="line">                    for j in range(4):</span><br><span class="line">                        a[i][j]=0</span><br><span class="line">                initi(a)</span><br><span class="line">                round_over=False</span><br><span class="line">                update(a)</span><br><span class="line">            else:</span><br><span class="line">                window.destroy()</span><br><span class="line"></span><br><span class="line">    def compare(a,b):</span><br><span class="line">        n_equal=False</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                if a[i][j]!=b[i][j]:</span><br><span class="line">                    n_equal=True</span><br><span class="line">                    break</span><br><span class="line">        return n_equal</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # 进行运算操作</span><br><span class="line">    def up_op():</span><br><span class="line">        ob=board.copy()</span><br><span class="line">        tb = board.T</span><br><span class="line">        for i in range(4):</span><br><span class="line">            left_move(tb[i])</span><br><span class="line">            left_add(tb[i])</span><br><span class="line">        m = tb.T</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                board[i][j] = m[i][j]</span><br><span class="line">        if compare(ob,board):</span><br><span class="line">            produce_rand(board)</span><br><span class="line">        judge_state(board)</span><br><span class="line"></span><br><span class="line">    def down_op():</span><br><span class="line">        ob = board.copy()</span><br><span class="line">        tb = board.T</span><br><span class="line">        for i in range(4):</span><br><span class="line">            right_move(tb[i])</span><br><span class="line">            right_add(tb[i])</span><br><span class="line">        m = tb.T</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                board[i][j] = m[i][j]</span><br><span class="line">        if compare(ob, board):</span><br><span class="line">            produce_rand(board)</span><br><span class="line">        judge_state(board)</span><br><span class="line"></span><br><span class="line">    def left_op():</span><br><span class="line">        ob = board.copy()</span><br><span class="line">        for i in range(4):</span><br><span class="line">            left_move(board[i])</span><br><span class="line">            left_add(board[i])</span><br><span class="line">        if compare(ob, board):</span><br><span class="line">            produce_rand(board)</span><br><span class="line">        judge_state(board)</span><br><span class="line"></span><br><span class="line">    def right_op():</span><br><span class="line">        ob = board.copy()</span><br><span class="line">        for i in range(4):</span><br><span class="line">            right_move(board[i])</span><br><span class="line">            right_add(board[i])</span><br><span class="line">        if compare(ob, board):</span><br><span class="line">            produce_rand(board)</span><br><span class="line">        judge_state(board)</span><br><span class="line"></span><br><span class="line">    def restart_op():</span><br><span class="line">        for i in range(4):</span><br><span class="line">            for j in range(4):</span><br><span class="line">                board[i][j] = 0</span><br><span class="line">        initi(board)</span><br><span class="line">        update(board)</span><br><span class="line"></span><br><span class="line">    def exit_op():</span><br><span class="line">        window.destroy()</span><br><span class="line"></span><br><span class="line">    # 创建按钮和标签</span><br><span class="line">    va=tk.StringVar()</span><br><span class="line">    va.set(0)</span><br><span class="line">    tk.Label(window,text=&apos;分数:&apos;,bg=&apos;gray96&apos;,font=(&apos;微软雅黑&apos;,15)).place(x=10,y=330)</span><br><span class="line">    tk.Label(window, textvariable=va, bg=&apos;gray96&apos;, font=(&apos;微软雅黑&apos;, 15)).place(x=70, y=330)</span><br><span class="line">    tk.Button(window, text=&apos;上&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=up_op).place(x=130, y=360)</span><br><span class="line">    tk.Button(window, text=&apos;下&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=down_op).place(x=130, y=465)</span><br><span class="line">    tk.Button(window, text=&apos;左&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=left_op).place(x=55, y=410)</span><br><span class="line">    tk.Button(window, text=&apos;右&apos;, bg=&apos;gray80&apos;, font=(&apos;微软雅黑&apos;,15),width=4, height=1, command=right_op).place(x=205, y=410)</span><br><span class="line">    tk.Button(window, text=&apos;重置&apos;, bg=&apos;gray86&apos;, font=(&apos;微软雅黑&apos;, 15), width=4, height=1, command=restart_op).place(x=20,y=510)</span><br><span class="line">    tk.Button(window, text=&apos;退出&apos;, bg=&apos;gray86&apos;, font=(&apos;微软雅黑&apos;, 15), width=4, height=1, command=exit_op).place(x=245,y=510)</span><br><span class="line"></span><br><span class="line">    window.mainloop()</span><br><span class="line"></span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p><br><br><strong>相关链接</strong></p>
+<ul>
+<li><a href="http://python.jobbole.com/84971/" target="_blank" rel="noopener">http://python.jobbole.com/84971/</a></li>
+<li><a href="https://www.shiyanlou.com/courses/reports/1283118" target="_blank" rel="noopener">https://www.shiyanlou.com/courses/reports/1283118</a></li>
+<li><a href="https://blog.csdn.net/qq_39451109/article/details/78161438" target="_blank" rel="noopener">https://blog.csdn.net/qq_39451109/article/details/78161438</a></li>
+<li><a href="https://blog.csdn.net/yjy_aii/article/details/78071955" target="_blank" rel="noopener">https://blog.csdn.net/yjy_aii/article/details/78071955</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tkinter/" rel="tag"># tkinter</a>
+          
+            <a href="/tags/2048/" rel="tag"># 2048</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/b1eae7a3.html" rel="next" title="Exercise_3_飞机大战">
+                <i class="fa fa-chevron-left"></i> Exercise_3_飞机大战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/652da2f1.html" rel="prev" title="linux1">
+                linux1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、总体框架设计"><span class="nav-text">一、总体框架设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、功能具体实现"><span class="nav-text">二、功能具体实现</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

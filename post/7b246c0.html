@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="实验4 利用队列实现二叉树的层次遍历（4课时）">
+<meta name="keywords" content="Algorithm,queue,layer travel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实算实验4之利用队列实现二叉树的层次遍历">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/7b246c0.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="实验4 利用队列实现二叉树的层次遍历（4课时）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/331a7bd35194e49e8b1d6.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/p19f59d.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/p25fd0d.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/p4c31ca.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/06/p5aec43.png">
+<meta property="og:updated_time" content="2019-05-19T12:39:50.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实算实验4之利用队列实现二叉树的层次遍历">
+<meta name="twitter:description" content="实验4 利用队列实现二叉树的层次遍历（4课时）">
+<meta name="twitter:image" content="https://miao.su/images/2019/02/06/331a7bd35194e49e8b1d6.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/7b246c0">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>实算实验4之利用队列实现二叉树的层次遍历 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/7b246c0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实算实验4之利用队列实现二叉树的层次遍历
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-22 17:50:16" itemprop="dateCreated datePublished" datetime="2018-11-22T17:50:16+08:00">2018-11-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-19 20:39:50" itemprop="dateModified" datetime="2019-05-19T20:39:50+08:00">2019-05-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/7b246c0.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/7b246c0.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/7b246c0.html" class="leancloud_visitors" data-flag-title="实算实验4之利用队列实现二叉树的层次遍历">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><center>实验4 利用队列实现二叉树的层次遍历（4课时）</center></strong><br><a id="more"></a></p>
+<h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的:"></a>1. 实验目的:</h1><p>理解队列的受限操作（在一端插入，另一端删除）以及先进先出的特性，体会队列的应用场景的特点；</p>
+<p>能利用《程序员实用算法》的程序清单2-9和2-10中的现有函数来解决实际应用问题。</p>
+<h1 id="2-实验要求"><a href="#2-实验要求" class="headerlink" title="2. 实验要求:"></a>2. 实验要求:</h1><p>应用需求：要求实现：若键盘输入t，则对当前二叉树进行非递归的层次遍历，并打印出来。（比如，若二叉树为：</p>
+<p><a href="https://miao.su/image/HLmrw" target="_blank" rel="noopener"><img src="https://miao.su/images/2019/02/06/331a7bd35194e49e8b1d6.png" alt="331a7bd35194e49e8b1d6.png"></a><br>则层次遍历后，打印出的结果为“33,23,44,12,37,46”。）</p>
+<p><strong>问题描述</strong>：利用队列作为数据结构来实现非递归的二叉树层次遍历的函数。</p>
+<p><strong>算法思想：</strong></p>
+<p><strong>关键：</strong>实现非递归的二叉树层次遍历的函数（函数原型为：int LevelTraBintree(Bintree *t, DoFunc df);</p>
+<blockquote>
+<p>输入：二叉排序树t，节点的操作函数df；<br>输出：若是空树，则返回TREE_FAIL；否则，返回TREE_OK.</p>
+</blockquote>
+<h1 id="3-算法设计思路："><a href="#3-算法设计思路：" class="headerlink" title="3. 算法设计思路："></a>3. 算法设计思路：</h1><ul>
+<li>分别创建队列和空闲列表；</li>
+<li>为空闲链表分配QMAX个结点；</li>
+<li>若二叉树为空，则退出程序；</li>
+<li>将二叉树根节点入队；</li>
+<li>重复执行下列操作，直至队列为空。<ul>
+<li>1）将队头节点出队并打印出其值；</li>
+<li>2）若出队节点有左子树，则将该节点的左孩子入队；</li>
+<li>3）若出队节点有右子树，则将该节点的右孩子入队；</li>
+</ul>
+</li>
+<li>返回成功，程序退出。</li>
+</ul>
+<h1 id="4-代码与分析"><a href="#4-代码与分析" class="headerlink" title="4. 代码与分析"></a>4. 代码与分析</h1><h2 id="4-1-1-头文件qapp-h：队列节点的定义与创建"><a href="#4-1-1-头文件qapp-h：队列节点的定义与创建" class="headerlink" title="4.1.1 头文件qapp.h：队列节点的定义与创建"></a>4.1.1 头文件qapp.h：队列节点的定义与创建</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- qapp.h ------------------------------ Listing 2-9 --------</span></span><br><span class="line"><span class="comment"> *  Application-specific data items for linked-list queues.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> QAPP_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> QAPP_H 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  Our first list's nodes consist of a pointer to</span></span><br><span class="line"><span class="comment"> *  text and a priority level.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEXT_SIZE 20    <span class="comment">/* the maximum size of our text string */</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">DataCopy</span> <span class="params">( <span class="keyword">void</span> *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The data and functions for the queue</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NodeData1</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">NodeData1</span> *<span class="title">link</span>[2];</span></span><br><span class="line">    <span class="keyword">char</span> text[<span class="number">20</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">NodeData1</span> * <span class="title">pND1</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> * <span class="title">CreateData1</span> <span class="params">( <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">DeleteData1</span> <span class="params">( <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">DuplicatedNode1</span> <span class="params">( Link, Link )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">NodeDataCmp1</span> <span class="params">( <span class="keyword">void</span> *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  The free list has identical nodes</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NodeData2</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">NodeData2</span> *<span class="title">link</span>[2];</span></span><br><span class="line">    <span class="keyword">char</span> text[<span class="number">20</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">NodeData2</span> * <span class="title">pND2</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> * <span class="title">CreateData2</span> <span class="params">( <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">DeleteData2</span> <span class="params">( <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">DuplicatedNode2</span> <span class="params">( Link, Link )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span>    <span class="title">NodeDataCmp2</span> <span class="params">( <span class="keyword">void</span> *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="4-1-2-接口qapp-c：队列函数的具体定义"><a href="#4-1-2-接口qapp-c：队列函数的具体定义" class="headerlink" title="4.1.2 接口qapp.c：队列函数的具体定义"></a>4.1.2 接口qapp.c：队列函数的具体定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- qapp.c ------------------------------ Listing 2-10 --------</span></span><br><span class="line"><span class="comment"> *  Application-specific functions for queue examples.</span></span><br><span class="line"><span class="comment"> *  Replace these routines with your own.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;         /* for free() */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;         /* for strcmp() and strdup() */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"llgen.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"qapp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*=== linked-list functions for queue ===*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * our nodes come from the free list,</span></span><br><span class="line"><span class="comment"> * so this function is never called.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">CreateData1</span> <span class="params">( <span class="keyword">void</span> * data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DeleteData1</span> <span class="params">( <span class="keyword">void</span> * data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * In this case, NodeData1 consists of a pointer and an int.</span></span><br><span class="line"><span class="comment">     * The integer will be returned to memory when the node</span></span><br><span class="line"><span class="comment">     * is freed. However, the string must be freed manually.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="comment">//free ( ((pND1) data)-&gt;text );//yyw</span></span><br><span class="line">     <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> * This function determines what to do when inserting a node</span></span><br><span class="line"><span class="comment"> * into a list if an existing node with the same data is found</span></span><br><span class="line"><span class="comment"> * in the list. In this case, since we are counting words, if a</span></span><br><span class="line"><span class="comment"> * duplicate word is found, we simply increment the counter.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Note this function should return one of the following values:</span></span><br><span class="line"><span class="comment"> *      0       an error occurred</span></span><br><span class="line"><span class="comment"> *      1       delete the duplicate node</span></span><br><span class="line"><span class="comment"> *      2       insert the duplicate node</span></span><br><span class="line"><span class="comment"> * Any other processing on the duplicate should be done in this</span></span><br><span class="line"><span class="comment"> * function.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DuplicatedNode1</span> <span class="params">( Link new_node, Link list_node )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* compare only the priority of the queue data */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NodeDataCmp1</span> <span class="params">( <span class="keyword">void</span> *first, <span class="keyword">void</span> *second )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*=== Now the functions for the list of free nodes ===*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* data is a priority level (int) and text (string) */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">CreateData2</span> <span class="params">( <span class="keyword">void</span> * data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">NodeData2</span> * <span class="title">new_data</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*--- allocate our data structure ---*/</span></span><br><span class="line"></span><br><span class="line">    new_data = (struct NodeData2 *)<span class="built_in">malloc</span> ( <span class="keyword">sizeof</span> ( struct NodeData2 ));</span><br><span class="line">    <span class="keyword">if</span> ( new_data == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">    <span class="comment">/*--- move the values into the data structure ---*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * we assign a priority of 0</span></span><br><span class="line"><span class="comment">     * and allocate a string of TEXT_SIZE + 1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	new_data-&gt;link[<span class="number">0</span>]=<span class="literal">NULL</span>;</span><br><span class="line">	new_data-&gt;link[<span class="number">1</span>]=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="comment">//new_data-&gt;text == (char *)malloc (TEXT_SIZE+1);//yyw</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( new_data-&gt;text == <span class="literal">NULL</span> )   <span class="comment">/* error copying string */</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span> ( new_data );</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> ( new_data ); <span class="comment">/* return a complete structure */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DeleteData2</span> <span class="params">( <span class="keyword">void</span> * data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * In this case, NodeData2 consists of a pointer.</span></span><br><span class="line"><span class="comment">     * The string must be freed manually.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">     <span class="comment">//free ( ((pND2) data)-&gt;text );</span></span><br><span class="line">     <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* this list inserts duplicated nodes */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DuplicatedNode2</span> <span class="params">( Link new_node, Link list_node )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* this function is never called */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NodeDataCmp2</span> <span class="params">( <span class="keyword">void</span> *first, <span class="keyword">void</span> *second )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* function to copy our data */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DataCopy</span> <span class="params">( <span class="keyword">void</span> * dest, <span class="keyword">void</span> * src )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pND2 s,d;</span><br><span class="line">    s = src;</span><br><span class="line">    d = dest;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( dest == <span class="literal">NULL</span> || src == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*printf ( "About to copy %s \n",</span></span><br><span class="line"><span class="comment">                s-&gt;text );*/</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">strncpy</span> ( d-&gt;text, s-&gt;text, TEXT_SIZE );</span><br><span class="line">	d-&gt;link[<span class="number">0</span>]=s-&gt;link[<span class="number">0</span>];</span><br><span class="line">	d-&gt;link[<span class="number">1</span>]=s-&gt;link[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-1-头文件llgen-h-链表的声明"><a href="#4-2-1-头文件llgen-h-链表的声明" class="headerlink" title="4.2.1 头文件llgen.h:链表的声明"></a>4.2.1 头文件llgen.h:链表的声明</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- llgen.h ----------------------------- Listing 2-2 ---------</span></span><br><span class="line"><span class="comment"> *  Declarations for generic doubly linked lists.</span></span><br><span class="line"><span class="comment"> *  Used in conjunction with llgen.c (Listing 2-3).</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> LLGEN_H       <span class="comment">/* make sure it's included only once */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LLGEN_H    1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>     *<span class="title">prev</span>;</span>  <span class="comment">/* link to previous node */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>     *<span class="title">next</span>;</span>  <span class="comment">/* link to next node */</span></span><br><span class="line">    <span class="keyword">void</span>            *pdata; <span class="comment">/* generic pointer to data */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">Link</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* a linked list data structure */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">List</span> &#123;</span></span><br><span class="line">    Link            LHead;</span><br><span class="line">    Link            LTail;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span>    LCount;</span><br><span class="line">    <span class="keyword">void</span> * ( * LCreateData )     ( <span class="keyword">void</span> * );</span><br><span class="line">    <span class="keyword">int</span>    ( * LDeleteData )     ( <span class="keyword">void</span> * );</span><br><span class="line">    <span class="keyword">int</span>    ( * LDuplicatedNode ) ( Link, Link );</span><br><span class="line">    <span class="keyword">int</span>    ( * LNodeDataCmp )    ( <span class="keyword">void</span> *, <span class="keyword">void</span> * );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* The four functions specific to an individual linked list are:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   LCreateData:  is passed a pointer to an application-defined</span></span><br><span class="line"><span class="comment">                 object and is expected to return a pointer to</span></span><br><span class="line"><span class="comment">                 whatever is to be stored in the linked list.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   LDeleteData:  is passed a pointer to the object an application</span></span><br><span class="line"><span class="comment">                 has stored in a linked list. LDeleteData must</span></span><br><span class="line"><span class="comment">                 destroy the object.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   LDuplicatedNode: is passed two pointers. The first pointer is</span></span><br><span class="line"><span class="comment">                    to a node that you would like to add to a</span></span><br><span class="line"><span class="comment">                    linked list and the second is to a node that</span></span><br><span class="line"><span class="comment">                    is already in the list but is a duplicate of</span></span><br><span class="line"><span class="comment">                    the first pointer.</span></span><br><span class="line"><span class="comment">                    LDuplicatedNode returns:</span></span><br><span class="line"><span class="comment">                            0 -&gt; do nothing to list</span></span><br><span class="line"><span class="comment">                            1 -&gt; destroy duplicate</span></span><br><span class="line"><span class="comment">                            2 -&gt; add duplicate to list</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   LNodeDataCmp: is passed pointers to two application data</span></span><br><span class="line"><span class="comment">                 objects and must compare them, returning a</span></span><br><span class="line"><span class="comment">                 number that is &lt; 0, zero, or &gt; 0, depending on</span></span><br><span class="line"><span class="comment">                 the relationship between the first and second</span></span><br><span class="line"><span class="comment">                 objects.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*--- generic linked-list primitives ---*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">AddNodeAscend</span>  <span class="params">( struct List *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">AddNodeAtHead</span>  <span class="params">( struct List *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function">struct List * <span class="title">CreateLList</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">void</span> * ( * ) ( <span class="keyword">void</span> * ),       <span class="comment">/* create data */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * ) ( <span class="keyword">void</span> * ),       <span class="comment">/* delete data */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * ) ( Link, Link ),   <span class="comment">/* duplicate   */</span></span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * )  ( <span class="keyword">void</span> *, <span class="keyword">void</span> * ))</span></span>; <span class="comment">/* compare */</span></span><br><span class="line"><span class="function">Link <span class="title">CreateNode</span>     <span class="params">( struct List * , <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">DeleteNode</span>     <span class="params">( struct List *, Link )</span></span>;</span><br><span class="line"><span class="function">Link <span class="title">FindNode</span>       <span class="params">( struct List *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function">Link <span class="title">FindNodeAscend</span> <span class="params">( struct List *, <span class="keyword">void</span> * )</span></span>;</span><br><span class="line"><span class="function">Link <span class="title">GotoNext</span>       <span class="params">( struct List *, Link )</span></span>;</span><br><span class="line"><span class="function">Link <span class="title">GotoPrev</span>       <span class="params">( struct List *, Link )</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="4-2-2-接口llgen-c：链表函数的具体定义"><a href="#4-2-2-接口llgen-c：链表函数的具体定义" class="headerlink" title="4.2.2 接口llgen.c：链表函数的具体定义"></a>4.2.2 接口llgen.c：链表函数的具体定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- llgen.c ------------------------------ Listing 2-3 --------</span></span><br><span class="line"><span class="comment"> *  Generic primitive functions for doubly linked lists.</span></span><br><span class="line"><span class="comment"> *  Contains no application-specific functions.</span></span><br><span class="line"><span class="comment"> *  Functions are in alphabetical order.</span></span><br><span class="line"><span class="comment"> *------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IN_LL_LIB   1   <span class="comment">/* in the library of primitives */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"llgen.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*--- Aliases to make the code more readable ---*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LLHead (L-&gt;LHead)      <span class="comment">/* The head of the current list */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LLTail (L-&gt;LTail)      <span class="comment">/* The tail of the current list */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NodeCount (L-&gt;LCount)  <span class="comment">/* Nodes in the current list */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CreateData     (*(L-&gt;LCreateData))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DeleteData     (*(L-&gt;LDeleteData))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DuplicatedNode (*(L-&gt;LDuplicatedNode))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NodeDataCmp    (*(L-&gt;LNodeDataCmp))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------------------------------------------------</span></span><br><span class="line"><span class="comment"> * Add a node at head: first allocate the space for</span></span><br><span class="line"><span class="comment"> * the data, then allocate a node with a pointer to</span></span><br><span class="line"><span class="comment"> * the data, then add the node to the list.</span></span><br><span class="line"><span class="comment"> *--------------------------------------------------*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">AddNodeAtHead</span> <span class="params">( struct List *L, <span class="keyword">void</span> *nd )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link pn;</span><br><span class="line"></span><br><span class="line">    pn = CreateNode ( L, nd );</span><br><span class="line">    <span class="keyword">if</span> ( pn == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*--- Add the node ---*/</span></span><br><span class="line">    <span class="keyword">if</span> ( LLHead == <span class="literal">NULL</span> )   <span class="comment">/* is it the first node? */</span></span><br><span class="line">    &#123;</span><br><span class="line">        LLHead = LLTail = pn; <span class="comment">/*--- yes ---*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>                      <span class="comment">/*--- no  ---*/</span></span><br><span class="line">    &#123;</span><br><span class="line">        LLHead-&gt;prev = pn; <span class="comment">/* first goes node before Head */</span></span><br><span class="line">        pn-&gt;next = LLHead; <span class="comment">/* put Head next */</span></span><br><span class="line">        LLHead = pn;       <span class="comment">/* then point Head to us */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    NodeCount += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------------------------------------------------</span></span><br><span class="line"><span class="comment"> * Add ascending. Adds a node to an ordered list.</span></span><br><span class="line"><span class="comment"> *--------------------------------------------------*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">AddNodeAscend</span> <span class="params">( struct List *L, <span class="keyword">void</span> *nd )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link        pn;         <span class="comment">/* to node we're creating */</span></span><br><span class="line">    Link        prev, curr; <span class="comment">/* our current search */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> <span class="title">dummy</span>;</span>      <span class="comment">/* a dummy node */</span></span><br><span class="line">    <span class="keyword">int</span>         compare;</span><br><span class="line"></span><br><span class="line">    pn = CreateNode ( L, nd );</span><br><span class="line">    <span class="keyword">if</span> ( pn == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* attach dummy node to head of list */</span></span><br><span class="line">    dummy.next = LLHead;</span><br><span class="line">    dummy.prev = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> ( dummy.next != <span class="literal">NULL</span> )</span><br><span class="line">        dummy.next-&gt;prev = &amp;dummy;</span><br><span class="line"></span><br><span class="line">    prev = &amp;dummy;</span><br><span class="line">    curr = dummy.next;</span><br><span class="line">    <span class="keyword">for</span> ( ; curr != <span class="literal">NULL</span>; prev = curr, curr = curr-&gt;next )</span><br><span class="line">    &#123;</span><br><span class="line">        compare = NodeDataCmp ( pn-&gt;pdata, curr-&gt;pdata );</span><br><span class="line">        <span class="keyword">if</span> ( compare &lt;= <span class="number">0</span> )</span><br><span class="line">            <span class="keyword">break</span>; <span class="comment">/* new node equals or precedes curr */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( curr != <span class="literal">NULL</span> &amp;&amp; compare == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        compare = DuplicatedNode ( pn, curr );</span><br><span class="line">        <span class="keyword">if</span> ( compare == <span class="number">2</span> )</span><br><span class="line">            <span class="comment">/* do nothing -- will get inserted */</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/* first, repair the linked list */</span></span><br><span class="line">            LLHead = dummy.next;</span><br><span class="line">            LLHead-&gt;prev = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* delete the duplicated node, if appropriate */</span></span><br><span class="line">            <span class="keyword">if</span> ( compare == <span class="number">1</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                DeleteData( pn-&gt;pdata );</span><br><span class="line">                <span class="built_in">free</span> ( pn );</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    prev-&gt;next = pn;</span><br><span class="line">    pn-&gt;prev = prev;</span><br><span class="line">    pn-&gt;next = curr;</span><br><span class="line">    <span class="keyword">if</span> ( curr != <span class="literal">NULL</span> )</span><br><span class="line">        curr-&gt;prev = pn;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        LLTail = pn; <span class="comment">/* this node is the new tail */</span></span><br><span class="line"></span><br><span class="line">    NodeCount += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* now, unhook the dummy head node */</span></span><br><span class="line">    LLHead = dummy.next;</span><br><span class="line">    LLHead-&gt;prev = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> * Creates a linked-list structure and returns a pointer to it.</span></span><br><span class="line"><span class="comment"> * On error, returns NULL. This functions accepts pointers</span></span><br><span class="line"><span class="comment"> * to the four list-specific functions and initializes the</span></span><br><span class="line"><span class="comment"> * linked-list structure with them.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="function">struct List * <span class="title">CreateLList</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">void</span> * ( * fCreateData ) ( <span class="keyword">void</span> * ),</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * fDeleteData ) ( <span class="keyword">void</span> * ),</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * fDuplicatedNode ) ( Link, Link ),</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>    ( * fNodeDataCmp )  ( <span class="keyword">void</span> *, <span class="keyword">void</span> * ))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">List</span> * <span class="title">pL</span>;</span></span><br><span class="line"></span><br><span class="line">    pL = (struct List *) <span class="built_in">malloc</span> ( <span class="keyword">sizeof</span> ( struct List ));</span><br><span class="line">    <span class="keyword">if</span> ( pL == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    pL-&gt;LHead = <span class="literal">NULL</span>;</span><br><span class="line">    pL-&gt;LTail = <span class="literal">NULL</span>;</span><br><span class="line">    pL-&gt;LCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    pL-&gt;LCreateData = fCreateData;</span><br><span class="line">    pL-&gt;LDeleteData = fDeleteData;</span><br><span class="line">    pL-&gt;LDuplicatedNode = fDuplicatedNode;</span><br><span class="line">    pL-&gt;LNodeDataCmp = fNodeDataCmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ( pL );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> * Creates a node and then calls the application-specific</span></span><br><span class="line"><span class="comment"> * function CreateData() to create the node's data structure.</span></span><br><span class="line"><span class="comment"> * Returns NULL on error.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="function">Link <span class="title">CreateNode</span> <span class="params">( struct List *L, <span class="keyword">void</span> *data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link new_node;</span><br><span class="line"></span><br><span class="line">    new_node = (Link) <span class="built_in">malloc</span> ( <span class="keyword">sizeof</span> ( struct Node ));</span><br><span class="line">    <span class="keyword">if</span> ( new_node == <span class="literal">NULL</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line"></span><br><span class="line">    new_node-&gt;prev = <span class="literal">NULL</span>;</span><br><span class="line">    new_node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*--- now call the application-specific data allocation ---*/</span></span><br><span class="line">    new_node-&gt;pdata = CreateData( data );</span><br><span class="line">    <span class="keyword">if</span> ( new_node-&gt;pdata == <span class="literal">NULL</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span> ( new_node );</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> ( new_node );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> *  Deletes the node pointed to by to_delete.</span></span><br><span class="line"><span class="comment"> *  Function calls list-specific function to delete data.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DeleteNode</span> <span class="params">( struct List *L, Link to_delete )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link pn;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( to_delete == <span class="literal">NULL</span> )        <span class="comment">/* Double check before */</span></span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );               <span class="comment">/* deleting anything.  */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( to_delete-&gt;prev == <span class="literal">NULL</span> )  <span class="comment">/* we're at the head */</span></span><br><span class="line">    &#123;</span><br><span class="line">        LLHead = to_delete-&gt;next;   <span class="comment">/* update head */</span></span><br><span class="line">        LLHead-&gt;prev = <span class="literal">NULL</span>;        <span class="comment">/* update next node??? */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( to_delete-&gt;next == <span class="literal">NULL</span> )</span><br><span class="line">    &#123;                               <span class="comment">/* we're at the tail */</span></span><br><span class="line">        pn = to_delete-&gt;prev;       <span class="comment">/* get the previous node */</span></span><br><span class="line">        pn-&gt;next = <span class="literal">NULL</span>;	<span class="comment">//???</span></span><br><span class="line">        LLTail = pn;                <span class="comment">/* update tail */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>                        <span class="comment">/* we're in the list */</span></span><br><span class="line">    &#123;</span><br><span class="line">        pn = to_delete-&gt;prev;       <span class="comment">/* get the previous node */</span></span><br><span class="line">        pn-&gt;next = to_delete-&gt;next; <span class="comment">/* update previous node to */</span></span><br><span class="line">                                    <span class="comment">/* point to the next one. */</span></span><br><span class="line">        pn = to_delete-&gt;next;       <span class="comment">/* get the next node */</span></span><br><span class="line">        pn-&gt;prev = to_delete-&gt;prev; <span class="comment">/* update it to point to */</span></span><br><span class="line">                                    <span class="comment">/* the previous one. */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DeleteData ( to_delete-&gt;pdata );  <span class="comment">/* delete the data */</span></span><br><span class="line">    <span class="built_in">free</span> ( to_delete );               <span class="comment">/* free the node */</span></span><br><span class="line"></span><br><span class="line">    NodeCount -= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> *  Finds node by starting at the head of the list, stepping</span></span><br><span class="line"><span class="comment"> *  through each node, and comparing data items with the search</span></span><br><span class="line"><span class="comment"> *  key. The Ascend version checks that the data in the node</span></span><br><span class="line"><span class="comment"> *  being examined is not larger than the search key. If it is,</span></span><br><span class="line"><span class="comment"> *  we know the key is not in the list. Returns pointer to node</span></span><br><span class="line"><span class="comment"> *  on success or NULL on failure.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"><span class="function">Link <span class="title">FindNode</span> <span class="params">( struct List *L, <span class="keyword">void</span> *nd )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link pcurr;             <span class="comment">/* the node we're examining */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( LLHead == <span class="literal">NULL</span> )        <span class="comment">/* empty list */</span></span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( pcurr = LLHead; pcurr != <span class="literal">NULL</span>; pcurr = pcurr-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( NodeDataCmp ( nd, pcurr-&gt;pdata ) == <span class="number">0</span> )</span><br><span class="line">            <span class="keyword">return</span> ( pcurr );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="literal">NULL</span> );             <span class="comment">/* could not find node */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Link <span class="title">FindNodeAscend</span> <span class="params">( struct List *L, <span class="keyword">void</span> *nd )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link    pcurr;          <span class="comment">/* the node we're examining */</span></span><br><span class="line">    <span class="keyword">int</span> cmp_result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( LLHead == <span class="literal">NULL</span> )        <span class="comment">/* empty list */</span></span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( pcurr = LLHead; pcurr != <span class="literal">NULL</span>; pcurr = pcurr-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        cmp_result =  NodeDataCmp ( nd, pcurr-&gt;pdata );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( cmp_result &lt; <span class="number">0</span> )</span><br><span class="line">             <span class="keyword">return</span> ( <span class="literal">NULL</span> );    <span class="comment">/* too far */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( cmp_result == <span class="number">0</span> )   <span class="comment">/* just right */</span></span><br><span class="line">             <span class="keyword">return</span> ( pcurr );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ( <span class="literal">NULL</span> );             <span class="comment">/* could not find node */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> *  The Goto functions return the pointer to the requested node</span></span><br><span class="line"><span class="comment"> *  or NULL on error.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="function">Link <span class="title">GotoNext</span> <span class="params">( struct List *L, Link pcurr )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( pcurr-&gt;next == <span class="literal">NULL</span> || pcurr == LLTail )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> ( pcurr-&gt;next );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Link <span class="title">GotoPrev</span> <span class="params">( struct List *L, Link pcurr )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( pcurr-&gt;prev == <span class="literal">NULL</span> || pcurr == LLHead )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> );</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> ( pcurr-&gt;prev );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-1-头文件bintree-h：二叉树定义"><a href="#4-3-1-头文件bintree-h：二叉树定义" class="headerlink" title="4.3.1 头文件bintree.h：二叉树定义"></a>4.3.1 头文件bintree.h：二叉树定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- bintree.h --------------------------- Listing 6-2 ---------</span></span><br><span class="line"><span class="comment"> * Binary-tree definitions</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TREE_OK    (0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TREE_FAIL (-1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LEFT        1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RIGHT       0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sBnode</span> &#123;</span></span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">sBnode</span> *<span class="title">link</span>[2];</span></span><br><span class="line">&#125; Bnode;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Our binary tree is made up of these */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sMynode</span> &#123;</span></span><br><span class="line">    <span class="comment">/* A copy of the items in a Bnode */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sMynode</span> *<span class="title">link</span>[2];</span></span><br><span class="line">    <span class="keyword">char</span> text[<span class="number">20</span>];</span><br><span class="line">&#125; Mynode;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Control structure for a binary tree */</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*CompFunc)</span> <span class="params">(<span class="keyword">void</span> *node1, <span class="keyword">void</span> *node2)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*DoFunc)</span> <span class="params">(<span class="keyword">void</span> *node, <span class="keyword">int</span> level)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sBintree</span> &#123;</span></span><br><span class="line">    Bnode *DummyHead;</span><br><span class="line">    CompFunc Compare;</span><br><span class="line">    <span class="keyword">int</span> DuplicatesOk;</span><br><span class="line">    <span class="keyword">size_t</span> NodeSize;</span><br><span class="line">&#125; Bintree;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Prototypes */</span></span><br><span class="line"><span class="function">Bintree *<span class="title">NewBintree</span> <span class="params">(Bnode *dummy, CompFunc cf,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">int</span> dup_ok, <span class="keyword">size_t</span> node_size)</span></span>;</span><br><span class="line"><span class="function">Bnode   *<span class="title">FindBintree</span><span class="params">(Bintree *t, Bnode *n)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>      <span class="title">InsBintree</span> <span class="params">(Bintree *t, Bnode *n)</span></span>;</span><br><span class="line"><span class="function">Bnode   *<span class="title">DelBintree</span> <span class="params">(Bintree *t, Bnode *n)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>      <span class="title">WalkBintree</span><span class="params">(Bintree *t, DoFunc df)</span></span>;</span><br><span class="line"><span class="function">Bnode   *<span class="title">InitBintreeNode</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LevelTraBintree</span><span class="params">(Bintree *t, DoFunc df)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-2-bintree-c：二叉树主要功能定义和问题算法思路的实现"><a href="#4-3-2-bintree-c：二叉树主要功能定义和问题算法思路的实现" class="headerlink" title="4.3.2 bintree.c：二叉树主要功能定义和问题算法思路的实现"></a>4.3.2 bintree.c：二叉树主要功能定义和问题算法思路的实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--- bintree.c --------------------------- Listing 6-1 ---------</span></span><br><span class="line"><span class="comment"> * Binary tree routines. Provides plain binary search</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bintree.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"llgen.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"qapp.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> QMAX 100    <span class="comment">/* maximum number of elements in a queue */</span> <span class="comment">//yyw</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* A safe malloc() */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> * <span class="title">tmalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *p;</span><br><span class="line">    <span class="keyword">if</span> ((p = <span class="built_in">malloc</span>(size)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Out of memory\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Create and initialize a node for the user. 'size' both can</span></span><br><span class="line"><span class="comment"> * and should be greater than sizeof(Bnode) to allow for a</span></span><br><span class="line"><span class="comment"> * data area for the user.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Bnode *<span class="title">InitBintreeNode</span><span class="params">(<span class="keyword">size_t</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bnode *n;</span><br><span class="line"></span><br><span class="line">    n = tmalloc(size);</span><br><span class="line">    n -&gt; link[LEFT] = n -&gt; link[RIGHT]  = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Create an empty tree */</span></span><br><span class="line"><span class="function">Bintree *<span class="title">NewBintree</span> <span class="params">(Bnode *dummy,</span></span></span><br><span class="line"><span class="function"><span class="params">    CompFunc cf,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> dup_ok,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">size_t</span> node_size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bintree *t;</span><br><span class="line"></span><br><span class="line">    t = tmalloc(<span class="keyword">sizeof</span>(Bintree));</span><br><span class="line">    t -&gt; DummyHead = dummy;</span><br><span class="line">    t -&gt; Compare = cf;</span><br><span class="line">    t -&gt; DuplicatesOk = dup_ok;</span><br><span class="line">    t -&gt; NodeSize = node_size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Find node n in tree t */</span></span><br><span class="line"><span class="function">Bnode *<span class="title">FindBintree</span><span class="params">(Bintree *t, Bnode *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Bnode *s;</span><br><span class="line">    <span class="keyword">int</span> dir;</span><br><span class="line"></span><br><span class="line">    s = t -&gt; DummyHead -&gt; link[RIGHT];</span><br><span class="line">    <span class="keyword">while</span> (s != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        dir = (t -&gt; Compare) (n, s);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * If a match, we're done.</span></span><br><span class="line"><span class="comment">         * For Red-Black, must also be a leaf.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (dir == <span class="number">0</span> )</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        dir = dir &lt; <span class="number">0</span>;</span><br><span class="line">        s = s -&gt; link[dir];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">/* no match */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Bnode * <span class="title">DelBintree</span> <span class="params">(Bintree *t, Bnode *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    Bnode *p, *s, *save;</span><br><span class="line">    <span class="keyword">int</span> dir, dir_old;</span><br><span class="line"></span><br><span class="line">    p = t -&gt; DummyHead;</span><br><span class="line">    s = p -&gt; link[RIGHT];</span><br><span class="line">    dir_old = dir = RIGHT;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Look for a match */</span></span><br><span class="line">    <span class="keyword">while</span> (s != <span class="literal">NULL</span> &amp;&amp; (dir = (t-&gt;Compare)(n, s)) != <span class="number">0</span>) &#123;</span><br><span class="line">        p = s;</span><br><span class="line">        dir = dir &lt; <span class="number">0</span>;</span><br><span class="line">        dir_old = dir;</span><br><span class="line">        s = p -&gt; link[dir];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (s == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">/* no match found */</span></span><br><span class="line"></span><br><span class="line">    save = s;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * First case: if s has no right child, then replace s</span></span><br><span class="line"><span class="comment">     * with s's left child.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (s -&gt; link[RIGHT] == <span class="literal">NULL</span>)</span><br><span class="line">        s = s -&gt; link[LEFT];</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Second case: if s has a right child that lacks a left</span></span><br><span class="line"><span class="comment">     * child, then replace s with s's right child and</span></span><br><span class="line"><span class="comment">     * copy s's left child into the right child's left child.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (s -&gt; link[RIGHT] -&gt; link[LEFT] == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        s = s -&gt; link[RIGHT];</span><br><span class="line">        s -&gt; link[LEFT] = save -&gt; link[LEFT];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Final case: find leftmost (smallest) node in s's right</span></span><br><span class="line"><span class="comment">     * subtree. By definition, this node has an empty left</span></span><br><span class="line"><span class="comment">     * link. Free this node by copying its right link to</span></span><br><span class="line"><span class="comment">     * its parent's left link and then give it both of s's</span></span><br><span class="line"><span class="comment">     * links (thus replacing s).</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Bnode *small;</span><br><span class="line"></span><br><span class="line">        small = s -&gt; link[RIGHT];</span><br><span class="line">        <span class="keyword">while</span> (small -&gt; link[LEFT] -&gt; link[LEFT])</span><br><span class="line">            small = small -&gt; link[LEFT];</span><br><span class="line">        s = small -&gt; link[LEFT];</span><br><span class="line">        small -&gt; link[LEFT] = s -&gt; link[RIGHT];</span><br><span class="line">        s -&gt; link[LEFT] = save -&gt; link[LEFT];</span><br><span class="line">        s -&gt; link[RIGHT] = save -&gt; link[RIGHT];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p -&gt; link[dir_old] = s;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> save;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Insert node n into tree t */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InsBintree</span> <span class="params">(Bintree *t, Bnode *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p_dir;</span><br><span class="line">    Bnode *p, *s;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Search until we find an empty arm. */</span></span><br><span class="line">    p = t -&gt; DummyHead;</span><br><span class="line">    p_dir = RIGHT; <span class="comment">/* direction from p to s */</span></span><br><span class="line">    s = p -&gt; link[RIGHT];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (s != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        p = s;</span><br><span class="line">        p_dir = (t -&gt; Compare) (n, s);</span><br><span class="line">        <span class="keyword">if</span> (p_dir == <span class="number">0</span> &amp;&amp; t -&gt; DuplicatesOk == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> TREE_FAIL; <span class="comment">/* duplicate */</span></span><br><span class="line">        p_dir = p_dir &lt; <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//printf(" Compare with '%s'.", ((struct sMynode *)s) -&gt; text);</span></span><br><span class="line">        s = s -&gt; link[p_dir];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Add the new node */</span></span><br><span class="line">    p -&gt; link[p_dir] = n;</span><br><span class="line">	<span class="comment">//printf("\n");</span></span><br><span class="line">    <span class="keyword">return</span> TREE_OK;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Recursive tree walk routines. The entry point is</span></span><br><span class="line"><span class="comment"> * WalkBintree. It will do an inorder traversal of the</span></span><br><span class="line"><span class="comment"> * tree, call df() for each node and leaf.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rWalk</span><span class="params">(Bnode *n, <span class="keyword">int</span> level, DoFunc df)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        rWalk(n -&gt; link[LEFT], level + <span class="number">1</span>, df);</span><br><span class="line">        df(n, level);</span><br><span class="line">        rWalk(n -&gt; link[RIGHT], level + <span class="number">1</span>, df);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">WalkBintree</span><span class="params">(Bintree *t, DoFunc df)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t -&gt; DummyHead -&gt; link[RIGHT] == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"Empty tree\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span> TREE_FAIL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rWalk(t -&gt; DummyHead -&gt; link[RIGHT], <span class="number">0</span>, df);</span><br><span class="line">    <span class="keyword">return</span> TREE_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(TEST)</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Test driver</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFLEN 100</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LoadString</span><span class="params">(Bintree *t, <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mynode *m;</span><br><span class="line"></span><br><span class="line">    m = (Mynode *) InitBintreeNode(<span class="keyword">sizeof</span>(Mynode));</span><br><span class="line">    <span class="built_in">strncpy</span>(m-&gt;text, <span class="built_in">string</span>, <span class="keyword">sizeof</span>(m-&gt;text));</span><br><span class="line">    m-&gt;text[<span class="keyword">sizeof</span>(m-&gt;text) - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> InsBintree(t, (Bnode *) m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FindString</span><span class="params">(Bintree *t, <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mynode m, *r;</span><br><span class="line">    <span class="built_in">strncpy</span>(m.text, <span class="built_in">string</span>, <span class="keyword">sizeof</span>(m.text));</span><br><span class="line">    m.text[<span class="keyword">sizeof</span>(m.text) - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ((r = (Mynode *) FindBintree(t, (Bnode *) &amp;m)) == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">" Not found.\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">" Found '%s'.\n"</span>, r -&gt; text);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DeleteString</span><span class="params">(Bintree *t, <span class="keyword">char</span> *<span class="built_in">string</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mynode m, *n;</span><br><span class="line">    <span class="built_in">strncpy</span>(m.text, <span class="built_in">string</span>, <span class="keyword">sizeof</span>(m.text));</span><br><span class="line">    m.text[<span class="keyword">sizeof</span>(m.text) - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    n = (Mynode *) DelBintree(t, (Bnode *) &amp;m);</span><br><span class="line">    <span class="keyword">if</span> (n)</span><br><span class="line">        <span class="built_in">free</span> (n);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">" Did not find '%s'.\n"</span>, <span class="built_in">string</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LoadFile</span><span class="params">(Bintree *t, <span class="keyword">char</span> *fname)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FILE *infile;</span><br><span class="line">    <span class="keyword">char</span> buffer[BUFLEN], *s;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ((infile = fopen(fname, <span class="string">"r"</span>)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">" Couldn't open the file.\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, BUFLEN, infile)) &#123;</span><br><span class="line">        s = buffer + <span class="built_in">strlen</span>(buffer);</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">iscntrl</span>(*s))</span><br><span class="line">            *s-- = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (buffer[<span class="number">0</span>] == <span class="string">';'</span>) <span class="comment">/* a comment */</span></span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (buffer[<span class="number">0</span>] == <span class="string">'-'</span> &amp;&amp; buffer[<span class="number">1</span>] != <span class="number">0</span>) &#123;</span><br><span class="line">            DeleteString(t, buffer+<span class="number">1</span>);</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            LoadString(t, buffer);</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(infile);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Loaded %d items and deleted %d from %s.\n"</span>,</span><br><span class="line">        i, j, fname);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * A sample action function: it prints out the data</span></span><br><span class="line"><span class="comment"> * at each node along with the node's level in the tree</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ShowFunc</span><span class="params">(<span class="keyword">void</span> *m, <span class="keyword">int</span> level)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"%s (%d)\n"</span>,</span><br><span class="line">        ((Mynode *)m) -&gt; text, level);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> TREE_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * A pair of functions to print the tree as a diagram.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(ALTDRAW)</span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> TOP <span class="meta-string">'+'</span>  <span class="comment">//yyw</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> BOT <span class="meta-string">'+'</span>  <span class="comment">//yyw</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> HOR <span class="meta-string">'-'</span> <span class="comment">//yyw</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> VRT <span class="meta-string">'|'</span> <span class="comment">//yyw</span></span></span><br><span class="line">  <span class="comment">//#define TOP '?</span></span><br><span class="line">  <span class="comment">//#define BOT '?</span></span><br><span class="line">  <span class="comment">//#define HOR '?</span></span><br><span class="line">  <span class="comment">//#define VRT '?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> TOP <span class="meta-string">'/'</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> BOT <span class="meta-string">'\\'</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> HOR <span class="meta-string">'-'</span></span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> VRT <span class="meta-string">'|'</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DRAWBUF 100</span></span><br><span class="line"><span class="keyword">char</span> draw[DRAWBUF];</span><br><span class="line"><span class="keyword">char</span> work[DRAWBUF * <span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> maxdepth;</span><br><span class="line">FILE *outfile;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xrWalk</span><span class="params">(Bnode *n, <span class="keyword">int</span> level)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">/* Monitor */</span></span><br><span class="line">        <span class="keyword">if</span> (level &gt; maxdepth)</span><br><span class="line">            maxdepth = level;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Go right</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        draw[level * <span class="number">2</span>] = TOP;</span><br><span class="line">        draw[level * <span class="number">2</span> + <span class="number">1</span>] = <span class="string">' '</span>;</span><br><span class="line">        xrWalk(n -&gt; link[RIGHT], level + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Show current node</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="built_in">strncpy</span>(work, draw, level * <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (level &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line">            c = work[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt; level * <span class="number">2</span>; i += <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">if</span> (work[i] == c)</span><br><span class="line">                    work[i - <span class="number">2</span>] = <span class="string">' '</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    c = work[i];</span><br><span class="line"></span><br><span class="line">            work[level * <span class="number">2</span> - <span class="number">1</span>] =</span><br><span class="line">                HOR;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; level * <span class="number">2</span> - <span class="number">2</span>; i += <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">if</span> (work[i] != <span class="string">' '</span>) &#123;</span><br><span class="line">                    work[i] = VRT;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">sprintf</span>(work + level * <span class="number">2</span>, <span class="string">"%s (%d)"</span>,</span><br><span class="line">                            ((Mynode *)n)-&gt;text, level);</span><br><span class="line">        <span class="built_in">fputs</span>(work, outfile);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"\n"</span>, outfile);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Go left</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        draw[level * <span class="number">2</span>] = BOT;</span><br><span class="line">        draw[level * <span class="number">2</span> + <span class="number">1</span>] = <span class="string">' '</span>;</span><br><span class="line">        xrWalk(n -&gt; link[LEFT], level + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">xWalkBintree</span><span class="params">(Bintree *t, <span class="keyword">char</span> *name, <span class="keyword">char</span> *mode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t -&gt; DummyHead -&gt; link[RIGHT] == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"Empty tree\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span> TREE_FAIL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    maxdepth = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    outfile = <span class="built_in">stdout</span>;</span><br><span class="line">    <span class="keyword">if</span> (name) &#123;</span><br><span class="line">        outfile = fopen(name, mode);</span><br><span class="line">        <span class="keyword">if</span> (outfile == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"Can't open %s.\n"</span>, name);</span><br><span class="line">            name = <span class="literal">NULL</span>;</span><br><span class="line">            outfile = <span class="built_in">stdout</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xrWalk(t -&gt; DummyHead -&gt; link[RIGHT], <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(outfile, <span class="string">"Max depth %d.\n"</span>, maxdepth);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (name)</span><br><span class="line">        fclose(outfile); <span class="comment">/* a real file */</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        fflush(outfile); <span class="comment">/* stdout */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> TREE_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> compare_length = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">CompareFunc</span><span class="params">(<span class="keyword">void</span> *n1, <span class="keyword">void</span> *n2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (compare_length)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">strncmp</span>(((Mynode *)n1)-&gt;text,</span><br><span class="line">        ((Mynode *)n2)-&gt;text,</span><br><span class="line">        compare_length);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">strcmp</span>(((Mynode *)n1)-&gt;text,</span><br><span class="line">        ((Mynode *)n2)-&gt;text);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> * enqueue loads the data items in entry into the head node of</span></span><br><span class="line"><span class="comment"> * the free list, then adds that node to the queue based on</span></span><br><span class="line"><span class="comment"> * priority.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">enqueue</span> <span class="params">( struct List *lqueue, struct List *lfree,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">void</span> *new_entry )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link curr, new_node;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Are there any free nodes left? */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( lfree-&gt;LCount == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span> ( <span class="built_in">stderr</span>, <span class="string">"Exceeded maximum queue size\n"</span> );</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* load the data into the head of the free list */</span></span><br><span class="line"></span><br><span class="line">    new_node = lfree-&gt;LHead;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( DataCopy ( new_node-&gt;pdata, new_entry ) == <span class="number">0</span> )</span><br><span class="line">         <span class="keyword">return</span>  ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">	lfree-&gt;LHead = lfree-&gt;LHead-&gt;next;</span><br><span class="line">    <span class="comment">/* adding to an empty list? */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( lqueue-&gt;LCount == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        new_node-&gt;prev = <span class="literal">NULL</span>;</span><br><span class="line">        new_node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        lqueue-&gt;LTail = new_node;</span><br><span class="line">        lqueue-&gt;LHead = new_node;</span><br><span class="line"></span><br><span class="line">        lqueue-&gt;LCount = <span class="number">1</span>;</span><br><span class="line">        lfree-&gt;LCount -= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Traverse the list to find the insertion position */</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">		new_node-&gt;prev = lqueue-&gt;LTail;</span><br><span class="line">		new_node-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		new_node-&gt;prev-&gt;next = new_node;</span><br><span class="line">		lqueue-&gt;LTail = new_node;</span><br><span class="line"></span><br><span class="line">        lqueue-&gt;LCount += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* update the free list */</span></span><br><span class="line">        lfree-&gt;LCount -= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	 <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"> * dequeue takes a pointer that will be set to the data in the</span></span><br><span class="line"><span class="comment"> * node at the head of the queue. It then moves the node being</span></span><br><span class="line"><span class="comment"> * dequeued from the queue to the free list. Note that if you do</span></span><br><span class="line"><span class="comment"> * not use the dequeued data before next queue operation, the</span></span><br><span class="line"><span class="comment"> * data is lost, so copy it if you need to. Returns 0 on error.</span></span><br><span class="line"><span class="comment"> *-------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dequeue</span> <span class="params">( struct List *lqueue, struct List *lfree,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">void</span> * our_data )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link dequeued_link;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* is there anything to dequeue? */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( lqueue-&gt;LCount == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span> ( <span class="built_in">stderr</span>, <span class="string">"Error dequeue from empty queue\n"</span> );</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* make a copy of the data being dequeued */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( DataCopy ( our_data, lqueue-&gt;LHead-&gt;pdata ) == <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* remove the node from the queue */</span></span><br><span class="line"></span><br><span class="line">    dequeued_link = lqueue-&gt;LHead;</span><br><span class="line">    lqueue-&gt;LHead = lqueue-&gt;LHead-&gt;next;</span><br><span class="line">    lqueue-&gt;LCount -= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* add the node to the free list */</span></span><br><span class="line"></span><br><span class="line">    dequeued_link-&gt;prev = <span class="literal">NULL</span>;</span><br><span class="line">    dequeued_link-&gt;next = lfree-&gt;LHead;</span><br><span class="line">    lfree-&gt;LHead = dequeued_link;</span><br><span class="line">    lfree-&gt;LCount += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LevelTraBintree</span><span class="params">(Bintree *t, DoFunc df)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 层序遍历</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>      count;</span><br><span class="line">	<span class="keyword">void</span> *temp;<span class="comment">/* temporary data area*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span>  <span class="title">List</span> *<span class="title">queue</span>,</span></span><br><span class="line"><span class="class">                 *<span class="title">free_list</span>;</span>  <span class="comment">/* our two queues */</span></span><br><span class="line">	<span class="keyword">int</span> level=<span class="number">0</span>;</span><br><span class="line">	Mynode * PCurrTnode;<span class="comment">//指向当前要操作的节点</span></span><br><span class="line">    <span class="comment">/*--- set up linked-list data structures for queues ---*/</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">queue</span></span><br><span class="line">       = CreateLList ( CreateData1,      <span class="comment">/* in qapp.c */</span></span><br><span class="line">                       DeleteData1,      <span class="comment">/*     "     */</span></span><br><span class="line">                       DuplicatedNode1,  <span class="comment">/*     "     */</span></span><br><span class="line">                       NodeDataCmp1 );   <span class="comment">/*     "     */</span></span><br><span class="line">    free_list</span><br><span class="line">       = CreateLList ( CreateData2,      <span class="comment">/* in qapp.c */</span></span><br><span class="line">                       DeleteData2,      <span class="comment">/*     "     */</span></span><br><span class="line">                       DuplicatedNode2,  <span class="comment">/*     "     */</span></span><br><span class="line">                       NodeDataCmp2 );   <span class="comment">/*     "     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">queue</span> == <span class="literal">NULL</span> || free_list == <span class="literal">NULL</span> ) <span class="comment">//要求queue,free_list 指向非空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span> ( <span class="built_in">stderr</span>, <span class="string">"Error creating queue\n"</span> );</span><br><span class="line">        <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*--- allocate the free list ---*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( count = <span class="number">0</span>; count &lt; QMAX; count++ ) <span class="comment">// 向free_list中填充所需节点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( ! AddNodeAtHead ( free_list, PCurrTnode ))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">fprintf</span></span><br><span class="line">                ( <span class="built_in">stderr</span>, <span class="string">"Could not create queue of %d\n"</span>,</span><br><span class="line">                    QMAX );</span><br><span class="line">            <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*--- begin processing file ---*/</span></span><br><span class="line">	<span class="keyword">if</span> (t -&gt; DummyHead -&gt; link[RIGHT] == <span class="literal">NULL</span>) &#123; <span class="comment">// 要求树非空</span></span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"Empty tree\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span> TREE_FAIL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	PCurrTnode = CreateData2 ( <span class="literal">NULL</span> );</span><br><span class="line">    <span class="keyword">if</span> ( PCurrTnode == <span class="literal">NULL</span> )   <span class="comment">// PCurrTnode 创建失败处理</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span> ( <span class="built_in">stderr</span>, <span class="string">"Error creating temporary data area\n"</span> );</span><br><span class="line">        <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( DataCopy ( PCurrTnode, t -&gt; DummyHead -&gt; link[RIGHT] ) == <span class="number">0</span> ) <span class="comment">// 树头节点值赋给PCurrTnode</span></span><br><span class="line">        <span class="keyword">return</span> ( <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( enqueue ( <span class="built_in">queue</span>, free_list, PCurrTnode ) == <span class="number">0</span> )<span class="comment">//将树的根节点入队</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Error enqueueing %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode)-&gt;text );</span><br><span class="line">                <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Enqueued %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode)-&gt;text );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> ( <span class="built_in">queue</span>-&gt;LCount &gt; <span class="number">0</span> ) <span class="comment">//队非空时循环操作，队空结束循环</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ( dequeue ( <span class="built_in">queue</span>, free_list, PCurrTnode ) == <span class="number">0</span> ) <span class="comment">// 队首元素出队，即PCurrTnode所指向的元素</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Error dequeueing %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode)-&gt;text );</span><br><span class="line">                <span class="keyword">return</span> ( EXIT_FAILURE );</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Dequeued %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode)-&gt;text );</span><br><span class="line"></span><br><span class="line">		df(PCurrTnode, level++);</span><br><span class="line">		<span class="keyword">if</span> (PCurrTnode -&gt; link[LEFT] != <span class="literal">NULL</span>)</span><br><span class="line">			<span class="keyword">if</span> ( enqueue ( <span class="built_in">queue</span>, free_list, PCurrTnode -&gt; link[LEFT] ) == <span class="number">0</span> )<span class="comment">//将PCurrTnode所指节点的左孩子入队</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Error enqueueing %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode -&gt; link[LEFT])-&gt;text );</span><br><span class="line">                <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Enqueued %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode -&gt; link[LEFT])-&gt;text );</span><br><span class="line">		<span class="keyword">if</span> (PCurrTnode -&gt; link[RIGHT] !=<span class="literal">NULL</span>)</span><br><span class="line">			<span class="keyword">if</span> ( enqueue ( <span class="built_in">queue</span>, free_list, PCurrTnode -&gt; link[RIGHT] ) == <span class="number">0</span> )<span class="comment">//将PCurrTnode所指节点的右孩子入队</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Error enqueueing  %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode -&gt; link[RIGHT])-&gt;text );</span><br><span class="line">                <span class="built_in">exit</span> ( EXIT_FAILURE );</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span> ( <span class="string">"Enqueued %s\n"</span>,</span><br><span class="line">                          ((pND2)PCurrTnode -&gt; link[RIGHT])-&gt;text );</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> TREE_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> inbuf[BUFLEN], *s;</span><br><span class="line">    Bintree *tree;</span><br><span class="line">    Mynode *dummy;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* create a dummy node for the tree algorithms */</span></span><br><span class="line">    dummy = (Mynode *) InitBintreeNode(<span class="keyword">sizeof</span>(Mynode));</span><br><span class="line">    dummy-&gt;text[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">/* must contain valid data */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* create a tree */</span></span><br><span class="line">    tree = NewBintree((Bnode *) dummy,</span><br><span class="line">                        CompareFunc, <span class="number">1</span>, <span class="keyword">sizeof</span>(Mynode));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(<span class="string">"Action (? for help): "</span>, <span class="built_in">stdout</span>);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        fgets(inbuf, BUFLEN, <span class="built_in">stdin</span>);</span><br><span class="line">        s = inbuf + <span class="built_in">strlen</span>(inbuf);</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">iscntrl</span>(*s))</span><br><span class="line">            *s-- = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (inbuf[<span class="number">0</span>]) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'?'</span>:</span><br><span class="line">                <span class="built_in">fputs</span>(</span><br><span class="line">                    <span class="string">"@file     - Load strings in file to tree\n"</span></span><br><span class="line">                    <span class="string">"d string  - Delete string from tree\n"</span></span><br><span class="line">                    <span class="string">"dup [0|1] - Disallow/allow duplicates\n"</span></span><br><span class="line">                    <span class="string">"s [file]  - Display tree (overwrite file)\n"</span></span><br><span class="line">                    <span class="string">"w         - Walk tree, running ShowFunc()\n"</span></span><br><span class="line">					<span class="string">"t         - travel tree by level, running ShowFunc()\n"</span></span><br><span class="line">                    <span class="string">"q         - Quit\n"</span></span><br><span class="line">                    , <span class="built_in">stdout</span>);</span><br><span class="line">                fflush(<span class="built_in">stdout</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'@'</span>:</span><br><span class="line">                LoadFile(tree, inbuf + <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'d'</span>:</span><br><span class="line">                <span class="keyword">if</span> (inbuf[<span class="number">1</span>] == <span class="string">'u'</span> &amp;&amp; inbuf[<span class="number">2</span>] == <span class="string">'p'</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (inbuf[<span class="number">3</span>] == <span class="string">' '</span> &amp;&amp;</span><br><span class="line">                        (inbuf[<span class="number">4</span>] == <span class="string">'0'</span> || inbuf[<span class="number">4</span>] == <span class="string">'1'</span>))</span><br><span class="line">                        tree -&gt; DuplicatesOk =</span><br><span class="line">                        inbuf[<span class="number">4</span>] == <span class="string">'0'</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">                    <span class="built_in">fputs</span>(<span class="string">"Duplicates are "</span>, <span class="built_in">stdout</span>);</span><br><span class="line">                    <span class="keyword">if</span> (tree -&gt; DuplicatesOk == <span class="number">0</span>)</span><br><span class="line">                        <span class="built_in">fputs</span>(<span class="string">"not "</span>, <span class="built_in">stdout</span>);</span><br><span class="line">                    <span class="built_in">fputs</span>(<span class="string">"allowed.\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (inbuf[<span class="number">1</span>] != <span class="string">' '</span> || inbuf[<span class="number">2</span>] == <span class="number">0</span>)</span><br><span class="line">                    <span class="built_in">fputs</span>(<span class="string">" Not a valid command\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    DeleteString(tree, inbuf + <span class="number">2</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'s'</span>:</span><br><span class="line">                <span class="keyword">if</span> (inbuf[<span class="number">1</span>] == <span class="string">' '</span> &amp;&amp; inbuf[<span class="number">2</span>] != <span class="number">0</span>)</span><br><span class="line">                    xWalkBintree(tree, inbuf + <span class="number">2</span>,</span><br><span class="line">                    inbuf[<span class="number">0</span>] == <span class="string">'s'</span> ? <span class="string">"w"</span> : <span class="string">"a"</span>);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    xWalkBintree(tree, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'w'</span>:</span><br><span class="line">                WalkBintree(tree, ShowFunc);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> <span class="string">'t'</span>:</span><br><span class="line">                LevelTraBintree(tree, ShowFunc);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'q'</span>:</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">';'</span>:</span><br><span class="line">                <span class="keyword">break</span>;  <span class="comment">/* comment */</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="built_in">fputs</span>(<span class="string">" Not a valid command\n"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="5-测试"><a href="#5-测试" class="headerlink" title="5. 测试"></a>5. 测试</h1><p>5.1 若键盘依次输入3个命令“@Lab4.DAT”、“s”和“t”，则程序运行结果为：</p>
+<p><img src="https://miao.su/images/2019/02/06/p19f59d.png" alt="p19f59d.png"><br><img src="https://miao.su/images/2019/02/06/p25fd0d.png" alt="p25fd0d.png"></p>
+<p>5.2 若键盘依次输入3个命令：“d 12”、“s”和“t”，则程序运行结果:</p>
+<p><img src="https://miao.su/images/2019/02/06/p4c31ca.png" alt="p4c31ca.png"></p>
+<p>5.3 若键盘依次输入3个命令：“d 20”、“s”和“t”，则程序运行结果：<br><img src="https://miao.su/images/2019/02/06/p5aec43.png" alt="p5aec43.png"></p>
+<p><strong>附件：</strong><br>文件Lab4.DAT内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">20</span><br><span class="line">10</span><br><span class="line">22</span><br><span class="line">12</span><br><span class="line">15</span><br><span class="line">06</span><br><span class="line">08</span><br><span class="line">01</span><br><span class="line">25</span><br><span class="line">00</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/queue/" rel="tag"># queue</a>
+          
+            <a href="/tags/layer-travel/" rel="tag"># layer travel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/e3e5434c.html" rel="next" title="BFS之迷宫最小步数">
+                <i class="fa fa-chevron-left"></i> BFS之迷宫最小步数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/dc9314c3.html" rel="prev" title="DFS">
+                DFS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-实验目的"><span class="nav-text">1. 实验目的:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-实验要求"><span class="nav-text">2. 实验要求:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-算法设计思路："><span class="nav-text">3. 算法设计思路：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-代码与分析"><span class="nav-text">4. 代码与分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-1-头文件qapp-h：队列节点的定义与创建"><span class="nav-text">4.1.1 头文件qapp.h：队列节点的定义与创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-2-接口qapp-c：队列函数的具体定义"><span class="nav-text">4.1.2 接口qapp.c：队列函数的具体定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-1-头文件llgen-h-链表的声明"><span class="nav-text">4.2.1 头文件llgen.h:链表的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-2-接口llgen-c：链表函数的具体定义"><span class="nav-text">4.2.2 接口llgen.c：链表函数的具体定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-1-头文件bintree-h：二叉树定义"><span class="nav-text">4.3.1 头文件bintree.h：二叉树定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-2-bintree-c：二叉树主要功能定义和问题算法思路的实现"><span class="nav-text">4.3.2 bintree.c：二叉树主要功能定义和问题算法思路的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-测试"><span class="nav-text">5. 测试</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

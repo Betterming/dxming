@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这篇post是智能机器人技术实验 实验 1 基于OpenCV的颜色特征识别">
+<meta name="keywords" content="CV,OpenCV,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于OpenCV的颜色特征识别">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/d7e278a1.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="这篇post是智能机器人技术实验 实验 1 基于OpenCV的颜色特征识别">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://miao.su/images/2019/05/19/0a201932f9f6f62b11d35.png">
+<meta property="og:image" content="https://miao.su/images/2019/02/04/cv8e8da.gif">
+<meta property="og:updated_time" content="2019-05-19T12:33:31.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于OpenCV的颜色特征识别">
+<meta name="twitter:description" content="这篇post是智能机器人技术实验 实验 1 基于OpenCV的颜色特征识别">
+<meta name="twitter:image" content="https://miao.su/images/2019/05/19/0a201932f9f6f62b11d35.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/d7e278a1">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于OpenCV的颜色特征识别 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/d7e278a1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于OpenCV的颜色特征识别
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-09 11:00:10" itemprop="dateCreated datePublished" datetime="2018-12-09T11:00:10+08:00">2018-12-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-19 20:33:31" itemprop="dateModified" datetime="2019-05-19T20:33:31+08:00">2019-05-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/d7e278a1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/d7e278a1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/d7e278a1.html" class="leancloud_visitors" data-flag-title="基于OpenCV的颜色特征识别">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇post是智能机器人技术实验</p>
+<h1 id="实验-1-基于OpenCV的颜色特征识别"><a href="#实验-1-基于OpenCV的颜色特征识别" class="headerlink" title="实验 1 基于OpenCV的颜色特征识别"></a>实验 1 基于OpenCV的颜色特征识别</h1><a id="more"></a>
+<h2 id="实验设备："><a href="#实验设备：" class="headerlink" title="实验设备："></a>实验设备：</h2><p>平台二选一：</p>
+<ul>
+<li>平台一：树莓派, Linux OS, OpenCV 开发库</li>
+<li>平台二： 个人计算机，Linux OS,USB 摄像头，OpenCV 开发库</li>
+</ul>
+<h2 id="预备知识："><a href="#预备知识：" class="headerlink" title="预备知识："></a>预备知识：</h2><ul>
+<li>数字图像处理基础</li>
+<li>C++、python 编程基础</li>
+<li>Linux 系统基本操作基础</li>
+</ul>
+<h2 id="关于颜色特征识别的一些知识："><a href="#关于颜色特征识别的一些知识：" class="headerlink" title="关于颜色特征识别的一些知识："></a>关于颜色特征识别的一些知识：</h2><h3 id="1-CamShift算法："><a href="#1-CamShift算法：" class="headerlink" title="1. CamShift算法："></a>1. CamShift算法：</h3><p>全称是 Continuously AdaptiveMeanShift，顾名思义，它是对Mean Shift 算法的改进，能够自动调节搜索窗口大小来适应目标的大小，可以跟踪视频中尺寸变化的目标。它也是一种半自动跟踪算法，需要手动标定跟踪目标。基本思想是以视频图像中运动物体的颜色信息作为特征，对输入图像的每一帧分别作 Mean-Shift 运算，并将上一帧的目标中心和搜索窗口大小(核函数带宽)作为下一帧 Mean shift 算法的中心和搜索窗口大小的初始值，如此迭代下去，就可以实现对目标的跟踪。因为在每次搜索前将搜索窗口的位置和大小设置为运动目标当前中心的位置和大小，而运动目标通常在这区域附近，缩短了搜索时间；另外，在目标运动过程中，颜色变化不大，故该算法具有良好的鲁棒性。已被广泛应用到运动人体跟踪，人脸跟踪等领域。</p>
+<h3 id="2-算法流程"><a href="#2-算法流程" class="headerlink" title="2. 算法流程"></a>2. 算法流程</h3><p><img src="https://miao.su/images/2019/05/19/0a201932f9f6f62b11d35.png" alt="0a201932f9f6f62b11d35.png"></p>
+<h3 id="3-代码及分析"><a href="#3-代码及分析" class="headerlink" title="3. 代码及分析"></a>3. 代码及分析</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> serial</span><br><span class="line"></span><br><span class="line"><span class="comment"># from picamera.array import PiRGBArray</span></span><br><span class="line"><span class="comment"># from picamera import PiCamera</span></span><br><span class="line"><span class="comment"># import time</span></span><br><span class="line"><span class="comment"># import copy</span></span><br><span class="line"><span class="keyword">import</span> video <span class="comment"># 调取摄像头</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, color)</span>:</span> <span class="comment"># 获取图片</span></span><br><span class="line">        self.cam = video.create_capture(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#         self.cam = PiCamera()</span></span><br><span class="line"><span class="comment">#         self.cam.resolution = (320,240)</span></span><br><span class="line"><span class="comment">#         self.cam.framerate = 32</span></span><br><span class="line"><span class="comment">#         self.rCa = PiRGBArray(self.cam, size=(320,240))</span></span><br><span class="line"><span class="comment">#         time.sleep(0.1)</span></span><br><span class="line"><span class="comment">#        self.cam.capture(self.rCa, format='bgr')</span></span><br><span class="line"><span class="comment">#        self.frame = self.rCa.array</span></span><br><span class="line"><span class="comment">#        ret, self.frame = self.cam.read()</span></span><br><span class="line">        cv2.namedWindow(<span class="string">'camshift'</span>) <span class="comment"># 通过命名的方式，创建了一个窗口</span></span><br><span class="line">        <span class="keyword">if</span> color == <span class="number">0</span>:</span><br><span class="line">            self.roi = cv2.imread( <span class="string">'lan.jpg'</span> )</span><br><span class="line">            self.flag = <span class="string">"lan"</span></span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            self.flag = <span class="string">"hong"</span></span><br><span class="line">            self.roi = cv2.imread(<span class="string">'hong.png'</span>)</span><br><span class="line">            self.selection = <span class="literal">None</span></span><br><span class="line">            self.tracking_state = <span class="number">0</span></span><br><span class="line">            self.show_backproj = <span class="literal">False</span></span><br><span class="line"><span class="comment">#         self.ser = serial.Serial('/dev/ttyAMA0',115200,timeout=0.5)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span> <span class="comment"># start方法用来设置一些状态，初始化信息</span></span><br><span class="line">        <span class="comment"># tracking_state 判断是否进行追踪</span></span><br><span class="line">        self.tracking_state = <span class="number">0</span></span><br><span class="line">        <span class="comment">#x, y = np.int16([220, 110]) # BUG</span></span><br><span class="line">        <span class="keyword">if</span> self.flag == <span class="string">'Hong'</span>:</span><br><span class="line">                self.selection = (<span class="number">4</span>, <span class="number">6</span>, <span class="number">407</span>, <span class="number">304</span>) <span class="comment"># 设置初始追踪窗口</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.selection = (<span class="number">40</span>, <span class="number">54</span>, <span class="number">296</span>, <span class="number">230</span>)</span><br><span class="line">            self.tracking_state = <span class="number">1</span></span><br><span class="line">    <span class="comment">#        print "start"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show_hist</span><span class="params">(self)</span>:</span> <span class="comment"># 直方图显示</span></span><br><span class="line">        bin_count = self.hist.shape[<span class="number">0</span>] <span class="comment"># hist在行数，在这里是16，即有16个条纹</span></span><br><span class="line">        print(<span class="string">"hist,bin"</span>,self.hist.shape, bin_count, self.hist)</span><br><span class="line"></span><br><span class="line">        bin_w = <span class="number">24</span> <span class="comment"># 每条条纹宽度</span></span><br><span class="line">        img = np.zeros((<span class="number">256</span>, bin_count*bin_w, <span class="number">3</span>), np.uint8) <span class="comment"># 初始化img图像，用于显示直方图，大小为256*(24*16)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(bin_count): <span class="comment"># 对每一条纹绘制</span></span><br><span class="line">            h = int(self.hist[i])</span><br><span class="line">            cv2.rectangle(img, (i*bin_w+<span class="number">2</span>, <span class="number">255</span>), ((i+<span class="number">1</span>)*bin_w<span class="number">-2</span>, <span class="number">255</span>-h), (int(<span class="number">180.0</span>*i/bin_count), <span class="number">255</span>, <span class="number">255</span>), <span class="number">-1</span>)</span><br><span class="line">        img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR) <span class="comment"># 将图像格式HSV转化成BGR</span></span><br><span class="line">        cv2.imshow(<span class="string">'hist'</span>, img)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span> <span class="comment">#主要功能函数</span></span><br><span class="line">        roi = self.roi <span class="comment"># roi存放目标图像</span></span><br><span class="line">        self.start()</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>: <span class="comment"># 死循环，通过Ctrl + C 退出</span></span><br><span class="line"><span class="comment">#         for frame in self.cam.capture_continuous(self.rCa, format='bgr', use_video_port=True):</span></span><br><span class="line">            ret, self.frame = self.cam.read() <span class="comment"># 通过摄像头获取图像</span></span><br><span class="line"><span class="comment">#             self.frame = frame.array        # frame为摄像头获取的图像</span></span><br><span class="line">            vis = self.frame.copy()           <span class="comment"># vis复制frame</span></span><br><span class="line"><span class="comment">#             vis = copy.deepcopy(self.frame)</span></span><br><span class="line">            hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)</span><br><span class="line">            mask = cv2.inRange(hsv, np.array((<span class="number">0.</span>, <span class="number">60.</span>, <span class="number">32.</span>)), np.array((<span class="number">180.</span>, <span class="number">255.</span>, <span class="number">255.</span>)))     <span class="comment"># 掩模图像。要统计整幅图像的直方图就把它设为 None。但是如 果你想统计图像某一部分的直方图的话，你就需要制作一个掩模图像，并 使用它。</span></span><br><span class="line"><span class="comment">#             self.selection = 1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self.selection:</span><br><span class="line"><span class="comment">#                 x0, y0, x1, y1 = 220, 110, 358, 245</span></span><br><span class="line">                x0, y0, x1, y1 = self.selection</span><br><span class="line">                self.track_window = (x0, y0, x1-x0, y1-y0) <span class="comment"># 窗口缩小</span></span><br><span class="line"><span class="comment">#                 hsv_roi = hsv[y0:y1, x0:x1]</span></span><br><span class="line"><span class="comment">#                 mask_roi = mask[y0:y1, x0:x1]</span></span><br><span class="line">                hsv_roi = cv2. cvtColor(roi,cv2. COLOR_BGR2HSV)</span><br><span class="line">                mask_roi = cv2.inRange(hsv_roi, np.array((<span class="number">0.</span>, <span class="number">60.</span>, <span class="number">32.</span>)), np.array((<span class="number">180.</span>, <span class="number">255.</span>, <span class="number">255.</span>)))</span><br><span class="line">                <span class="comment">#一维直方图</span></span><br><span class="line">                hist = cv2.calcHist( [hsv_roi], [<span class="number">0</span>], mask_roi, [<span class="number">16</span>], [<span class="number">0</span>, <span class="number">180</span>] )</span><br><span class="line">                <span class="comment">#二维直方图</span></span><br><span class="line"><span class="comment">#                 hist = cv2.calcHist( [hsv_roi], [0,2],None, [180,256], [0, 180,0 , 255] )</span></span><br><span class="line"></span><br><span class="line">                cv2.normalize(hist, hist, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX);</span><br><span class="line">                self.hist = hist.reshape(<span class="number">-1</span>)</span><br><span class="line">                <span class="comment">#二维直方图显示</span></span><br><span class="line"><span class="comment">#                 plt.imshow(hist,interpolation = 'nearest')</span></span><br><span class="line"><span class="comment">#                 plt.show()</span></span><br><span class="line">                self.show_hist()</span><br><span class="line"></span><br><span class="line">                vis_roi = vis[y0:y1, x0:x1]</span><br><span class="line">                cv2.bitwise_not(vis_roi, vis_roi) <span class="comment"># 颜色反转</span></span><br><span class="line">                vis[mask == <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self.tracking_state == <span class="number">1</span>:</span><br><span class="line">                self.selection = <span class="literal">None</span></span><br><span class="line">                prob = cv2.calcBackProject([hsv], [<span class="number">0</span>], self.hist, [<span class="number">0</span>, <span class="number">180</span>], <span class="number">1</span>) <span class="comment"># 计算反向投影参数为：捕获的图片（转化成hsv格式），灰度值方式，目标图像直方图，直方图范围</span></span><br><span class="line">                prob &amp;= mask</span><br><span class="line">                term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, <span class="number">10</span>, <span class="number">1</span> ) <span class="comment"># 跳出条件，迭代10次或至少移动一次</span></span><br><span class="line">                track_box, self.track_window = cv2.CamShift(prob, self.track_window, term_crit) <span class="comment"># 利用cameshift算法在追踪窗口中搜寻与直方图分布最相似的窗口，结果返回窗口和track_box</span></span><br><span class="line"><span class="comment">#                 if track_box[0][1] &lt;= 240:</span></span><br><span class="line"><span class="comment">#             self.ser.write(str(int(track_box[0][0])-320) + " " + str(int(track_box[0][1])-240))</span></span><br><span class="line"><span class="comment">#             print str(int(track_box[0][0])-320) + " " + str(int(track_box[0][1])-240)</span></span><br><span class="line">                <span class="keyword">if</span> track_box[<span class="number">1</span>][<span class="number">1</span>] &lt;= <span class="number">1</span>:</span><br><span class="line">                    self.tracking_state = <span class="number">0</span></span><br><span class="line">                    self.start()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> self.show_backproj:</span><br><span class="line">                        vis[:] = prob[...,np.newaxis]</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        cv2.ellipse(vis, track_box, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)<span class="comment">#利用返回的track_box画出椭圆</span></span><br><span class="line"><span class="comment">#                         print track_box</span></span><br><span class="line">                        a = str(track_box[<span class="number">0</span>][<span class="number">0</span>])+<span class="string">" "</span>+str(track_box[<span class="number">0</span>][<span class="number">1</span>])+<span class="string">" "</span>+str(round(track_box[<span class="number">1</span>][<span class="number">0</span>],<span class="number">2</span>))\</span><br><span class="line">                                       +<span class="string">" "</span>+str(round(track_box[<span class="number">1</span>][<span class="number">1</span>],<span class="number">2</span>))+<span class="string">" "</span>+str(round(track_box[<span class="number">2</span>],<span class="number">2</span>))+<span class="string">"\r\n"</span></span><br><span class="line">                        <span class="keyword">print</span> a</span><br><span class="line"><span class="comment">#                         self.ser.write(a)</span></span><br><span class="line">                    <span class="keyword">except</span>: <span class="keyword">print</span> track_box</span><br><span class="line"></span><br><span class="line">            cv2.imshow(<span class="string">'camshift'</span>, vis)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 通过键盘输入来实现一些功能</span></span><br><span class="line">            ch = <span class="number">0xFF</span> &amp; cv2.waitKey(<span class="number">5</span>)</span><br><span class="line">            <span class="keyword">if</span> ch == <span class="number">27</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> ch == ord(<span class="string">'b'</span>):</span><br><span class="line">                self.show_backproj = <span class="keyword">not</span> self.show_backproj</span><br><span class="line">            <span class="keyword">if</span> ch == ord(<span class="string">'r'</span>):</span><br><span class="line">                self.tracking_state = <span class="number">0</span></span><br><span class="line">                self.start()</span><br><span class="line">        cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> sys</span><br><span class="line">    <span class="keyword">try</span>: color = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">except</span>: color = <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> __doc__</span><br><span class="line">    a = App(color)</span><br><span class="line">    a.run()</span><br></pre></td></tr></table></figure>
+<p><img src="https://miao.su/images/2019/02/04/cv8e8da.gif" alt="cv8e8da.gif"></p>
+<p>video.py</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Video capture sample.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Sample shows how VideoCapture class can be used to acquire video</span></span><br><span class="line"><span class="string">frames from a camera of a movie file. Also the sample provides</span></span><br><span class="line"><span class="string">an example of procedural video generation by an object, mimicking</span></span><br><span class="line"><span class="string">the VideoCapture interface (see Chess class).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'create_capture' is a convinience function for capture creation,</span></span><br><span class="line"><span class="string">falling back to procedural video in case of error.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Usage:</span></span><br><span class="line"><span class="string">    video.py [--shotdir &lt;shot path&gt;] [source0] [source1] ...'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    sourceN is an</span></span><br><span class="line"><span class="string">     - integer number for camera capture</span></span><br><span class="line"><span class="string">     - name of video file</span></span><br><span class="line"><span class="string">     - synth:&lt;params&gt; for procedural video</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Synth examples:</span></span><br><span class="line"><span class="string">    synth:bg=../cpp/lena.jpg:noise=0.1</span></span><br><span class="line"><span class="string">    synth:class=chess:bg=../cpp/lena.jpg:noise=0.1:size=640x480</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Keys:</span></span><br><span class="line"><span class="string">    ESC    - exit</span></span><br><span class="line"><span class="string">    SPACE  - save current frame to &lt;shot path&gt; director</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> clock</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> pi, sin, cos</span><br><span class="line"><span class="keyword">import</span> common</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VideoSynthBase</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size=None, noise=<span class="number">0.0</span>, bg = None, **params)</span>:</span></span><br><span class="line">        self.bg = <span class="literal">None</span></span><br><span class="line">        self.frame_size = (<span class="number">1000</span>, <span class="number">480</span>)</span><br><span class="line"><span class="comment">#         self.frame_size = (640, 480)</span></span><br><span class="line">        <span class="keyword">if</span> bg <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.bg = cv2.imread(bg, <span class="number">1</span>)</span><br><span class="line">            h, w = self.bg.shape[:<span class="number">2</span>]</span><br><span class="line">            self.frame_size = (w, h)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> size <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            w, h = map(int, size.split(<span class="string">'x'</span>))</span><br><span class="line">            self.frame_size = (w, h)</span><br><span class="line">            self.bg = cv2.resize(self.bg, self.frame_size)</span><br><span class="line"></span><br><span class="line">        self.noise = float(noise)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">render</span><span class="params">(self, dst)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(self, dst=None)</span>:</span></span><br><span class="line">        w, h = self.frame_size</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.bg <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            buf = np.zeros((h, w, <span class="number">3</span>), np.uint8)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            buf = self.bg.copy()</span><br><span class="line"></span><br><span class="line">        self.render(buf)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.noise &gt; <span class="number">0.0</span>:</span><br><span class="line">            noise = np.zeros((h, w, <span class="number">3</span>), np.int8)</span><br><span class="line">            cv2.randn(noise, np.zeros(<span class="number">3</span>), np.ones(<span class="number">3</span>)*<span class="number">255</span>*self.noise)</span><br><span class="line">            buf = cv2.add(buf, noise, dtype=cv2.CV_8UC3)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span>, buf</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isOpened</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chess</span><span class="params">(VideoSynthBase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></span><br><span class="line">        super(Chess, self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">        w, h = self.frame_size</span><br><span class="line"></span><br><span class="line">        self.grid_size = sx, sy = <span class="number">10</span>, <span class="number">7</span></span><br><span class="line">        white_quads = []</span><br><span class="line">        black_quads = []</span><br><span class="line">        <span class="keyword">for</span> i, j <span class="keyword">in</span> np.ndindex(sy, sx):</span><br><span class="line">            q = [[j, i, <span class="number">0</span>], [j+<span class="number">1</span>, i, <span class="number">0</span>], [j+<span class="number">1</span>, i+<span class="number">1</span>, <span class="number">0</span>], [j, i+<span class="number">1</span>, <span class="number">0</span>]]</span><br><span class="line">            [white_quads, black_quads][(i + j) % <span class="number">2</span>].append(q)</span><br><span class="line">        self.white_quads = np.float32(white_quads)</span><br><span class="line">        self.black_quads = np.float32(black_quads)</span><br><span class="line"></span><br><span class="line">        fx = <span class="number">0.9</span></span><br><span class="line">        self.K = np.float64([[fx*w, <span class="number">0</span>, <span class="number">0.5</span>*(w<span class="number">-1</span>)],</span><br><span class="line">                        [<span class="number">0</span>, fx*w, <span class="number">0.5</span>*(h<span class="number">-1</span>)],</span><br><span class="line">                        [<span class="number">0.0</span>,<span class="number">0.0</span>,      <span class="number">1.0</span>]])</span><br><span class="line"></span><br><span class="line">        self.dist_coef = np.float64([<span class="number">-0.2</span>, <span class="number">0.1</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        self.t = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">draw_quads</span><span class="params">(self, img, quads, color = <span class="params">(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)</span>)</span>:</span></span><br><span class="line">        img_quads = cv2.projectPoints(quads.reshape(<span class="number">-1</span>, <span class="number">3</span>), self.rvec, self.tvec, self.K, self.dist_coef) [<span class="number">0</span>]</span><br><span class="line">        img_quads.shape = quads.shape[:<span class="number">2</span>] + (<span class="number">2</span>,)</span><br><span class="line">        <span class="keyword">for</span> q <span class="keyword">in</span> img_quads:</span><br><span class="line">            cv2.fillConvexPoly(img, np.int32(q*<span class="number">4</span>), color, cv2.CV_AA, shift=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">render</span><span class="params">(self, dst)</span>:</span></span><br><span class="line">        t = self.t</span><br><span class="line">        self.t += <span class="number">1.0</span>/<span class="number">30.0</span></span><br><span class="line"></span><br><span class="line">        sx, sy = self.grid_size</span><br><span class="line">        center = np.array([<span class="number">0.5</span>*sx, <span class="number">0.5</span>*sy, <span class="number">0.0</span>])</span><br><span class="line">        phi = pi/<span class="number">3</span> + sin(t*<span class="number">3</span>)*pi/<span class="number">8</span></span><br><span class="line">        c, s = cos(phi), sin(phi)</span><br><span class="line">        ofs = np.array([sin(<span class="number">1.2</span>*t), cos(<span class="number">1.8</span>*t), <span class="number">0</span>]) * sx * <span class="number">0.2</span></span><br><span class="line">        eye_pos = center + np.array([cos(t)*c, sin(t)*c, s]) * <span class="number">15.0</span> + ofs</span><br><span class="line">        target_pos = center + ofs</span><br><span class="line"></span><br><span class="line">        R, self.tvec = common.lookat(eye_pos, target_pos)</span><br><span class="line">        self.rvec = common.mtx2rvec(R)</span><br><span class="line"></span><br><span class="line">        self.draw_quads(dst, self.white_quads, (<span class="number">245</span>, <span class="number">245</span>, <span class="number">245</span>))</span><br><span class="line">        self.draw_quads(dst, self.black_quads, (<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">classes = dict(chess=Chess)</span><br><span class="line"></span><br><span class="line">presets = dict(</span><br><span class="line">    empty = <span class="string">'synth:'</span>,</span><br><span class="line">    lena = <span class="string">'synth:bg=../cpp/lena.jpg:noise=0.1'</span>,</span><br><span class="line">    chess = <span class="string">'synth:class=chess:bg=../cpp/lena.jpg:noise=0.1:size=640x480'</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_capture</span><span class="params">(source = <span class="number">0</span>, fallback = presets[<span class="string">'chess'</span>])</span>:</span></span><br><span class="line">    <span class="string">'''source: &lt;int&gt; or '&lt;int&gt;|&lt;filename&gt;|synth [:&lt;param_name&gt;=&lt;value&gt; [:...]]'</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    source = str(source).strip()</span><br><span class="line">    chunks = source.split(<span class="string">':'</span>)</span><br><span class="line">    <span class="comment"># hanlde drive letter ('c:', ...)</span></span><br><span class="line">    <span class="keyword">if</span> len(chunks) &gt; <span class="number">1</span> <span class="keyword">and</span> len(chunks[<span class="number">0</span>]) == <span class="number">1</span> <span class="keyword">and</span> chunks[<span class="number">0</span>].isalpha():</span><br><span class="line">        chunks[<span class="number">1</span>] = chunks[<span class="number">0</span>] + <span class="string">':'</span> + chunks[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">del</span> chunks[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    source = chunks[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">try</span>: source = int(source)</span><br><span class="line">    <span class="keyword">except</span> ValueError: <span class="keyword">pass</span></span><br><span class="line">    params = dict( s.split(<span class="string">'='</span>) <span class="keyword">for</span> s <span class="keyword">in</span> chunks[<span class="number">1</span>:] )</span><br><span class="line"></span><br><span class="line">    cap = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">if</span> source == <span class="string">'synth'</span>:</span><br><span class="line">        Class = classes.get(params.get(<span class="string">'class'</span>, <span class="literal">None</span>), VideoSynthBase)</span><br><span class="line">        <span class="keyword">try</span>: cap = Class(**params)</span><br><span class="line">        <span class="keyword">except</span>: <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cap = cv2.VideoCapture(source)</span><br><span class="line">        params[<span class="string">"size"</span>] = <span class="string">"320x240"</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'size'</span> <span class="keyword">in</span> params:</span><br><span class="line">            w, h = map(int, params[<span class="string">'size'</span>].split(<span class="string">'x'</span>))</span><br><span class="line">            cap.set(cv2.CAP_PROP_FRAME_WIDTH, w)</span><br><span class="line">            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, h)</span><br><span class="line">    <span class="keyword">if</span> cap <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> cap.isOpened():</span><br><span class="line">        print(<span class="string">'Warning: unable to open video source: '</span>, source)</span><br><span class="line">        <span class="keyword">if</span> fallback <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> create_capture(fallback, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">return</span> cap</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> sys</span><br><span class="line">    <span class="keyword">import</span> getopt</span><br><span class="line"></span><br><span class="line">    print(__doc__)</span><br><span class="line"></span><br><span class="line">    args, sources = getopt.getopt(sys.argv[<span class="number">1</span>:], <span class="string">''</span>, <span class="string">'shotdir='</span>)</span><br><span class="line">    args = dict(args)</span><br><span class="line">    shotdir = args.get(<span class="string">'--shotdir'</span>, <span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">if</span> len(sources) == <span class="number">0</span>:</span><br><span class="line">        sources = [ <span class="number">0</span> ]</span><br><span class="line"></span><br><span class="line">    caps = map(create_capture, sources)</span><br><span class="line">    shot_idx = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        imgs = []</span><br><span class="line">        <span class="keyword">for</span> i, cap <span class="keyword">in</span> enumerate(caps):</span><br><span class="line">            ret, img = cap.read()</span><br><span class="line">            imgs.append(img)</span><br><span class="line">            cv2.imshow(<span class="string">'capture %d'</span> % i, img)</span><br><span class="line">        ch = <span class="number">0xFF</span> &amp; cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> ch == <span class="number">27</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> ch == ord(<span class="string">' '</span>):</span><br><span class="line">            <span class="keyword">for</span> i, img <span class="keyword">in</span> enumerate(imgs):</span><br><span class="line">                fn = <span class="string">'%s/shot_%d_%03d.bmp'</span> % (shotdir, i, shot_idx)</span><br><span class="line">                cv2.imwrite(fn, img)</span><br><span class="line">                print(fn, <span class="string">'saved'</span>)</span><br><span class="line">            shot_idx += <span class="number">1</span></span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><strong>参考：</strong></p>
+<ol>
+<li><a href="https://blog.csdn.net/tiemaxiaosu/article/details/51649401" target="_blank" rel="noopener">https://blog.csdn.net/tiemaxiaosu/article/details/51649401</a></li>
+<li><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=camshift#cv2.CamShift" target="_blank" rel="noopener">http://www.opencv.org.cn/opencvdoc/2.3.2/html/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=camshift#cv2.CamShift</a></li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CV/" rel="tag"># CV</a>
+          
+            <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/b2bb211a.html" rel="next" title="pycharm安装和破解">
+                <i class="fa fa-chevron-left"></i> pycharm安装和破解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/8957bd28.html" rel="prev" title="视觉3D点云图构建与深度测量 ">
+                视觉3D点云图构建与深度测量  <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验-1-基于OpenCV的颜色特征识别"><span class="nav-text">实验 1 基于OpenCV的颜色特征识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设备："><span class="nav-text">实验设备：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识："><span class="nav-text">预备知识：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于颜色特征识别的一些知识："><span class="nav-text">关于颜色特征识别的一些知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-CamShift算法："><span class="nav-text">1. CamShift算法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-算法流程"><span class="nav-text">2. 算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-代码及分析"><span class="nav-text">3. 代码及分析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

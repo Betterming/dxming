@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;本期将会涉及到Python模块中的numpy，这是一个处理数组的强大模块，而该模块也是其他数据分析模块（如pandas和scipy）的核心。">
+<meta name="keywords" content="数组,线性代数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numpy学习一">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/6975a0d3.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本期将会涉及到Python模块中的numpy，这是一个处理数组的强大模块，而该模块也是其他数据分析模块（如pandas和scipy）的核心。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-06T14:05:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Numpy学习一">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本期将会涉及到Python模块中的numpy，这是一个处理数组的强大模块，而该模块也是其他数据分析模块（如pandas和scipy）的核心。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/6975a0d3">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Numpy学习一 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/6975a0d3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Numpy学习一
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-06 09:41:00" itemprop="dateCreated datePublished" datetime="2018-10-06T09:41:00+08:00">2018-10-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-06 22:05:48" itemprop="dateModified" datetime="2019-02-06T22:05:48+08:00">2019-02-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Leaning/" itemprop="url" rel="index"><span itemprop="name">Machine Leaning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/6975a0d3.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/6975a0d3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/6975a0d3.html" class="leancloud_visitors" data-flag-title="Numpy学习一">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;本期将会涉及到Python模块中的numpy，这是一个处理数组的强大模块，而该模块也是其他数据分析模块（如pandas和scipy）的核心。<br><a id="more"></a></p>
+<h2 id="一、数组的创建"><a href="#一、数组的创建" class="headerlink" title="一、数组的创建"></a>一、数组的创建</h2><ul>
+<li>np.array(list,tuple,array类型)</li>
+<li>np.arange,一维数组中的range</li>
+<li>ones,ones_like,zeros,zeros_like,empty,empty_like</li>
+<li>eye,identity #单位矩阵</li>
+<li>full #全为指定数矩阵</li>
+<li>linspace(0,20,10)<br>In:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">arr1 = np.array(range(10)).reshape(2,5)</span><br><span class="line">arr2 = np.arange(10).reshape(2,5)</span><br><span class="line">arr3 = np.ones((2,5))</span><br><span class="line">arr4 = np.zeros_like(arr1)</span><br><span class="line">arr5 = np.eye(5)</span><br><span class="line">arr6 = np.full((2, 5), 3)</span><br><span class="line">np.linspace(0,20,10)  #在0 和 20 包括0,20等长的截取10个点</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Out:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">arr1</span><br><span class="line">Out[5]:</span><br><span class="line">array([[0, 1, 2, 3, 4],</span><br><span class="line">       [5, 6, 7, 8, 9]])</span><br><span class="line"></span><br><span class="line">arr2</span><br><span class="line">Out[6]:</span><br><span class="line">array([[0, 1, 2, 3, 4],</span><br><span class="line">       [5, 6, 7, 8, 9]])</span><br><span class="line"></span><br><span class="line">arr3</span><br><span class="line">Out[7]:</span><br><span class="line">array([[1., 1., 1., 1., 1.],</span><br><span class="line">       [1., 1., 1., 1., 1.]])</span><br><span class="line"></span><br><span class="line">arr4</span><br><span class="line">Out[8]:</span><br><span class="line">array([[0, 0, 0, 0, 0],</span><br><span class="line">       [0, 0, 0, 0, 0]])</span><br><span class="line"></span><br><span class="line">arr5</span><br><span class="line">Out[9]:</span><br><span class="line">array([[1., 0., 0., 0., 0.],</span><br><span class="line">       [0., 1., 0., 0., 0.],</span><br><span class="line">       [0., 0., 1., 0., 0.],</span><br><span class="line">       [0., 0., 0., 1., 0.],</span><br><span class="line">       [0., 0., 0., 0., 1.]])</span><br><span class="line"></span><br><span class="line">arr6</span><br><span class="line">Out[10]:</span><br><span class="line">array([[3, 3, 3, 3, 3],</span><br><span class="line">       [3, 3, 3, 3, 3]])</span><br><span class="line"></span><br><span class="line">Out[11]:</span><br><span class="line">array([ 0.        ,  2.22222222,  4.44444444,  6.66666667,  8.88888889,</span><br><span class="line">       11.11111111, 13.33333333, 15.55555556, 17.77777778, 20.        ])</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、数组的基本操作"><a href="#二、数组的基本操作" class="headerlink" title="二、数组的基本操作"></a>二、数组的基本操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">In[25]:arr1</span><br><span class="line">Out[25]:</span><br><span class="line">array([[0, 1, 2, 3, 4],</span><br><span class="line">       [5, 6, 7, 8, 9]])</span><br><span class="line"></span><br><span class="line">In [26]:arr2</span><br><span class="line">Out[26]:</span><br><span class="line">array([ 1,  3,  5,  7,  9, 11, 13, 15, 17, 19])</span><br><span class="line"></span><br><span class="line">In [28]:arr3=arr2.reshape(2,5) #reshape 改变类型</span><br><span class="line">In [29]:arr3.shape#不该变arr3自身</span><br><span class="line">Out[29]:</span><br><span class="line">(2, 5)</span><br><span class="line"></span><br><span class="line">In [30]:arr3.size #元素个数</span><br><span class="line">Out[30]:</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line">In [31]:arr3.ndim #元素维度</span><br><span class="line">Out[31]:</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h2 id="三、矩阵元素访问"><a href="#三、矩阵元素访问" class="headerlink" title="三、矩阵元素访问"></a>三、矩阵元素访问</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">In [32]:arr3[:]</span><br><span class="line">Out[32]:</span><br><span class="line">array([[ 1,  3,  5,  7,  9],</span><br><span class="line">       [11, 13, 15, 17, 19]])</span><br><span class="line"></span><br><span class="line">In [33]:arr3[1,3] #arr3[1,3]和arr3[1][3]一样但是推荐使用前者</span><br><span class="line">Out[33]:</span><br><span class="line">17</span><br><span class="line"></span><br><span class="line">In [34]:x = np.array(range(12)).reshape(3, 4)</span><br><span class="line">        x</span><br><span class="line">Out[34]:</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11]])</span><br><span class="line"></span><br><span class="line">In [35]:x[::-1,::-1] #步长为-1表示从后往前数</span><br><span class="line">Out[35]:</span><br><span class="line">array([[11, 10,  9,  8],</span><br><span class="line">       [ 7,  6,  5,  4],</span><br><span class="line">       [ 3,  2,  1,  0]])</span><br><span class="line"></span><br><span class="line">In [36]:subx=x[:2,:3] #切片访问 subx改变值不会改变arr3值</span><br><span class="line">        subx</span><br><span class="line">Out[36]:</span><br><span class="line">array([[0, 1, 2],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line"></span><br><span class="line">In [37]:subx=x[:2,2:]</span><br><span class="line">        subx</span><br><span class="line">Out[37]:</span><br><span class="line">array([[2, 3],</span><br><span class="line">       [6, 7]])</span><br><span class="line"></span><br><span class="line">In [38]:subx[0,1]=100</span><br><span class="line">In [39]:print(arr3)#改变arr3中子矩阵，arr3也会改变，是引用方式</span><br><span class="line">Out[39]:</span><br><span class="line">[[ 1  3  5  7  9]</span><br><span class="line"> [11 13 15 17 19]]</span><br></pre></td></tr></table></figure>
+<h2 id="四、合并操作"><a href="#四、合并操作" class="headerlink" title="四、合并操作"></a>四、合并操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">In [40]:x=np.array([1,2,3])</span><br><span class="line">        y=np.array([3,1,2])</span><br><span class="line">In [41]:np.concatenate([x,y])</span><br><span class="line">Out[41]:</span><br><span class="line">array([1, 2, 3, 3, 1, 2])</span><br><span class="line"></span><br><span class="line">In [42]:np.concatenate([x,y],axis=0)</span><br><span class="line">Out[42]:</span><br><span class="line">array([1, 2, 3, 3, 1, 2])</span><br><span class="line"></span><br><span class="line">In [43]:A = np.array([[1,2,3],</span><br><span class="line">                      [4,5,6]])</span><br><span class="line">In [44]:np.concatenate([A,A])  #默认垂直合并 concatenate只能处理同类型矩阵</span><br><span class="line">Out[44]:</span><br><span class="line">array([[1, 2, 3],</span><br><span class="line">       [4, 5, 6],</span><br><span class="line">       [1, 2, 3],</span><br><span class="line">       [4, 5, 6]])</span><br><span class="line"></span><br><span class="line">In [45]:np.concatenate([A,A],axis = 1)</span><br><span class="line">Out[45]:</span><br><span class="line">array([[1, 2, 3, 1, 2, 3],</span><br><span class="line">       [4, 5, 6, 4, 5, 6]])</span><br><span class="line"></span><br><span class="line">In [46]:z = np.array([666,666,666])</span><br><span class="line">In [47]:np.concatenate([A, z.reshape(1,-1)]) #针对concatenate只能同类型矩阵，可以用（1，-1）表示一行，列数随机的方法</span><br><span class="line">Out[47]:</span><br><span class="line">array([[  1,   2,   3],</span><br><span class="line">       [  4,   5,   6],</span><br><span class="line">       [666, 666, 666]])</span><br><span class="line"></span><br><span class="line">In [48]:np.vstack([A,z])#垂直堆叠合并</span><br><span class="line">Out[48]:</span><br><span class="line">array([[  1,   2,   3],</span><br><span class="line">       [  4,   5,   6],</span><br><span class="line">       [666, 666, 666]])</span><br><span class="line"></span><br><span class="line">In [49]:B = np.full((2,2),100)</span><br><span class="line">        B</span><br><span class="line">Out[49]:</span><br><span class="line">array([[100, 100],</span><br><span class="line">       [100, 100]])</span><br><span class="line"></span><br><span class="line">In [50]:arr4 = np.array(range(12)).reshape(3,4)</span><br><span class="line">In [51]:print(arr4)</span><br><span class="line">Out[51]:</span><br><span class="line">[[ 0  1  2  3]</span><br><span class="line"> [ 4  5  6  7]</span><br><span class="line"> [ 8  9 10 11]]</span><br><span class="line"></span><br><span class="line">In [52]:np.hstack([arr4,arr4])  #水平堆叠合并</span><br><span class="line">Out[52]:</span><br><span class="line">array([[ 0,  1,  2,  3,  0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7,  4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11,  8,  9, 10, 11]])</span><br><span class="line"></span><br><span class="line">In [53]:np.hstack([arr4,arr4])</span><br><span class="line">Out[53]:</span><br><span class="line">array([[ 0,  1,  2,  3,  0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7,  4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11,  8,  9, 10, 11]])</span><br></pre></td></tr></table></figure>
+<h2 id="五、分割-split"><a href="#五、分割-split" class="headerlink" title="五、分割 split"></a>五、分割 split</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">In [54]:arr5=np.array(range(10))</span><br><span class="line">In [55]:x1,x2,x3=np.split(arr5,[3,7])#arr5 分割矩阵，【3,7】为分割点列表</span><br><span class="line">In [56]:print(x1)</span><br><span class="line">Out[56]:</span><br><span class="line">[0 1 2]</span><br><span class="line"></span><br><span class="line">In [57]:x2</span><br><span class="line">Out[57]:</span><br><span class="line">array([3, 4, 5, 6])</span><br><span class="line"></span><br><span class="line">In [58]:x3</span><br><span class="line">Out[58]:</span><br><span class="line">array([7, 8, 9])</span><br><span class="line"></span><br><span class="line">In [59]:x1,x2 = np.split(arr5,[5])</span><br><span class="line">        x1,x2</span><br><span class="line">Out[59]:</span><br><span class="line">(array([0, 1, 2, 3, 4]), array([5, 6, 7, 8, 9]))</span><br><span class="line"></span><br><span class="line">In [60]:arr6=np.array(range(16)).reshape(4,4)</span><br><span class="line">        arr6</span><br><span class="line">Out[60]:</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11],</span><br><span class="line">       [12, 13, 14, 15]])</span><br><span class="line"></span><br><span class="line">In [61]:a1,a2 = np.split(arr6, [2]) #当arr6为二维数组时，【2】表示前两行为分割处</span><br><span class="line">        a1</span><br><span class="line">Out[61]:</span><br><span class="line">array([[0, 1, 2, 3],</span><br><span class="line">       [4, 5, 6, 7]])</span><br><span class="line"></span><br><span class="line">In [62]:a2</span><br><span class="line">Out[62]:</span><br><span class="line">array([[ 8,  9, 10, 11],</span><br><span class="line">       [12, 13, 14, 15]])</span><br><span class="line"></span><br><span class="line">In [63]:A1,A2 = np.split(arr6, [2], axis = 1)  #axis=1 表示列分割</span><br><span class="line">        A1,A2</span><br><span class="line">Out[63]:</span><br><span class="line">(array([[ 0,  1],</span><br><span class="line">        [ 4,  5],</span><br><span class="line">        [ 8,  9],</span><br><span class="line">        [12, 13]]), array([[ 2,  3],</span><br><span class="line">        [ 6,  7],</span><br><span class="line">        [10, 11],</span><br><span class="line">        [14, 15]]))</span><br><span class="line"></span><br><span class="line">In [64]:up,down =np.vsplit(arr6,[-1])  #垂直切割，表示分成上下部分</span><br><span class="line">In [65]:up,down</span><br><span class="line">Out[65]:</span><br><span class="line">(array([[ 0,  1,  2,  3],</span><br><span class="line">        [ 4,  5,  6,  7],</span><br><span class="line">        [ 8,  9, 10, 11]]), array([[12, 13, 14, 15]]))</span><br><span class="line"></span><br><span class="line">In [66]:left,right = np.hsplit(arr6,[2]) #水平切割，表示分成左右部分</span><br><span class="line">        left,right</span><br><span class="line">Out[66]:</span><br><span class="line">(array([[ 0,  1],</span><br><span class="line">        [ 4,  5],</span><br><span class="line">        [ 8,  9],</span><br><span class="line">        [12, 13]]), array([[ 2,  3],</span><br><span class="line">        [ 6,  7],</span><br><span class="line">        [10, 11],</span><br><span class="line">        [14, 15]]))</span><br><span class="line"></span><br><span class="line">In [67]:data = np.arange(16).reshape(4,4)</span><br><span class="line">        data</span><br><span class="line">Out[67]:</span><br><span class="line">array([[ 0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7],</span><br><span class="line">       [ 8,  9, 10, 11],</span><br><span class="line">       [12, 13, 14, 15]])</span><br><span class="line"></span><br><span class="line">In [82]:x,y = np.hsplit(data,[-1]) # data表示数据集，前三个为特征，后一个为标签，这样切割为x，y</span><br><span class="line">        x,y</span><br><span class="line">Out[82]:</span><br><span class="line">(array([[ 0,  1,  2],</span><br><span class="line">        [ 4,  5,  6],</span><br><span class="line">        [ 8,  9, 10],</span><br><span class="line">        [12, 13, 14]]), array([[ 3],</span><br><span class="line">        [ 7],</span><br><span class="line">        [11],</span><br><span class="line">        [15]]))</span><br></pre></td></tr></table></figure>
+<h2 id="六、矩阵的标量运算"><a href="#六、矩阵的标量运算" class="headerlink" title="六、矩阵的标量运算"></a>六、矩阵的标量运算</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [83]:%%timeit #计算单元格内运算时间</span><br><span class="line">        n = 10</span><br><span class="line">        A = [i for i in range(n)]</span><br><span class="line">        A</span><br><span class="line">858 ns ± 7.77 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)</span><br><span class="line"></span><br><span class="line">In [84]:%%timeit</span><br><span class="line">        n = 10</span><br><span class="line">        B = []</span><br><span class="line">        for i in range(n):</span><br><span class="line">          B.append(i)</span><br><span class="line">        B</span><br><span class="line">1.51 µs ± 85.2 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)</span><br><span class="line"></span><br><span class="line">In [85]:%%timeit</span><br><span class="line">        n = 10</span><br><span class="line">        A = np.arange(n)</span><br><span class="line">        A</span><br><span class="line">881 ns ± 93.5 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)</span><br></pre></td></tr></table></figure>
+<h2 id="七、Universal-Function"><a href="#七、Universal-Function" class="headerlink" title="七、Universal Function"></a>七、Universal Function</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">In [87]:A = [i for i in range(10)]</span><br><span class="line">        A</span><br><span class="line">Out[87]:</span><br><span class="line">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line"></span><br><span class="line">In [88]:arrA = np.array(A).reshape(2, 5)</span><br><span class="line">In [89]:arrA * 2</span><br><span class="line">Out[89]:</span><br><span class="line">array([[ 0,  2,  4,  6,  8],</span><br><span class="line">       [10, 12, 14, 16, 18]])</span><br><span class="line"></span><br><span class="line">In [90]:arrA - 1</span><br><span class="line">Out[90]:</span><br><span class="line">array([[-1,  0,  1,  2,  3],</span><br><span class="line">       [ 4,  5,  6,  7,  8]])</span><br><span class="line"></span><br><span class="line">In [91]:arrA/2</span><br><span class="line">Out[91]:</span><br><span class="line">array([[0. , 0.5, 1. , 1.5, 2. ],</span><br><span class="line">       [2.5, 3. , 3.5, 4. , 4.5]])</span><br><span class="line"></span><br><span class="line">In [92]:arrA **2</span><br><span class="line">Out[92]:</span><br><span class="line">array([[ 0,  1,  4,  9, 16],</span><br><span class="line">       [25, 36, 49, 64, 81]], dtype=int32)</span><br><span class="line"></span><br><span class="line">In [93]:arrA //2 #整除</span><br><span class="line">Out[93]:</span><br><span class="line">array([[0, 0, 1, 1, 2],</span><br><span class="line">       [2, 3, 3, 4, 4]], dtype=int32)</span><br><span class="line"></span><br><span class="line">In [94]:np.abs(arrA-4)</span><br><span class="line">Out[94]:</span><br><span class="line">array([[4, 3, 2, 1, 0],</span><br><span class="line">       [1, 2, 3, 4, 5]])</span><br><span class="line"></span><br><span class="line">In [95]:np.sin(arrA)</span><br><span class="line">Out[95]:</span><br><span class="line">array([[ 0.        ,  0.84147098,  0.90929743,  0.14112001, -0.7568025 ],</span><br><span class="line">       [-0.95892427, -0.2794155 ,  0.6569866 ,  0.98935825,  0.41211849]])</span><br><span class="line"></span><br><span class="line">In [96]:np.arcsin(arrA)</span><br><span class="line">C:\program123\Anaconda\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: invalid value encountered in arcsin</span><br><span class="line">  &quot;&quot;&quot;Entry point for launching an IPython kernel.</span><br><span class="line">Out[96]:</span><br><span class="line">array([[0.        , 1.57079633,        nan,        nan,        nan],</span><br><span class="line">       [       nan,        nan,        nan,        nan,        nan]])</span><br><span class="line"></span><br><span class="line">In [97]:np.power(arrA,3)</span><br><span class="line">Out[97]:</span><br><span class="line">array([[  0,   1,   8,  27,  64],</span><br><span class="line">       [125, 216, 343, 512, 729]], dtype=int32)</span><br><span class="line"></span><br><span class="line">In [98]:1/arrA</span><br><span class="line">C:\program123\Anaconda\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: divide by zero encountered in true_divide</span><br><span class="line">  &quot;&quot;&quot;Entry point for launching an IPython kernel.</span><br><span class="line">Out[98]:</span><br><span class="line">array([[       inf, 1.        , 0.5       , 0.33333333, 0.25      ],</span><br><span class="line">       [0.2       , 0.16666667, 0.14285714, 0.125     , 0.11111111]])</span><br><span class="line"></span><br><span class="line">In [99]:np.exp(arrA)</span><br><span class="line">Out[99]:</span><br><span class="line">array([[1.00000000e+00, 2.71828183e+00, 7.38905610e+00, 2.00855369e+01,</span><br><span class="line">        5.45981500e+01],</span><br><span class="line">       [1.48413159e+02, 4.03428793e+02, 1.09663316e+03, 2.98095799e+03,</span><br><span class="line">        8.10308393e+03]])</span><br><span class="line"></span><br><span class="line">In [100]:np.log2(arrA)</span><br><span class="line">C:\program123\Anaconda\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: divide by zero encountered in log2</span><br><span class="line">  &quot;&quot;&quot;Entry point for launching an IPython kernel.</span><br><span class="line">Out[100]:</span><br><span class="line">array([[      -inf, 0.        , 1.        , 1.5849625 , 2.        ],</span><br><span class="line">       [2.32192809, 2.5849625 , 2.80735492, 3.        , 3.169925  ]])</span><br><span class="line"></span><br><span class="line">In [101]:np.log10(arrA)</span><br><span class="line">C:\program123\Anaconda\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: divide by zero encountered in log10</span><br><span class="line">  &quot;&quot;&quot;Entry point for launching an IPython kernel.</span><br><span class="line">Out[101]:</span><br><span class="line">array([[      -inf, 0.        , 0.30103   , 0.47712125, 0.60205999],</span><br><span class="line">       [0.69897   , 0.77815125, 0.84509804, 0.90308999, 0.95424251]])</span><br><span class="line"></span><br><span class="line">In [102]:np.log(arrA) #log默认为e</span><br><span class="line">C:\program123\Anaconda\lib\site-packages\ipykernel_launcher.py:1: RuntimeWarning: divide by zero encountered in log</span><br><span class="line">  &quot;&quot;&quot;Entry point for launching an IPython kernel.</span><br><span class="line">Out[102]:</span><br><span class="line">array([[      -inf, 0.        , 0.69314718, 1.09861229, 1.38629436],</span><br><span class="line">       [1.60943791, 1.79175947, 1.94591015, 2.07944154, 2.19722458]])</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数组/" rel="tag"># 数组</a>
+          
+            <a href="/tags/线性代数/" rel="tag"># 线性代数</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/652da2f1.html" rel="next" title="linux1">
+                <i class="fa fa-chevron-left"></i> linux1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/52f58e7a.html" rel="prev" title="Numpy学习二">
+                Numpy学习二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数组的创建"><span class="nav-text">一、数组的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、数组的基本操作"><span class="nav-text">二、数组的基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、矩阵元素访问"><span class="nav-text">三、矩阵元素访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、合并操作"><span class="nav-text">四、合并操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、分割-split"><span class="nav-text">五、分割 split</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、矩阵的标量运算"><span class="nav-text">六、矩阵的标量运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Universal-Function"><span class="nav-text">七、Universal Function</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

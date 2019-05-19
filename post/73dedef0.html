@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1. 海量数据处理的案例类型查询：  关于重复项的处理：（海量）数据的判重、取重、去重； 统计： （海量）数据的出现频度；排序： （海量）数据的排序； （海量）数据的前K个最大（小）数；">
+<meta name="keywords" content="Hash,BitMap,Trie树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海量数据处理">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/73dedef0.html">
+<meta property="og:site_name" content="小明のBlog">
+<meta property="og:description" content="1. 海量数据处理的案例类型查询：  关于重复项的处理：（海量）数据的判重、取重、去重； 统计： （海量）数据的出现频度；排序： （海量）数据的排序； （海量）数据的前K个最大（小）数；">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-06T13:18:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="海量数据处理">
+<meta name="twitter:description" content="1. 海量数据处理的案例类型查询：  关于重复项的处理：（海量）数据的判重、取重、去重； 统计： （海量）数据的出现频度；排序： （海量）数据的排序； （海量）数据的前K个最大（小）数；">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小明のBlog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/73dedef0">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>海量数据处理 | 小明のBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小明のBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/73dedef0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Betterming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小明のBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">海量数据处理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-06 18:42:00 / 修改时间：21:18:24" itemprop="dateCreated datePublished" datetime="2019-02-06T18:42:00+08:00">2019-02-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/73dedef0.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/73dedef0.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/73dedef0.html" class="leancloud_visitors" data-flag-title="海量数据处理">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-海量数据处理的案例类型"><a href="#1-海量数据处理的案例类型" class="headerlink" title="1. 海量数据处理的案例类型"></a>1. 海量数据处理的案例类型</h1><p><strong>查询</strong>：</p>
+<ul>
+<li>关于重复项的处理：（海量）数据的判重、取重、去重；</li>
+<li>统计： （海量）数据的出现频度；<br><strong>排序</strong>：</li>
+<li>（海量）数据的排序；</li>
+<li>（海量）数据的前K个最大（小）数；<a id="more"></a>
+<strong>解题策略中的关键问题</strong>:<blockquote>
+<p>1、存储什么？如何存储一组数据；（选择数据结构）<br>2、如何解决问题？（选择算法）</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="2-可以采用的数据结构"><a href="#2-可以采用的数据结构" class="headerlink" title="2. 可以采用的数据结构"></a>2. 可以采用的数据结构</h1><blockquote>
+<p>线性结构：</p>
+<ul>
+<li>顺序表：一般的顺序表,字符串,BitMap</li>
+<li>链表：</li>
+</ul>
+<p>树状结构：</p>
+<ul>
+<li>二叉树：BST、红黑树</li>
+<li>B树</li>
+<li>Trie树</li>
+</ul>
+<p>扩展的结构：hash表,B+树</p>
+</blockquote>
+<h1 id="3-可以采用的算法"><a href="#3-可以采用的算法" class="headerlink" title="3. 可以采用的算法"></a>3. 可以采用的算法</h1><h2 id="3-1-查找"><a href="#3-1-查找" class="headerlink" title="3.1 查找"></a>3.1 查找</h2><ul>
+<li>应用场景：在某数据集合中查找指定的目标项.(隐含：待查找的目标项必须是已知的！)</li>
+<li>基于Hash表的查找：</li>
+<li>蛮力查找（顺序查找）：线性表</li>
+<li>基于有序表的二分查找：有序的顺序表</li>
+<li>字符串的查找：朴素查找、KMP算法、BM算</li>
+<li>基于树的查找：遍历<ul>
+<li>二叉查找树BST：中序遍历</li>
+<li>Trie树：层次遍历</li>
+<li>基于红黑树：STL SET,STL Map</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-排序"><a href="#3-2-排序" class="headerlink" title="3.2 排序"></a>3.2 排序</h2><ul>
+<li>基于比较操作的排序算法：平均时间复杂度≥O(Nlog2N)<ul>
+<li>交换排序：两两比较待排序记录的关键字，如果逆序就进行交换，直到所有记录都排好序为止。</li>
+<li>冒泡排序</li>
+<li>快速排序（分区交换排序）</li>
+</ul>
+</li>
+<li>选择排序（Selection Sort）的基本思想是：不断从待排记录序列中选出关键字最小的记录放到已排序记录序列的后面，直到n个记录全部插入已排序记录序列中。<ul>
+<li>简单选择排序</li>
+<li>堆排序（树型选择排序）</li>
+</ul>
+</li>
+<li>插入排序：每次将一个待排序的记录，按其关键字大小插入到前面已经排好序的子表中的适当位置，直到全部记录插入完成为止。<ul>
+<li>直接插入排序</li>
+<li>折半插入排序</li>
+<li>希尔排序</li>
+</ul>
+</li>
+<li>应用场景：对于某顺序表，按照指定的KEY进行整体排序(隐含：待排序的集合已全部存储在内存中；且各条记录的KEY必须是已知的！)</li>
+</ul>
+<h1 id="4-案例"><a href="#4-案例" class="headerlink" title="4. 案例"></a>4. 案例</h1><h2 id="4-1-案例–统计"><a href="#4-1-案例–统计" class="headerlink" title="4.1 案例–统计"></a>4.1 案例–统计</h2><p><strong>案例</strong>：有一个1G大小的文件，该文件中每一行是一个单词，每个单词的大小不超过16个字节，内存限制大小是1M。统计各个单词的出现频率。<br><strong>分析</strong>：</p>
+<blockquote>
+<p>将1G文件划分为多个1M的文件；<br>每次只统计1M的文件中单词频度。</p>
+</blockquote>
+<p>(1) Q：如何统计1M的文件中单词频度？</p>
+<ul>
+<li>设计思路1：依次读入文件的每个单词，并查询在内存中是否存在与该单词匹配的项。若查询到匹配项，则意味着该单词重复出现了，因而只需更改该单词对应的计数值；否则，将该单词插入到内存对应的数据结构中。（基本操作为：查询和插入操作）</li>
+<li>设计思路2：直接将文件中每个单词读入内存，然后对内存中的单词进行排序，最后进行词频统计。（基本操作为：排序、比较操作）</li>
+</ul>
+<p>(2) 假设单词文件大小F，假定每个单词的平均长度为le，那么单词数量为N=F/le。<br>现对单词频度进行统计，那么</p>
+<ul>
+<li>采用Trie树，结合设计思路1，平均性能为$O(N*le)$ ；</li>
+<li>采用红黑树，结合设计思路1，平均性能为：$O(N*log2N)$；<ul>
+<li>采用红黑树时，可直接利用STL中的map技术:STL map&lt;string,int&gt;</li>
+</ul>
+</li>
+<li>采用hash表，结合设计思路1，平均性能为：O(N*每个槽上的线性表的平均长度)；<ul>
+<li>采用hash表时，可直接利用STL中的hash_map技术:STL hash_map&lt;string,int&gt;</li>
+</ul>
+</li>
+<li>采用线性结构，结合设计思路2。先排序，再相邻单词的相互比较来统计单词频度，平均性能为：$O(N*log_2N)+O(N)=O(N*log_2N)$。</li>
+</ul>
+<p>(3) 算法设计思路</p>
+<blockquote>
+<p><strong>思路1:双层桶划分+ trie树/hash表/红黑树</strong></p>
+<ul>
+<li>Step1：将1G的大文件划分为若干个小文件，每个小文件不超过1M；<br>利用Hash技术：读取文件F，对于每个词x，取hash(x)%5000，然后按照该值存到5000个小文件（记为F0,F1,…F4999）中。这样每个文件大概是200k左右。如果其中的有的文件超过了1M大小，还可以按照类似的方法继续往下分，直到分解得到的每个小文件Fi的大小都不超过1M。</li>
+<li>Step2:对每个小文件Fi中的词的出现频率进行统计。<br>采用trie树/hash表。</li>
+<li>Step3：合并各个小文件的统计结果。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>思路2:采用云计算的架构，MapReduce )(分布式处理：比如 hadoop)</strong></p>
+<ul>
+<li>MAP ：将1G的大文件划分为若干个小文件，每个小文件不超过1M；<ul>
+<li>利用Hash技术：读取文件，对于每个词x，取hash(x)%5000，然后按照该值存到5000个小文件（记为F0,F1,…F4999）中。这样每个文件大概是200k左右。如果其中的有的文件超过了1M大小，还可以按照类似的方法继续往下分，直到分解得到的小文件的大小都不超过1M。</li>
+</ul>
+</li>
+<li>Reduce:对每个小文件Fi中的词的出现频率进行统计，最后合并各个小文件的统计结果。<ul>
+<li>采用trie树/hash表/红黑树，对每个小文件中的词的出现频率进行统计。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>思路3:线性结构+直接排序法</strong></p>
+<ul>
+<li>内存不能超过1M，而单词文件的大小为1G。因此采用顺序表存储单词文件，并利用外排序的方法来进行排序。采用归并排序，时间复杂度O(Nlog2N)。</li>
+<li>排完序之后，再对已经有序的多个文件进行遍历，统计每个单词出现的次数，再次写入文件中。</li>
+<li><strong>总结</strong>：<br>理论上的时间复杂度分析：归并排序的时间复杂度是O(Nlog2N)，而遍历线性表进行单词频度统计的时间复杂度是O(N)，因此该算法的总体时间复杂度就是O(Nlog2N)。<br>但是，实际上，采用归并排序进行外排序，每个单词需要I/O不止一次，而I/O操作属于耗时操作，因此该算法的实际时间开销的数量级远不止O(Nlog2N)</li>
+</ul>
+</blockquote>
+<h2 id="4-2-案例–排序"><a href="#4-2-案例–排序" class="headerlink" title="4.2 案例–排序"></a>4.2 案例–排序</h2><p><strong>案例1</strong>：100w个数中找最大的前100个数。（假设内存开销无限制）</p>
+<p>(1) <strong>算法设计思路1：采用局部淘汰法</strong></p>
+<ul>
+<li>选取前100个元素，并按降序进行排序，记为序列L。<br>依此扫描剩余的元素，并与排好序的100个元素中最小的元素比，如果比这个最小的要大，那么把这个最小的元素删除，并把x利用插入排序的思想，插入到序列L中。</li>
+<li>时间复杂度$T(n)=O(100*log_2100) +O((100w-100)*100)$。</li>
+</ul>
+<p>(2) <strong>算法设计思路2：利用堆排序</strong></p>
+<ul>
+<li>利用100w个数的前100个数构造一个小根堆；<br>遍历其他的数，分别与堆的根元素进行对比：若大于根，则用该元素替换旧根，作为堆的新根，重新维护保持堆的性质；否则，不处理。</li>
+<li>时间复杂度:<br>$T(n)= O(100*log_2100) + O((100w-100)*log_2100)= O(100w*log_2100)$。</li>
+</ul>
+<p><strong>案例2</strong>：寻找热门查询：<br>&emsp;&emsp;搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节。假设目前有一千万个记录，这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就是越热门。请你统计最热门的10个查询串，<strong>要求使用的内存不能超过1GB</strong>。 </p>
+<blockquote>
+<ol>
+<li>请描述你解决这个问题的思路；</li>
+<li>请给出主要的处理流程，算法，以及算法的复杂度。</li>
+</ol>
+</blockquote>
+<p>(1) 问题分析：要统计最热门查询，首先就是要统计每个Query出现的次数，然后根据统计结果，找出Top 10。</p>
+<ul>
+<li>第一步：Query统计<br>设计思路1：顺序表+直接排序法<br>设计思路2：采用Hash表</li>
+<li>第二步：找出Top 10</li>
+</ul>
+<p>(2) 设计思路</p>
+<blockquote>
+<p><strong>设计思路1：顺序表+直接排序法</strong></p>
+</blockquote>
+<ul>
+<li>内存不能超过1G，而一千万条记录，每条记录是225Byte，很显然要占据2.55G内存。因此采用外排序的方法来进行排序（采用归并排序，时间复杂度O(Nlog2N)。</li>
+<li>排完序之后我们再对已经有序的Query文件进行遍历，统计每个Query出现的次数，再次写入文件中。</li>
+<li>总结：排序的时间复杂度是O(Nlog2N)，而遍历的时间复杂度是O(N)，因此该算法的总体时间复杂度就是O(Nlog2N)。</li>
+</ul>
+<blockquote>
+<p><strong>设计思路2: 利用Hash Table</strong></p>
+<ul>
+<li>采用Hash Table。<ul>
+<li>虽然有一千万个Query，但是由于重复度比较高，事实上只有300万的Query，而每个Query255Byte，因此我们可以考虑把他们都放进1GB内存中去。（3*106*255B&lt;1GB)</li>
+<li>采用Hash Table绝对是我们优先的选择，因为Hash Table的查询速度非常的快，几乎是O(1)的时间复杂度。</li>
+</ul>
+</li>
+<li>维护一个Key为Query字串，Value为该Query出现次数的Hash表，每次读取一个Query，如果该字串不在Hash表中，那么加入该字串，并且将Value值设为1；如果该字串在Hash表中，那么将该字串的计数加1即可。</li>
+<li>T(n)=O(N*每个槽上的线性表的平均长度) 。</li>
+<li>相比于设计思路1：在时间复杂度上提高了一个数量级，但不仅仅是时间复杂度上的优化，该方法只需要I/O数据文件一次，而设计思路1的I/O次数较多的，因此该算法比设计思路1在工程上有更好的可操作性。</li>
+</ul>
+</blockquote>
+<ul>
+<li>第二步：找出Top 10（按照Query的出现频度）<br><strong>设计思路1：内部排序</strong><br>时间复杂度$T(n)=nlog_2n$(三百万条记录可以放在1G内存中）<br><strong>设计思路2：采用局部淘汰法</strong><br>时间复杂度$T(n)=O(10*log_210) +O((n-10)*10)$。<br><strong>设计思路3：利用堆</strong><br>时间复杂度$T(n)= O(10*log_210) + O((n-10)*log_210)$。  </li>
+</ul>
+<h2 id="4-3-案例——关于重复项的处理"><a href="#4-3-案例——关于重复项的处理" class="headerlink" title="4.3. 案例——关于重复项的处理"></a>4.3. 案例——关于重复项的处理</h2><p><strong>案例1</strong>： A,B两个文件，各存放50亿条URL，每条URL占用64字节，内存限制是4GB，要求找出A,B文件中共同的URL。<br>(1) 方案1：分而治之+基于hash表的查找</p>
+<ul>
+<li>可以估计每个文件的大小为5G×64=320GB，远远大于内存限制的4G。所以不可能将其完全加载到内存中处理。考虑采取分而治之的方法。<ul>
+<li>遍历文件a，对每个url求取hash(url)%1000，然后根据所取得的值将url分别存储到1000个小文件（记为a0,a1,…,a999）中。这样每个小文件的大约为300M。</li>
+<li>遍历文件b，采取和a相同的方式将url分别存储到1000小文件（记为b0,b1,…,b999）。这样处理后，所有可能相同的url都在对应的小文件（a0 vs..b0,a1 vs. b1,…,a999 vs. b999）中，不对应的小文件不可能有相同的url。</li>
+</ul>
+</li>
+<li>分别计算出1000对小文件中相同的url，再进行汇总。<ul>
+<li>采用Hash表，可以直接利用STL Hash_set。</li>
+<li>对于每1对小文件(ai,bi)，把小文件ai的url存储到hash表中，然后遍历另一个小文件bi中的每个url，查询其是否在刚才构建的hash表中，如果是，那么就是共同的url。</li>
+</ul>
+</li>
+</ul>
+<p>(2) 方案2：若允许有一定的错误率，可采用Bloom filter,Bloom filter是BitMap的扩展。</p>
+<ul>
+<li><p>若直接采用BitMap。那么：可用内存4GB=4*1024*1024*1024*8b≈340亿bit。由于每条URL占用64字节，即每个URL对应的整数可以用log2(25664)bit=864bit&gt;340亿bit来描述。因而不能用BitMap。</p>
+<blockquote>
+<p>Bloom filter：通过极少的错误换取了存储空间的极大节省。将每条url使用Bloom filter映射为这340亿bit中的k个bit，并将这k个bit置为1。</p>
+</blockquote>
+</li>
+<li><p>将文件a中的每条url使用Bloom filter映射为这340亿bit；然后依次读取文件b中的每条url，检查其Bloom filter映射的k比特是否都为1，如果是，那么该url应该是两个文件共同的url（注意：会有一定的错误率）。</p>
+</li>
+</ul>
+<p><strong>案例2</strong>：2.5亿个整数中找出不重复的整数，内存空间不足以容纳这2.5亿个整数。 </p>
+<p>(1) 方案1：假设2.5亿个整数的取值范围为[0,250000000)。那么，采用Bitmap（每个数分配2bit，00表示不存在，01表示出现一次，10表示多次，11无意义）进行，共需0.5G bits，还可以接受。然后扫描这2.5亿个整数，查看Bitmap中相对应位，如果是00变01，01变10，10保持不变。扫描结束后，查看bitmap，把对应位是01的整数输出即可。</p>
+<p>(2) 方案2：也可采用与第1题类似的方法，先将大文件划分为小文件。然后在小文件中找出不重复的整数，并排序。最后进行归并，注意去除重复的元素。</p>
+<p><strong>本文内容来自余老师上课PPT</strong></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hash/" rel="tag"># Hash</a>
+          
+            <a href="/tags/BitMap/" rel="tag"># BitMap</a>
+          
+            <a href="/tags/Trie树/" rel="tag"># Trie树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/c2a5fdc5.html" rel="next" title="堆排序">
+                <i class="fa fa-chevron-left"></i> 堆排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/960616a.html" rel="prev" title="hexo中文标题打不开博客">
+                hexo中文标题打不开博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+            
+              <p class="site-author-name" itemprop="name">Betterming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-海量数据处理的案例类型"><span class="nav-text">1. 海量数据处理的案例类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-可以采用的数据结构"><span class="nav-text">2. 可以采用的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-可以采用的算法"><span class="nav-text">3. 可以采用的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-查找"><span class="nav-text">3.1 查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-排序"><span class="nav-text">3.2 排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-案例"><span class="nav-text">4. 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-案例–统计"><span class="nav-text">4.1 案例–统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-案例–排序"><span class="nav-text">4.2 案例–排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-案例——关于重复项的处理"><span class="nav-text">4.3. 案例——关于重复项的处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Betterming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
+                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
