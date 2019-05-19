@@ -153,7 +153,7 @@ template {
 }
 body {
   position: relative;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Linux Biolinum", 'Noto Serif SC', sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
@@ -179,7 +179,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Linux Biolinum", 'Noto Serif SC', sans-serif;
 }
 h1 {
   font-size: 22px;
@@ -584,7 +584,7 @@ pre,
 }
 pre,
 code {
-  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: consolas, Menlo, "Linux Biolinum", 'Noto Serif SC', sans-serif, monospace;
 }
 code {
   overflow-wrap: break-word;
@@ -1212,7 +1212,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Linux Biolinum", 'Noto Serif SC', sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1305,7 +1305,7 @@ pre .javascript .function {
 .post-body {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Linux Biolinum", 'Noto Serif SC', sans-serif;
 }
 .post-body span.exturl .fa {
   font-size: 14px;
@@ -1570,7 +1570,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Linux Biolinum", 'Noto Serif SC', sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1860,7 +1860,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fe2ad0;
+  background: #ffccad;
 }
 .feed-link,
 .chat {
@@ -2627,8 +2627,38 @@ embed {
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
 }
+@font-face {
+  font-family: 'Linux Biolinum';
+  src: url("/fonts/LinBiolinum_Rah.eot");
+  font-display: swap;
+  src: url("/fonts/LinBiolinum_Rah.eot") format('embedded-opentype'), url("/fonts/LinBiolinum_Rah.woff2") format('woff2'), url("/fonts/LinBiolinum_Rah.woff") format('woff'), url("/fonts/LinBiolinum_Rah.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  src: url("/fonts/LinBiolinum_RBah.eot");
+  font-display: swap;
+  src: url("/fonts/LinBiolinum_RBah.eot") format('embedded-opentype'), url("/fonts/LinBiolinum_RBah.woff2") format('woff2'), url("/fonts/LinBiolinum_RBah.woff") format('woff'), url("/fonts/LinBiolinum_RBah.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  src: url("/fonts/LinBiolinum_RIah.eot");
+  font-display: swap;
+  src: url("/fonts/LinBiolinum_RIah.eot") format('embedded-opentype'), url("/fonts/LinBiolinum_RIah.woff2") format('woff2'), url("/fonts/LinBiolinum_RIah.woff") format('woff'), url("/fonts/LinBiolinum_RIah.ttf") format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
 .headband {
   display: none;
+}
+.header {
+  line-height: 1.5;
+}
+.container {
+  background-color: rgba(0,0,0,0);
 }
 .main-inner {
   margin-top: 10px;
@@ -2640,8 +2670,47 @@ embed {
 .container .header-inner {
   width: 100%;
 }
-.header {
-  line-height: 1.5;
+.brand {
+  background-color: rgba(255,255,255,0);
+  margin-top: 15px;
+  padding: 0px;
+}
+.site-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 80px;
+  letter-spacing: 3px;
+}
+.site-subtitle {
+  margin: 0px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding-bottom: 3px;
+  font-weight: bold;
+  color: #fff;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: #a166ab;
+}
+.menu {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 5px;
+}
+.menu .menu-item a {
+  font-size: 15px;
+}
+.menu .menu-item {
+  margin: 5px 15px;
+}
+.menu .menu-item a:hover {
+  border-bottom-color: rgba(161,102,171,0);
+}
+.header-inner {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .posts-expand {
   padding-top: 0px;
