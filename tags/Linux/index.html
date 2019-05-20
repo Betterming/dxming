@@ -125,7 +125,7 @@
   <meta name="description" content="Coding Changes the World">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Betterming">
-<meta property="og:url" content="http://looby.coding.me/betterming/tags/Linux/index.html">
+<meta property="og:url" content="http://looby.coding.me/betterming/tags/linux/index.html">
 <meta property="og:site_name" content="Betterming">
 <meta property="og:description" content="Coding Changes the World">
 <meta property="og:locale" content="zh-CN">
@@ -141,7 +141,7 @@
 
   
   
-  <link rel="canonical" href="http://looby.coding.me/betterming/tags/Linux/">
+  <link rel="canonical" href="http://looby.coding.me/betterming/tags/linux/">
 
 
 
@@ -151,7 +151,7 @@
   };
 </script>
 
-  <title>标签: Linux | Betterming</title>
+  <title>标签: linux | Betterming</title>
   
 
 
@@ -420,7 +420,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Linux<small>标签</small>
+        <h1>linux<small>标签</small>
         </h1>
       </div>
 
@@ -432,69 +432,17 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/post/a008a0d9.html" itemprop="url">
+          <a class="post-title-link" href="/post/652da2f1.html" itemprop="url">
             
-              <span itemprop="name">实验3_图像特征匹配、跟踪与相机运动估计实验</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-28T14:40:00+08:00" content="2018-12-28">
-          12-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/post/8957bd28.html" itemprop="url">
-            
-              <span itemprop="name">视觉3D点云图构建与深度测量 </span>
+              <span itemprop="name">linux1</span>
             
           </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-12T21:03:00+08:00" content="2018-12-12">
-          12-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/post/d7e278a1.html" itemprop="url">
-            
-              <span itemprop="name">基于OpenCV的颜色特征识别</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-09T11:00:10+08:00" content="2018-12-09">
-          12-09
+        <time class="post-time" itemprop="dateCreated" datetime="2018-10-03T15:12:00+08:00" content="2018-10-03">
+          10-03
         </time>
       </div>
 
@@ -553,7 +501,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -703,7 +651,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -773,11 +723,11 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://xq773939719.coding.me/" title="https://xq773939719.coding.me/" rel="noopener" target="_blank">大佬</a>
+                    <a href="https://xq99.me/" title="https://xq99.me/" rel="noopener" target="_blank">冰水鉴心</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://me.csdn.net/zgcr654321" title="https://me.csdn.net/zgcr654321" rel="noopener" target="_blank">诸葛大佬</a>
+                    <a href="https://www.zgcr1991.com/" title="https://www.zgcr1991.com/" rel="noopener" target="_blank">记忆碎片</a>
                   </li>
                 
               </ul>
@@ -1122,6 +1072,42 @@ if ($('body').find('div.pdf').length) {
     $(e).after($wrap);
     $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
       var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
         return $(e).text();
       }).toArray().join('\n');
       var ta = document.createElement('textarea');
