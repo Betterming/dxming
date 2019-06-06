@@ -124,18 +124,18 @@
 
   <meta name="description" content="Coding Changes the World">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Betterming">
+<meta property="og:title" content="dxming">
 <meta property="og:url" content="http://looby.coding.me/betterming/index.html">
-<meta property="og:site_name" content="Betterming">
+<meta property="og:site_name" content="dxming">
 <meta property="og:description" content="Coding Changes the World">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Betterming">
+<meta name="twitter:title" content="dxming">
 <meta name="twitter:description" content="Coding Changes the World">
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Betterming" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="dxming" type="application/atom+xml">
 
 
 
@@ -151,7 +151,7 @@
   };
 </script>
 
-  <title>Betterming</title>
+  <title>dxming</title>
   
 
 
@@ -211,7 +211,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Betterming</span>
+        <span class="site-title">dxming</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -402,16 +402,211 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/3d8555f3.html">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/c8a77db1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
       <meta itemprop="description" content="Coding Changes the World">
       <meta itemprop="image" content="/images/jj.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/post/c8a77db1.html" class="post-title-link" itemprop="url">Chap4_BacktrackingDivideAndConquer</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-06 23:07:48 / 修改时间：23:46:48" itemprop="dateCreated datePublished" datetime="2019-06-06T23:07:48+08:00">2019-06-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/c8a77db1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/c8a77db1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/c8a77db1.html" class="leancloud_visitors" data-flag-title="Chap4_BacktrackingDivideAndConquer">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="第四节：递归，回溯与分治"><a href="#第四节：递归，回溯与分治" class="headerlink" title="第四节：递归，回溯与分治"></a>第四节：递归，回溯与分治</h1><h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h2><blockquote>
+<p>回溯法：回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，<br>当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。<br>回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。<br>但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，<br>这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。<br>许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+</blockquote>
+<blockquote>
+<p>回溯法就是对隐式图的深度优先搜索算法<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/post/c8a77db1.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></blockquote></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/3d8555f3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dxming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dxming">
     </span>
 
     
@@ -599,13 +794,13 @@
     <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/ea08c047.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
       <meta itemprop="description" content="Coding Changes the World">
       <meta itemprop="image" content="/images/jj.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
     </span>
 
     
@@ -658,7 +853,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-02 20:06:08" itemprop="dateModified" datetime="2019-06-02T20:06:08+08:00">2019-06-02</time>
+                <time title="修改时间：2019-06-06 23:07:16" itemprop="dateModified" datetime="2019-06-06T23:07:16+08:00">2019-06-06</time>
               
             
           </span>
@@ -735,7 +930,10 @@
 
       
         
-          <h1 id="第二节：栈，队列，堆"><a href="#第二节：栈，队列，堆" class="headerlink" title="第二节：栈，队列，堆"></a>第二节：栈，队列，堆</h1><h2 id="1-基础："><a href="#1-基础：" class="headerlink" title="1. 基础："></a>1. 基础：</h2><blockquote>
+          <blockquote>
+<p>视频：<a href="https://www.bilibili.com/video/av36288901" target="_blank" rel="noopener">https://www.bilibili.com/video/av36288901</a></p>
+</blockquote>
+<h1 id="第二节：栈，队列，堆"><a href="#第二节：栈，队列，堆" class="headerlink" title="第二节：栈，队列，堆"></a>第二节：栈，队列，堆</h1><h2 id="1-基础："><a href="#1-基础：" class="headerlink" title="1. 基础："></a>1. 基础：</h2><blockquote>
 <p>栈，先进后出的线性表</p>
 <ul>
 <li>s.push(item);        //将item压入栈顶</li>
@@ -820,13 +1018,13 @@
     <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/5bf81e17.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
       <meta itemprop="description" content="Coding Changes the World">
       <meta itemprop="image" content="/images/jj.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
     </span>
 
     
@@ -1015,13 +1213,13 @@
     <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/60f57c72.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
       <meta itemprop="description" content="Coding Changes the World">
       <meta itemprop="image" content="/images/jj.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Betterming">
+      <meta itemprop="name" content="dxming">
     </span>
 
     
@@ -1203,197 +1401,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/b7214e7b.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Betterming">
-      <meta itemprop="description" content="Coding Changes the World">
-      <meta itemprop="image" content="/images/jj.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Betterming">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/post/b7214e7b.html" class="post-title-link" itemprop="url">opencv实现图片二值化</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-13 22:55:00 / 修改时间：23:27:42" itemprop="dateCreated datePublished" datetime="2019-02-13T22:55:00+08:00">2019-02-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/post/b7214e7b.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/post/b7214e7b.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-            <span id="/post/b7214e7b.html" class="leancloud_visitors" data-flag-title="opencv实现图片二值化">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>利用openCV来实现图像二值化，主要利用的函数有 cv2.threshold，cv2.adaptiveThreshold 等，具体内容如下：<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/post/b7214e7b.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1429,9 +1436,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="Betterming">
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="dxming">
             
-              <p class="site-author-name" itemprop="name">Betterming</p>
+              <p class="site-author-name" itemprop="name">dxming</p>
               <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
           </div>
 
@@ -1442,7 +1449,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1598,7 +1605,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">55</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1706,7 +1719,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Betterming</span>
+  <span class="author" itemprop="copyrightHolder">dxming</span>
 
   
 
