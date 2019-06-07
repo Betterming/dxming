@@ -359,6 +359,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -367,6 +375,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -548,7 +583,7 @@
       
 
       
-        <p>&emsp;&emsp;一个小小项目，主要练习类，对象的使用流程。<br>下面是代码来自网上学习视频，作为练习所用:<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">	&quot;&quot;&quot;人的类&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, name):</span><br><span class="line">		super(Person, self).__init__()</span><br><span class="line">		self.name = name</span><br><span class="line">		self.gun = None#用来保存枪对象的引用</span><br><span class="line">		self.hp = 100</span><br><span class="line"></span><br><span class="line">	def anzhuang_zidan(self, dan_jia_temp, zi_dan_temp):</span><br><span class="line">		&quot;&quot;&quot;把子弹装到弹夹中&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">		#弹夹.保存子弹(子弹)</span><br><span class="line">		dan_jia_temp.baocun_zidan(zi_dan_temp)</span><br><span class="line"></span><br><span class="line">	def anzhuang_danjia(self, gun_temp, dan_jia_temp):</span><br><span class="line">		&quot;&quot;&quot;把弹夹安装到枪中&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">		#枪.保存弹夹(弹夹)</span><br><span class="line">		gun_temp.baocun_danjia(dan_jia_temp)</span><br><span class="line"></span><br><span class="line">	def naqiang(self, gun_temp):</span><br><span class="line">		&quot;&quot;&quot;拿起一把枪&quot;&quot;&quot;</span><br><span class="line">		self.gun = gun_temp</span><br><span class="line"></span><br><span class="line">	def __str__(self):</span><br><span class="line">		if self.gun:</span><br><span class="line">			return &quot;%s的血量为:%d, 他有枪 %s&quot;%(self.name, self.hp, self.gun)</span><br><span class="line">		else:</span><br><span class="line">			if self.hp&gt;0:</span><br><span class="line">				return &quot;%s的血量为%d, 他没有枪&quot;%(self.name, self.hp)</span><br><span class="line">			else:</span><br><span class="line">				return &quot;%s 已挂....&quot;%self.name</span><br><span class="line"></span><br><span class="line">	def kou_ban_ji(self, diren):</span><br><span class="line">		&quot;&quot;&quot;让枪发射子弹去打敌人&quot;&quot;&quot;</span><br><span class="line">		#枪.开火(敌人)</span><br><span class="line"></span><br><span class="line">		self.gun.fire(diren)</span><br><span class="line"></span><br><span class="line">	def xiao_xue(self, sha_shang_li):</span><br><span class="line">		&quot;&quot;&quot;根据杀伤力，掉相应的血量&quot;&quot;&quot;</span><br><span class="line">		self.hp -= sha_shang_li</span><br><span class="line"></span><br><span class="line">class Gun(object):</span><br><span class="line">	&quot;&quot;&quot;枪类&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, name):</span><br><span class="line">		super(Gun, self).__init__()</span><br><span class="line">		self.name = name#用来记录枪的类型</span><br><span class="line">		self.danjia = None#用来记录弹夹对象的引用</span><br><span class="line"></span><br><span class="line">	def baocun_danjia(self, dan_jia_temp):</span><br><span class="line">		&quot;&quot;&quot;用一个属性来保存这个弹夹对象的引用&quot;&quot;&quot;</span><br><span class="line">		self.danjia = dan_jia_temp</span><br><span class="line"></span><br><span class="line">	def __str__(self):</span><br><span class="line">		if self.danjia:</span><br><span class="line">			return &quot;枪的信息为:%s, %s&quot;%(self.name, self.danjia)</span><br><span class="line">		else:</span><br><span class="line">			return &quot;枪的信息为:%s,这把枪中没有弹夹&quot;%(self.name)</span><br><span class="line"></span><br><span class="line">	def fire(self, diren):</span><br><span class="line">		&quot;&quot;&quot;枪从弹夹中获取一发子弹，然后让这发子弹去击中敌人&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">		#先从弹夹中取子弹</span><br><span class="line">		#弹夹.弹出一发子弹()</span><br><span class="line">		zidan_temp = self.danjia.tanchu_zidan()</span><br><span class="line"></span><br><span class="line">		#让这个子弹去伤害敌人</span><br><span class="line">		if zidan_temp:</span><br><span class="line">			#子弹.打中敌人(敌人)</span><br><span class="line">			zidan_temp.dazhong(diren)</span><br><span class="line">		else:</span><br><span class="line">			print(&quot;弹夹中没有子弹了。。。。&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Danjia(object):</span><br><span class="line">	&quot;&quot;&quot;弹夹类&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, max_num):</span><br><span class="line">		super(Danjia, self).__init__()</span><br><span class="line">		self.max_num = max_num#用来记录弹夹的最大容量</span><br><span class="line">		self.zidan_list = []#用来记录所有的子弹的引用</span><br><span class="line"></span><br><span class="line">	def baocun_zidan(self, zi_dan_temp):</span><br><span class="line">		&quot;&quot;&quot;将这颗子弹保存&quot;&quot;&quot;</span><br><span class="line">		self.zidan_list.append(zi_dan_temp)</span><br><span class="line"></span><br><span class="line">	def __str__(self):</span><br><span class="line">		return &quot;弹夹的信息为:%d/%d&quot;%(len(self.zidan_list), self.max_num)</span><br><span class="line"></span><br><span class="line">	def tanchu_zidan(self):</span><br><span class="line">		&quot;&quot;&quot;弹出最上面的那颗子弹&quot;&quot;&quot;</span><br><span class="line">		if self.zidan_list:</span><br><span class="line">			return self.zidan_list.pop()</span><br><span class="line">		else:</span><br><span class="line">			return None</span><br><span class="line"></span><br><span class="line">class Zidan(object):</span><br><span class="line">	&quot;&quot;&quot;子弹类&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, sha_shang_li):</span><br><span class="line">		super(Zidan, self).__init__()</span><br><span class="line">		self.sha_shang_li = sha_shang_li#这颗子弹的威力</span><br><span class="line"></span><br><span class="line">	def dazhong(self, diren):</span><br><span class="line">		&quot;&quot;&quot;让敌人掉血&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">		#敌人.掉血(一颗子弹的威力)</span><br><span class="line">		diren.xiao_xue(self.sha_shang_li)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">	&quot;&quot;&quot;用来控制整个程序的流程&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	#1. 创建老王对象</span><br><span class="line">	laowang = Person(&quot;老王&quot;)</span><br><span class="line"></span><br><span class="line">	#2. 创建一个枪对象</span><br><span class="line">	ak47 = Gun(&quot;AK47&quot;)</span><br><span class="line"></span><br><span class="line">	#3. 创建一个弹夹对象</span><br><span class="line">	dan_jia = Danjia(20)</span><br><span class="line"></span><br><span class="line">	#4. 创建一些子弹</span><br><span class="line">	for i in range(15):</span><br><span class="line">		zi_dan = Zidan(10)</span><br><span class="line"></span><br><span class="line">		#5. 老王把子弹安装到弹夹中</span><br><span class="line">		#老王.安装子弹到弹夹中(弹夹，子弹)</span><br><span class="line">		laowang.anzhuang_zidan(dan_jia, zi_dan)</span><br><span class="line"></span><br><span class="line">	#6. 老王把弹夹安装到枪中</span><br><span class="line">	#老王.安装弹夹到枪中(枪，弹夹)</span><br><span class="line">	laowang.anzhuang_danjia(ak47, dan_jia)</span><br><span class="line"></span><br><span class="line">	#test:测试弹夹的信息</span><br><span class="line">	#print(dan_jia)</span><br><span class="line"></span><br><span class="line">	#test:测试枪的信息</span><br><span class="line">	#print(ak47)</span><br><span class="line"></span><br><span class="line">	#7. 老王拿枪</span><br><span class="line">	#老王.拿枪(枪)</span><br><span class="line">	laowang.naqiang(ak47)</span><br><span class="line"></span><br><span class="line">	#test:测试老王对象</span><br><span class="line">	print(laowang)</span><br><span class="line"></span><br><span class="line">	#8. 创建一个敌人</span><br><span class="line">	gebi_laosong = Person(&quot;隔壁老宋&quot;)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line"></span><br><span class="line">	#9. 老王开枪打敌人</span><br><span class="line">	#老王.扣扳机(隔壁老宋)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure></p>
+        <p>&emsp;&emsp;一个小小项目，主要练习类，对象的使用流程。<br>下面是代码来自网上学习视频，作为练习所用:<br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="string">"""人的类"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">		super(Person, self).__init__()</span><br><span class="line">		self.name = name</span><br><span class="line">		self.gun = <span class="literal">None</span><span class="comment">#用来保存枪对象的引用</span></span><br><span class="line">		self.hp = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">anzhuang_zidan</span><span class="params">(self, dan_jia_temp, zi_dan_temp)</span>:</span></span><br><span class="line">		<span class="string">"""把子弹装到弹夹中"""</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">#弹夹.保存子弹(子弹)</span></span><br><span class="line">		dan_jia_temp.baocun_zidan(zi_dan_temp)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">anzhuang_danjia</span><span class="params">(self, gun_temp, dan_jia_temp)</span>:</span></span><br><span class="line">		<span class="string">"""把弹夹安装到枪中"""</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">#枪.保存弹夹(弹夹)</span></span><br><span class="line">		gun_temp.baocun_danjia(dan_jia_temp)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">naqiang</span><span class="params">(self, gun_temp)</span>:</span></span><br><span class="line">		<span class="string">"""拿起一把枪"""</span></span><br><span class="line">		self.gun = gun_temp</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.gun:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"%s的血量为:%d, 他有枪 %s"</span>%(self.name, self.hp, self.gun)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">if</span> self.hp&gt;<span class="number">0</span>:</span><br><span class="line">				<span class="keyword">return</span> <span class="string">"%s的血量为%d, 他没有枪"</span>%(self.name, self.hp)</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				<span class="keyword">return</span> <span class="string">"%s 已挂...."</span>%self.name</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">kou_ban_ji</span><span class="params">(self, diren)</span>:</span></span><br><span class="line">		<span class="string">"""让枪发射子弹去打敌人"""</span></span><br><span class="line">		<span class="comment">#枪.开火(敌人)</span></span><br><span class="line"></span><br><span class="line">		self.gun.fire(diren)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">xiao_xue</span><span class="params">(self, sha_shang_li)</span>:</span></span><br><span class="line">		<span class="string">"""根据杀伤力，掉相应的血量"""</span></span><br><span class="line">		self.hp -= sha_shang_li</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Gun</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="string">"""枪类"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">		super(Gun, self).__init__()</span><br><span class="line">		self.name = name<span class="comment">#用来记录枪的类型</span></span><br><span class="line">		self.danjia = <span class="literal">None</span><span class="comment">#用来记录弹夹对象的引用</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">baocun_danjia</span><span class="params">(self, dan_jia_temp)</span>:</span></span><br><span class="line">		<span class="string">"""用一个属性来保存这个弹夹对象的引用"""</span></span><br><span class="line">		self.danjia = dan_jia_temp</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.danjia:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"枪的信息为:%s, %s"</span>%(self.name, self.danjia)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"枪的信息为:%s,这把枪中没有弹夹"</span>%(self.name)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">fire</span><span class="params">(self, diren)</span>:</span></span><br><span class="line">		<span class="string">"""枪从弹夹中获取一发子弹，然后让这发子弹去击中敌人"""</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">#先从弹夹中取子弹</span></span><br><span class="line">		<span class="comment">#弹夹.弹出一发子弹()</span></span><br><span class="line">		zidan_temp = self.danjia.tanchu_zidan()</span><br><span class="line"></span><br><span class="line">		<span class="comment">#让这个子弹去伤害敌人</span></span><br><span class="line">		<span class="keyword">if</span> zidan_temp:</span><br><span class="line">			<span class="comment">#子弹.打中敌人(敌人)</span></span><br><span class="line">			zidan_temp.dazhong(diren)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(<span class="string">"弹夹中没有子弹了。。。。"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Danjia</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="string">"""弹夹类"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, max_num)</span>:</span></span><br><span class="line">		super(Danjia, self).__init__()</span><br><span class="line">		self.max_num = max_num<span class="comment">#用来记录弹夹的最大容量</span></span><br><span class="line">		self.zidan_list = []<span class="comment">#用来记录所有的子弹的引用</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">baocun_zidan</span><span class="params">(self, zi_dan_temp)</span>:</span></span><br><span class="line">		<span class="string">"""将这颗子弹保存"""</span></span><br><span class="line">		self.zidan_list.append(zi_dan_temp)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"弹夹的信息为:%d/%d"</span>%(len(self.zidan_list), self.max_num)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">tanchu_zidan</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="string">"""弹出最上面的那颗子弹"""</span></span><br><span class="line">		<span class="keyword">if</span> self.zidan_list:</span><br><span class="line">			<span class="keyword">return</span> self.zidan_list.pop()</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zidan</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="string">"""子弹类"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sha_shang_li)</span>:</span></span><br><span class="line">		super(Zidan, self).__init__()</span><br><span class="line">		self.sha_shang_li = sha_shang_li<span class="comment">#这颗子弹的威力</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">dazhong</span><span class="params">(self, diren)</span>:</span></span><br><span class="line">		<span class="string">"""让敌人掉血"""</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">#敌人.掉血(一颗子弹的威力)</span></span><br><span class="line">		diren.xiao_xue(self.sha_shang_li)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="string">"""用来控制整个程序的流程"""</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">#1. 创建老王对象</span></span><br><span class="line">	laowang = Person(<span class="string">"老王"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#2. 创建一个枪对象</span></span><br><span class="line">	ak47 = Gun(<span class="string">"AK47"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#3. 创建一个弹夹对象</span></span><br><span class="line">	dan_jia = Danjia(<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#4. 创建一些子弹</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">15</span>):</span><br><span class="line">		zi_dan = Zidan(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">		<span class="comment">#5. 老王把子弹安装到弹夹中</span></span><br><span class="line">		<span class="comment">#老王.安装子弹到弹夹中(弹夹，子弹)</span></span><br><span class="line">		laowang.anzhuang_zidan(dan_jia, zi_dan)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#6. 老王把弹夹安装到枪中</span></span><br><span class="line">	<span class="comment">#老王.安装弹夹到枪中(枪，弹夹)</span></span><br><span class="line">	laowang.anzhuang_danjia(ak47, dan_jia)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#test:测试弹夹的信息</span></span><br><span class="line">	<span class="comment">#print(dan_jia)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">#test:测试枪的信息</span></span><br><span class="line">	<span class="comment">#print(ak47)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">#7. 老王拿枪</span></span><br><span class="line">	<span class="comment">#老王.拿枪(枪)</span></span><br><span class="line">	laowang.naqiang(ak47)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#test:测试老王对象</span></span><br><span class="line">	print(laowang)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#8. 创建一个敌人</span></span><br><span class="line">	gebi_laosong = Person(<span class="string">"隔壁老宋"</span>)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#9. 老王开枪打敌人</span></span><br><span class="line">	<span class="comment">#老王.扣扳机(隔壁老宋)</span></span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line">	laowang.kou_ban_ji(gebi_laosong)</span><br><span class="line">	print(gebi_laosong)</span><br><span class="line">	print(laowang)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure></p>
 <p>配上下面的图更好理解：<br><img src="https://miao.su/images/2019/05/19/a5f9dee338d730182c485.jpg" alt="a5f9dee338d730182c485.jpg"></p>
 
       
@@ -585,6 +620,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1107,8 +1154,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1125,7 +1172,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1143,12 +1523,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1168,15 +1546,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1231,6 +1609,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1239,6 +1637,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

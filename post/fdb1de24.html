@@ -357,6 +357,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -365,6 +373,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -554,7 +589,7 @@
 <li>没有键值相等的节点。</li>
 </ul>
 <a id="more"></a>
-<h2 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2.基本操作"></a>2.基本操作</h2><p>主要包括：查找、插入、建立、删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">struct node &#123;</span><br><span class="line">	int data;</span><br><span class="line">	node *lchild;</span><br><span class="line">	node *rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 新建节点，返回一个节点指针</span><br><span class="line">node* newNode(int v)&#123;</span><br><span class="line">	node* Node = new node;</span><br><span class="line">	Node-&gt;data = v;</span><br><span class="line">	Node-&gt;lchild = Node-&gt;rchild = NULL;</span><br><span class="line">	return Node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// search x 只需搜索一边子树即可,O(h) h表示树高</span><br><span class="line">void search(node* root, int x)&#123;</span><br><span class="line">	if(root == NULL) &#123;</span><br><span class="line">		printf(&quot;search failed!\n&quot;);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(x == root-&gt;data) printf(&quot;%d\n&quot;, root-&gt;data);</span><br><span class="line">	else if(x &lt; root-&gt;data) search(root-&gt;lchild, int x);</span><br><span class="line">	else search(root-&gt;rchild, int x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// insert x 当root==NULL时，即为插入之处 O(h)</span><br><span class="line"></span><br><span class="line">void insert(node* &amp;root, int x)&#123;</span><br><span class="line">	if(root == NULL)&#123;</span><br><span class="line">		root = newNode(x);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	if(x == root-&gt;data) return;</span><br><span class="line">	else if(x &lt; root-&gt;data) insert(root-&gt;lchild, x);</span><br><span class="line">	else insert(root-&gt;rchild, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// BST的建立(注意：同一组数据，如果插入的顺序不同最后形成的BST可能也不同)</span><br><span class="line">// 复杂度O(h)*n = O(nlog2n)</span><br><span class="line"></span><br><span class="line">node *Create(int data[], int n)&#123;</span><br><span class="line">	node* root = NULL;</span><br><span class="line">	for (int i = 0; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		insert(root, data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//BST的节点删除，删除根节点</span><br><span class="line">//删除根节点后，用直接后继或者直接前驱来替换</span><br><span class="line">//直接前驱：左子树一直向右直到某一节点的右子树为NULL的节点</span><br><span class="line">//直接后继：右子树一直向左直到某一节点的左子树为NULL的节点</span><br><span class="line"></span><br><span class="line">//FindMin()函数用于寻找树root的最小权值节点</span><br><span class="line"></span><br><span class="line">node* FindMin(node* root)&#123;</span><br><span class="line">	while(root-&gt;lchild != NULL) root = root-&gt;lchild;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//FindMax()函数用于寻找树root的最大权值节点</span><br><span class="line"></span><br><span class="line">node* FindMax(node* root)&#123;</span><br><span class="line">	while(root-&gt;rchild != NULL) root = root-&gt;rchild;</span><br><span class="line">	return root;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">BST删除节点步骤:</span><br><span class="line">1. 当前节点root空，直接返回</span><br><span class="line">2. 当前节点root的data值等于x，进入删除操作</span><br><span class="line">	a)当前节点root为叶子节点，直接删除。</span><br><span class="line"> 	b)当前节点root存在左子树，找到前驱pre，覆盖root，删除pre</span><br><span class="line"> 	c)当前节点root存在右子树，找到后继next，覆盖root，删除next</span><br><span class="line">3. 若当前节点root权值大于x，则root = root-&gt;lchild 递归删除</span><br><span class="line">4. 若当前节点root权值小于x，则root = root-&gt;rchild 递归删除</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">void deleteNode(node* &amp;root, int x)&#123;</span><br><span class="line">	if(root == NULL) return;</span><br><span class="line"></span><br><span class="line">	if(root-&gt;data == x) &#123;</span><br><span class="line">		if(root-&gt;lchild == NULL &amp;&amp; root-&gt;rchild == NULL) root = NULL;</span><br><span class="line">		else if(root-&gt;lchild != NULL) &#123;</span><br><span class="line">			node *pre = FindMax(root-&gt;lchild);</span><br><span class="line">			root-&gt;data = pre-&gt;data;</span><br><span class="line">			deleteNode(root-&gt;lchild, pre-&gt;data);  //删除pre节点</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			node* next = FindMin(root-&gt;rchild);</span><br><span class="line">			root-&gt;data = next-&gt;data;</span><br><span class="line">			deleteNode(root-&gt;rchild, next-&gt;data); //删除next 节点</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else if(root-&gt;data &gt; x) deleteNode(root-&gt;lchild, x);</span><br><span class="line">	else deleteNode(root-&gt;rchild, x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2.基本操作"></a>2.基本操作</h2><p>主要包括：查找、插入、建立、删除<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">struct <span class="type">node</span> &#123;</span><br><span class="line">	int data;</span><br><span class="line">	<span class="type">node</span> *lchild;</span><br><span class="line">	<span class="type">node</span> *rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 新建节点，返回一个节点指针</span><br><span class="line"><span class="type">node</span>* newNode(int v)&#123;</span><br><span class="line">	<span class="type">node</span>* Node = new <span class="type">node</span>;</span><br><span class="line">	Node-&gt;data = v;</span><br><span class="line">	Node-&gt;lchild = Node-&gt;rchild = NULL;</span><br><span class="line">	<span class="keyword">return</span> Node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// search x 只需搜索一边子树即可,O(h) h表示树高</span><br><span class="line">void search(<span class="type">node</span>*<span class="built_in"> root</span>, int x)&#123;</span><br><span class="line">	<span class="keyword">if</span><span class="built_in">(root</span> == NULL) &#123;</span><br><span class="line">		printf(<span class="string">"search failed!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(x ==<span class="built_in"> root</span>-&gt;data) printf(<span class="string">"%d\n"</span>,<span class="built_in"> root</span>-&gt;data);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(x &lt;<span class="built_in"> root</span>-&gt;data) search<span class="built_in">(root</span>-&gt;lchild, int x);</span><br><span class="line">	<span class="keyword">else</span> search<span class="built_in">(root</span>-&gt;rchild, int x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">insert</span> x <span class="built_in">当root</span>==NULL时，即为插入之处 O(h)</span><br><span class="line"></span><br><span class="line">void <span class="keyword">insert</span>(<span class="type">node</span>* <span class="built_in">&amp;root</span>, int x)&#123;</span><br><span class="line">	<span class="keyword">if</span><span class="built_in">(root</span> == NULL)&#123;</span><br><span class="line">	<span class="built_in">	root</span> = newNode(x);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x ==<span class="built_in"> root</span>-&gt;data) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(x &lt;<span class="built_in"> root</span>-&gt;data) <span class="keyword">insert</span><span class="built_in">(root</span>-&gt;lchild, x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">insert</span><span class="built_in">(root</span>-&gt;rchild, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// BST的建立(注意：同一组数据，如果插入的顺序不同最后形成的BST可能也不同)</span><br><span class="line">// 复杂度O(h)*n = O(nlog2n)</span><br><span class="line"></span><br><span class="line"><span class="type">node</span> *Create(int data[], int n)&#123;</span><br><span class="line">	<span class="type">node</span>*<span class="built_in"> root</span> = NULL;</span><br><span class="line">	<span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">insert</span><span class="built_in">(root</span>, data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span><span class="built_in"> root</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//BST的节点删除，删除根节点</span><br><span class="line">//删除根节点后，用直接后继或者直接前驱来替换</span><br><span class="line">//直接前驱：左子树一直向右直到某一节点的右子树为NULL的节点</span><br><span class="line">//直接后继：右子树一直向左直到某一节点的左子树为NULL的节点</span><br><span class="line"></span><br><span class="line">//FindMin()函数用于寻找<span class="built_in">树root</span>的最小权值节点</span><br><span class="line"></span><br><span class="line"><span class="type">node</span>* FindMin(<span class="type">node</span>*<span class="built_in"> root</span>)&#123;</span><br><span class="line">	while<span class="built_in">(root</span>-&gt;lchild != NULL)<span class="built_in"> root</span> =<span class="built_in"> root</span>-&gt;lchild;</span><br><span class="line">	<span class="keyword">return</span><span class="built_in"> root</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//FindMax()函数用于寻找<span class="built_in">树root</span>的最大权值节点</span><br><span class="line"></span><br><span class="line"><span class="type">node</span>* FindMax(<span class="type">node</span>*<span class="built_in"> root</span>)&#123;</span><br><span class="line">	while<span class="built_in">(root</span>-&gt;rchild != NULL)<span class="built_in"> root</span> =<span class="built_in"> root</span>-&gt;rchild;</span><br><span class="line">	<span class="keyword">return</span><span class="built_in"> root</span>;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">BST删除节点步骤:</span><br><span class="line"><span class="number">1</span>. 当前节<span class="built_in">点root</span>空，直接返回</span><br><span class="line"><span class="number">2</span>. 当前节<span class="built_in">点root</span>的data值等于x，进入删除操作</span><br><span class="line">	a)当前节<span class="built_in">点root</span>为叶子节点，直接删除。</span><br><span class="line"> 	b)当前节<span class="built_in">点root</span>存在左子树，找到前驱pre，覆<span class="built_in">盖root</span>，删除pre</span><br><span class="line"> 	c)当前节<span class="built_in">点root</span>存在右子树，找到后继<span class="keyword">next</span>，覆<span class="built_in">盖root</span>，删除<span class="keyword">next</span></span><br><span class="line"><span class="number">3</span>. 若当前节<span class="built_in">点root</span>权值大于x，<span class="built_in">则root</span> =<span class="built_in"> root</span>-&gt;lchild 递归删除</span><br><span class="line"><span class="number">4</span>. 若当前节<span class="built_in">点root</span>权值小于x，<span class="built_in">则root</span> =<span class="built_in"> root</span>-&gt;rchild 递归删除</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">void deleteNode(<span class="type">node</span>* <span class="built_in">&amp;root</span>, int x)&#123;</span><br><span class="line">	<span class="keyword">if</span><span class="built_in">(root</span> == NULL) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span><span class="built_in">(root</span>-&gt;data == x) &#123;</span><br><span class="line">		<span class="keyword">if</span><span class="built_in">(root</span>-&gt;lchild == NULL &amp;&amp;<span class="built_in"> root</span>-&gt;rchild == NULL)<span class="built_in"> root</span> = NULL;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span><span class="built_in">(root</span>-&gt;lchild != NULL) &#123;</span><br><span class="line">			<span class="type">node</span> *pre = FindMax<span class="built_in">(root</span>-&gt;lchild);</span><br><span class="line">		<span class="built_in">	root</span>-&gt;data = pre-&gt;data;</span><br><span class="line">			deleteNode<span class="built_in">(root</span>-&gt;lchild, pre-&gt;data);  //删除pre节点</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">node</span>* <span class="keyword">next</span> = FindMin<span class="built_in">(root</span>-&gt;rchild);</span><br><span class="line">		<span class="built_in">	root</span>-&gt;data = next-&gt;data;</span><br><span class="line">			deleteNode<span class="built_in">(root</span>-&gt;rchild, next-&gt;data); //删除<span class="keyword">next</span> 节点</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span><span class="built_in">(root</span>-&gt;data &gt; x) deleteNode<span class="built_in">(root</span>-&gt;lchild, x);</span><br><span class="line">	<span class="keyword">else</span> deleteNode<span class="built_in">(root</span>-&gt;rchild, x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-应用"><a href="#3-应用" class="headerlink" title="3. 应用"></a>3. 应用</h2><p>利用PAT1043_Is It a Binary Search Tree 来练习一下BST。</p>
 <blockquote>
 <p>1043 Is It a Binary Search Tree （25 分）<br>A Binary Search Tree (BST) is recursively defined as a binary tree which has the following properties:</p>
@@ -573,19 +608,19 @@
 <blockquote>
 <p>For each test case, first print in a line YES if the sequence is the preorder traversal sequence of a BST or the mirror image of a BST, or NO if not. Then if the answer is YES, print in the next line the postorder traversal sequence of that tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
 </blockquote>
-<p>Sample Input 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">8 6 5 7 10 8 11</span><br></pre></td></tr></table></figure></p>
-<p>Sample Output 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">5 7 6 8 11 10 8</span><br></pre></td></tr></table></figure></p>
-<p>Sample Input 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">8 10 11 8 6 7 5</span><br></pre></td></tr></table></figure></p>
-<p>Sample Output 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">11 8 10 7 5 6 8</span><br></pre></td></tr></table></figure></p>
-<p>Sample Input 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">8 6 8 5 10 9 11</span><br></pre></td></tr></table></figure></p>
-<p>Sample Output 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NO</span><br></pre></td></tr></table></figure></p>
+<p>Sample Input 1:<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="symbol">8 </span><span class="number">6</span> <span class="number">5</span> <span class="number">7</span> <span class="number">10</span> <span class="number">8</span> <span class="number">11</span></span><br></pre></td></tr></table></figure></p>
+<p>Sample Output 1:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line"><span class="number">5</span> <span class="number">7</span> <span class="number">6</span> <span class="number">8</span> <span class="number">11</span> <span class="number">10</span> <span class="number">8</span></span><br></pre></td></tr></table></figure></p>
+<p>Sample Input 2:<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="symbol">8 </span><span class="number">10</span> <span class="number">11</span> <span class="number">8</span> <span class="number">6</span> <span class="number">7</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>Sample Output 2:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line"><span class="number">11</span> <span class="number">8</span> <span class="number">10</span> <span class="number">7</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span></span><br></pre></td></tr></table></figure></p>
+<p>Sample Input 3:<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="symbol">8 </span><span class="number">6</span> <span class="number">8</span> <span class="number">5</span> <span class="number">10</span> <span class="number">9</span> <span class="number">11</span></span><br></pre></td></tr></table></figure></p>
+<p>Sample Output 3:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NO</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>Code and Analysis</strong>:<br>(1) 题意：判断给定序列是不是BST或者BST的镜像的先序遍历序列。是，输出YES和后序遍历序列；否，输出NO结束。<br>(2) 思路步骤：</p>
 <ul>
 <li>对给定的序列建立BST</li>
 <li>对BST先序遍历，后序遍历，BST镜像先序遍历，BST镜像后序遍历</li>
 <li>将给定序列与BST先序遍历，BST镜像先序遍历比较，相等，输出YES和对应后序序列，不相等，输出NO。</li>
 </ul>
-<p>(3) 数据结构：用vector<int>存储给定序列origin, BST先序序列pre, BST后序序列post, BST镜像先序序列preM, BST镜像后序序列postM<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	node* lchild;</span><br><span class="line">	node* rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void insert(node* &amp;root, int x)&#123;</span><br><span class="line">	if(root == NULL) &#123;</span><br><span class="line">		root = new node;</span><br><span class="line">		root-&gt;data = x;</span><br><span class="line">		root-&gt;lchild = root-&gt;rchild = NULL;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	else if(root-&gt;data &gt; x) insert(root-&gt;lchild, x);</span><br><span class="line">	else insert(root-&gt;rchild, x);</span><br><span class="line">&#125;</span><br><span class="line">// 先序遍历：中左右 --- 镜像先序遍历：中右左</span><br><span class="line">// 后序遍历：左右中 --- 镜像后序遍历：右左中</span><br><span class="line">// 中序遍历：左中右 --- 镜像中序遍历：右中左</span><br><span class="line">void preOrder(node* root, vector&lt;int&gt;&amp;vi)&#123;</span><br><span class="line">	if(root == NULL) return;</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">	preOrder(root-&gt;lchild, vi);</span><br><span class="line">	preOrder(root-&gt;rchild, vi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void preMirror(node* root, vector&lt;int&gt;&amp;vi)&#123;</span><br><span class="line">	if(root == NULL) return;</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">	preMirror(root-&gt;rchild, vi);</span><br><span class="line">	preMirror(root-&gt;lchild, vi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void postOrder(node* root, vector&lt;int&gt;&amp;vi)&#123;</span><br><span class="line">	if(root == NULL) return;</span><br><span class="line">	postOrder(root-&gt;lchild, vi);</span><br><span class="line">	postOrder(root-&gt;rchild, vi);</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void postMirror(node* root, vector&lt;int&gt;&amp;vi)&#123;</span><br><span class="line">	if(root == NULL) return;</span><br><span class="line">	postMirror(root-&gt;rchild, vi);</span><br><span class="line">	postMirror(root-&gt;lchild, vi);</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt; origin, pre, post, preM, postM;</span><br><span class="line"></span><br><span class="line">int main(int argc, char const *argv[])</span><br><span class="line">&#123;</span><br><span class="line">	int n, data;</span><br><span class="line">	node* root = new node;</span><br><span class="line">	root = NULL;</span><br><span class="line"></span><br><span class="line">	scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		scanf(&quot;%d&quot;, &amp;data);</span><br><span class="line">		origin.push_back(data);</span><br><span class="line">		insert(root, data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	preOrder(root, pre);</span><br><span class="line">	preMirror(root, preM);</span><br><span class="line">	postOrder(root, post);</span><br><span class="line">	postMirror(root, postM);</span><br><span class="line"></span><br><span class="line">	if(origin == pre)&#123;</span><br><span class="line">		printf(&quot;YES\n&quot;);</span><br><span class="line">		for (int i = 0; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%d&quot;,post[i]);</span><br><span class="line">			if(i &lt; n-1) printf(&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else if(origin == preM)&#123;</span><br><span class="line">		printf(&quot;YES\n&quot;);</span><br><span class="line">		for (int i = 0; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%d&quot;, postM[i]);</span><br><span class="line">			if(i &lt; n-1) printf(&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else printf(&quot;NO\n&quot;);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">7</span><br><span class="line">8 6 5 7 10 8 11</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></int></p>
+<p>(3) 数据结构：用vector<int>存储给定序列origin, BST先序序列pre, BST后序序列post, BST镜像先序序列preM, BST镜像后序序列postM<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	node* lchild;</span><br><span class="line">	node* rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(node* &amp;root, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		root = <span class="keyword">new</span> node;</span><br><span class="line">		root-&gt;data = x;</span><br><span class="line">		root-&gt;lchild = root-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;data &gt; x) insert(root-&gt;lchild, x);</span><br><span class="line">	<span class="keyword">else</span> insert(root-&gt;rchild, x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 先序遍历：中左右 --- 镜像先序遍历：中右左</span></span><br><span class="line"><span class="comment">// 后序遍历：左右中 --- 镜像后序遍历：右左中</span></span><br><span class="line"><span class="comment">// 中序遍历：左中右 --- 镜像中序遍历：右中左</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;vi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">	preOrder(root-&gt;lchild, vi);</span><br><span class="line">	preOrder(root-&gt;rchild, vi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preMirror</span><span class="params">(node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;vi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">	preMirror(root-&gt;rchild, vi);</span><br><span class="line">	preMirror(root-&gt;lchild, vi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;vi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	postOrder(root-&gt;lchild, vi);</span><br><span class="line">	postOrder(root-&gt;rchild, vi);</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postMirror</span><span class="params">(node* root, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;vi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">	postMirror(root-&gt;rchild, vi);</span><br><span class="line">	postMirror(root-&gt;lchild, vi);</span><br><span class="line">	vi.push_back(root-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; origin, pre, post, preM, postM;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, data;</span><br><span class="line">	node* root = <span class="keyword">new</span> node;</span><br><span class="line">	root = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;data);</span><br><span class="line">		origin.push_back(data);</span><br><span class="line">		insert(root, data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	preOrder(root, pre);</span><br><span class="line">	preMirror(root, preM);</span><br><span class="line">	postOrder(root, post);</span><br><span class="line">	postMirror(root, postM);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(origin == pre)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>,post[i]);</span><br><span class="line">			<span class="keyword">if</span>(i &lt; n<span class="number">-1</span>) <span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(origin == preM)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>, postM[i]);</span><br><span class="line">			<span class="keyword">if</span>(i &lt; n<span class="number">-1</span>) <span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">7</span></span><br><span class="line"><span class="comment">8 6 5 7 10 8 11</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></int></p>
 
       
     </div>
@@ -625,6 +660,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1173,8 +1220,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1191,7 +1238,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1209,12 +1589,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1234,15 +1612,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1337,6 +1715,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1345,6 +1743,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

@@ -357,6 +357,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -365,6 +373,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -551,7 +586,7 @@
 <blockquote>
 <p>SA10225048,张三,24<br>SG10225132,李四,22连续子向量中的最大和<br>SG10225027,王五,24<br>SA10225213,赵六,25<br>SA10225197,欧阳奋强,23<br>SG10225059,孙八,24<br>SA10225083,余久,23<br>SA10225112,张唯一,24</p>
 </blockquote>
-<h2 id="二、顺序表实现代码与分析"><a href="#二、顺序表实现代码与分析" class="headerlink" title="二、顺序表实现代码与分析"></a>二、顺序表实现代码与分析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#define maxn 100</span><br><span class="line"></span><br><span class="line">struct Node &#123;</span><br><span class="line">    char *SchoolNumber;</span><br><span class="line">    char *Name;</span><br><span class="line">    int Age;</span><br><span class="line">&#125;ArrNode[maxn];</span><br><span class="line"></span><br><span class="line">// 实现字符串信息转换成相应节点信息</span><br><span class="line">struct Node Str_Node(char *buffer) &#123;</span><br><span class="line">	char *p[3];</span><br><span class="line">	char *temp;</span><br><span class="line">	struct Node n;</span><br><span class="line">	int i = 0;</span><br><span class="line">	temp = strdup(strtok(buffer, &quot;,&quot;));</span><br><span class="line"></span><br><span class="line">	while(temp) &#123;</span><br><span class="line">		p[i] = temp;</span><br><span class="line">		temp = strdup(strtok(NULL, &quot;,&quot;));</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	n.SchoolNumber = p[0];</span><br><span class="line">	n.Name = p[1];</span><br><span class="line">	n.Age = atoi(p[2]);</span><br><span class="line"></span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印所有节点</span><br><span class="line">void Print(int NodeCount)&#123;</span><br><span class="line">	for(int i = 0; i &lt; NodeCount; i++)&#123;</span><br><span class="line">		printf(&quot;%-10d&quot;, i+1);</span><br><span class="line">		printf(&quot;%-15x&quot;, ArrNode + i);</span><br><span class="line">		printf(&quot;%-15s&quot;, ArrNode[i].SchoolNumber);</span><br><span class="line">		printf(&quot;%-15s&quot;, ArrNode[i].Name);</span><br><span class="line">		printf(&quot;%-15d\n&quot;, ArrNode[i].Age);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 插入节点</span><br><span class="line">void InsertNode(struct Node n, int &amp;NodeCount, int i)&#123;</span><br><span class="line"></span><br><span class="line">	for(int j = NodeCount; j &gt;= i; j--)&#123;</span><br><span class="line">		ArrNode[j].SchoolNumber = ArrNode[j-1].SchoolNumber;</span><br><span class="line">		ArrNode[j].Name = ArrNode[j-1].Name;</span><br><span class="line">		ArrNode[j].Age = ArrNode[j-1].Age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ArrNode[i-1].SchoolNumber = n.SchoolNumber;</span><br><span class="line">	ArrNode[i-1].Name = n.Name;</span><br><span class="line">	ArrNode[i-1].Age = n.Age;</span><br><span class="line">	NodeCount++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 删除节点</span><br><span class="line">void DeleteNode(int &amp;NodeCount, int i)&#123;</span><br><span class="line"></span><br><span class="line">	for(int j = i; j &lt; NodeCount; j++)&#123;</span><br><span class="line">		ArrNode[j - 1].SchoolNumber = ArrNode[j].SchoolNumber;</span><br><span class="line">		ArrNode[j - 1].Name = ArrNode[j].Name;</span><br><span class="line">		ArrNode[j - 1].Age = ArrNode[j].Age;</span><br><span class="line">	&#125;</span><br><span class="line">	NodeCount--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	FILE *fp;</span><br><span class="line">	char buffer[100];</span><br><span class="line">	int  NodeCount = 0;</span><br><span class="line">	char operate[30];</span><br><span class="line">	int op_number;</span><br><span class="line"></span><br><span class="line">	if((fp = fopen(&quot;studentinfo.data&quot;, &quot;rt&quot;)) != NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		while(fgets(buffer, 99, fp) != NULL) &#123;</span><br><span class="line">			ArrNode[NodeCount++] = Str_Node(buffer);</span><br><span class="line">		&#125;</span><br><span class="line">		fclose(fp);</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;Number    PhysiAddr      SchoolNumber   Name           Age\n&quot;);</span><br><span class="line">	Print(NodeCount);</span><br><span class="line"></span><br><span class="line">	while(1)&#123;</span><br><span class="line">		printf(&quot;Please enter Pi, Di or Ii(i&lt;%d):\n&quot;,NodeCount);</span><br><span class="line">		scanf(&quot;%s&quot;,operate);</span><br><span class="line"></span><br><span class="line">		if(operate[0] == &apos;0&apos;) break;</span><br><span class="line"></span><br><span class="line">		if(operate[0] == &apos;P&apos;) &#123;</span><br><span class="line">			op_number = atoi(operate + 1);</span><br><span class="line">			printf(&quot;%-10d&quot;, op_number);</span><br><span class="line">			printf(&quot;%-15x&quot;, ArrNode + op_number - 1);</span><br><span class="line">			printf(&quot;%-15s&quot;, ArrNode[op_number - 1].SchoolNumber);</span><br><span class="line">			printf(&quot;%-15s&quot;, ArrNode[op_number - 1].Name);</span><br><span class="line">			printf(&quot;%-15d\n&quot;, ArrNode[op_number - 1].Age);</span><br><span class="line">		&#125;</span><br><span class="line">		else if(operate[0] == &apos;I&apos;)&#123;</span><br><span class="line">			char *t[4];</span><br><span class="line">			char *temp;</span><br><span class="line">			int i = 0;</span><br><span class="line">			struct Node n;</span><br><span class="line">			temp = strdup(strtok(operate, &quot;,&quot;));</span><br><span class="line"></span><br><span class="line">			while(temp)&#123;</span><br><span class="line">				t[i] = temp;</span><br><span class="line">				temp = strdup(strtok(NULL, &quot;,&quot;));</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			int number = atoi(operate + 1);</span><br><span class="line">			n.SchoolNumber = t[1];</span><br><span class="line">			n.Name = t[2];</span><br><span class="line">			n.Age = atoi(t[3]);</span><br><span class="line"></span><br><span class="line">			InsertNode(n, NodeCount, number);</span><br><span class="line">			Print(NodeCount);</span><br><span class="line">		&#125;</span><br><span class="line">		else if(operate[0] == &apos;D&apos;) &#123;</span><br><span class="line">			op_number = atoi(operate + 1);</span><br><span class="line">			DeleteNode(NodeCount, op_number);</span><br><span class="line">			Print(NodeCount);</span><br><span class="line">		&#125;</span><br><span class="line">		else printf(&quot;Error!\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、顺序表实现代码与分析"><a href="#二、顺序表实现代码与分析" class="headerlink" title="二、顺序表实现代码与分析"></a>二、顺序表实现代码与分析</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> *SchoolNumber;</span><br><span class="line">    <span class="keyword">char</span> *Name;</span><br><span class="line">    <span class="keyword">int</span> Age;</span><br><span class="line">&#125;ArrNode[maxn];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现字符串信息转换成相应节点信息</span></span><br><span class="line"><span class="function">struct Node <span class="title">Str_Node</span><span class="params">(<span class="keyword">char</span> *buffer)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *p[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">char</span> *temp;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span> <span class="title">n</span>;</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	temp = strdup(strtok(buffer, <span class="string">","</span>));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(temp) &#123;</span><br><span class="line">		p[i] = temp;</span><br><span class="line">		temp = strdup(strtok(<span class="literal">NULL</span>, <span class="string">","</span>));</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	n.SchoolNumber = p[<span class="number">0</span>];</span><br><span class="line">	n.Name = p[<span class="number">1</span>];</span><br><span class="line">	n.Age = atoi(p[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印所有节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(<span class="keyword">int</span> NodeCount)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NodeCount; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%-10d"</span>, i+<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%-15x"</span>, ArrNode + i);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%-15s"</span>, ArrNode[i].SchoolNumber);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%-15s"</span>, ArrNode[i].Name);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%-15d\n"</span>, ArrNode[i].Age);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertNode</span><span class="params">(struct Node n, <span class="keyword">int</span> &amp;NodeCount, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = NodeCount; j &gt;= i; j--)&#123;</span><br><span class="line">		ArrNode[j].SchoolNumber = ArrNode[j<span class="number">-1</span>].SchoolNumber;</span><br><span class="line">		ArrNode[j].Name = ArrNode[j<span class="number">-1</span>].Name;</span><br><span class="line">		ArrNode[j].Age = ArrNode[j<span class="number">-1</span>].Age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ArrNode[i<span class="number">-1</span>].SchoolNumber = n.SchoolNumber;</span><br><span class="line">	ArrNode[i<span class="number">-1</span>].Name = n.Name;</span><br><span class="line">	ArrNode[i<span class="number">-1</span>].Age = n.Age;</span><br><span class="line">	NodeCount++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DeleteNode</span><span class="params">(<span class="keyword">int</span> &amp;NodeCount, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; NodeCount; j++)&#123;</span><br><span class="line">		ArrNode[j - <span class="number">1</span>].SchoolNumber = ArrNode[j].SchoolNumber;</span><br><span class="line">		ArrNode[j - <span class="number">1</span>].Name = ArrNode[j].Name;</span><br><span class="line">		ArrNode[j - <span class="number">1</span>].Age = ArrNode[j].Age;</span><br><span class="line">	&#125;</span><br><span class="line">	NodeCount--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	FILE *fp;</span><br><span class="line">	<span class="keyword">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">	<span class="keyword">int</span>  NodeCount = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> operate[<span class="number">30</span>];</span><br><span class="line">	<span class="keyword">int</span> op_number;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((fp = fopen(<span class="string">"studentinfo.data"</span>, <span class="string">"rt"</span>)) != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(fgets(buffer, <span class="number">99</span>, fp) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">			ArrNode[NodeCount++] = Str_Node(buffer);</span><br><span class="line">		&#125;</span><br><span class="line">		fclose(fp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Number    PhysiAddr      SchoolNumber   Name           Age\n"</span>);</span><br><span class="line">	Print(NodeCount);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Please enter Pi, Di or Ii(i&lt;%d):\n"</span>,NodeCount);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,operate);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(operate[<span class="number">0</span>] == <span class="string">'0'</span>) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(operate[<span class="number">0</span>] == <span class="string">'P'</span>) &#123;</span><br><span class="line">			op_number = atoi(operate + <span class="number">1</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%-10d"</span>, op_number);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%-15x"</span>, ArrNode + op_number - <span class="number">1</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%-15s"</span>, ArrNode[op_number - <span class="number">1</span>].SchoolNumber);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%-15s"</span>, ArrNode[op_number - <span class="number">1</span>].Name);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%-15d\n"</span>, ArrNode[op_number - <span class="number">1</span>].Age);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(operate[<span class="number">0</span>] == <span class="string">'I'</span>)&#123;</span><br><span class="line">			<span class="keyword">char</span> *t[<span class="number">4</span>];</span><br><span class="line">			<span class="keyword">char</span> *temp;</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">			<span class="class"><span class="keyword">struct</span> <span class="title">Node</span> <span class="title">n</span>;</span></span><br><span class="line">			temp = strdup(strtok(operate, <span class="string">","</span>));</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span>(temp)&#123;</span><br><span class="line">				t[i] = temp;</span><br><span class="line">				temp = strdup(strtok(<span class="literal">NULL</span>, <span class="string">","</span>));</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> number = atoi(operate + <span class="number">1</span>);</span><br><span class="line">			n.SchoolNumber = t[<span class="number">1</span>];</span><br><span class="line">			n.Name = t[<span class="number">2</span>];</span><br><span class="line">			n.Age = atoi(t[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">			InsertNode(n, NodeCount, number);</span><br><span class="line">			Print(NodeCount);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(operate[<span class="number">0</span>] == <span class="string">'D'</span>) &#123;</span><br><span class="line">			op_number = atoi(operate + <span class="number">1</span>);</span><br><span class="line">			DeleteNode(NodeCount, op_number);</span><br><span class="line">			Print(NodeCount);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Error!\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用的是顺序表结构来实现线性表的基本操作，明天采用链表结构来实现。</p>
 
       
@@ -586,6 +621,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1134,8 +1181,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1152,7 +1199,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1170,12 +1550,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1195,15 +1573,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1258,6 +1636,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1266,6 +1664,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

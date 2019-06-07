@@ -363,6 +363,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -371,6 +379,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -565,7 +600,7 @@
 <li>基本思路：<br>对所有满足0 ≤ i ≤ j &lt; n的整数对(i,j)进行检查，判断x[i..j]的总和Sum(x[i..j])是否最大？其中Sum(x[i..j])</li>
 <li>该算法时间复制度为O(n^3)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">float alg1()</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	float sum, maxsofar = 0;</span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">		for (j = i; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum = 0;</span><br><span class="line">			for (k = i; k &lt;= j; k++)</span><br><span class="line">				sum += x[k];</span><br><span class="line">			if (sum &gt; maxsofar)</span><br><span class="line">				maxsofar = sum;</span><br><span class="line">		&#125;</span><br><span class="line">	return maxsofar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">float alg1()</span><br><span class="line">&#123;</span><br><span class="line">	int <span class="built_in">i</span>, <span class="built_in">j</span>, k;</span><br><span class="line">	float sum, maxsofar = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; n; <span class="built_in">i</span>++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">j</span> = <span class="built_in">i</span>; <span class="built_in">j</span> &lt; n; <span class="built_in">j</span>++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (k = <span class="built_in">i</span>; k &lt;= <span class="built_in">j</span>; k++)</span><br><span class="line">				sum += x[k];</span><br><span class="line">			<span class="keyword">if</span> (sum &gt; maxsofar)</span><br><span class="line">				maxsofar = sum;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> maxsofar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>暴力法的一些简化<br>基本思路：</li>
 </ol>
@@ -578,7 +613,7 @@
 </li>
 <li>该算法时间复制度为O(n^2)<br>由以上两种计算sum(x[i..j])，可以得到两种算法</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//第一种</span><br><span class="line">float alg2()</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	float sum, maxsofar = 0;</span><br><span class="line"></span><br><span class="line">	for (i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum = 0;</span><br><span class="line">		for (j = i; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum += x[j];</span><br><span class="line">			if(sum &gt; maxsofar)</span><br><span class="line">				maxsofar = sum;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return maxsofar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//第二种</span><br><span class="line">float cumvec[MAXN + 1];</span><br><span class="line">float alg2b()</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	float *cumarr, sum, maxsofar = 0;</span><br><span class="line">	cumarr = cumvec + 1;</span><br><span class="line">	cumarr[-1] = 0;</span><br><span class="line"></span><br><span class="line">	for(i = 0; i &lt; n; i++)</span><br><span class="line">		cumarr[i] = cumarr[i - 1] = x[i];</span><br><span class="line"></span><br><span class="line">	for(i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(j = i; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum = cumarr[j] - cumarr[i - 1];</span><br><span class="line">			if(sum &gt; maxsofar)</span><br><span class="line">				maxsofar = sum;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return maxsofar;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//第一种</span><br><span class="line"><span class="built_in">float</span> alg2()</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	<span class="built_in">float</span> <span class="built_in">sum</span>, maxsofar = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">sum</span> = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = i; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">sum</span> += x[j];</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">sum</span> &gt; maxsofar)</span><br><span class="line">				maxsofar = <span class="built_in">sum</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> maxsofar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//第二种</span><br><span class="line"><span class="built_in">float</span> cumvec[MAXN + <span class="number">1</span>];</span><br><span class="line"><span class="built_in">float</span> alg2b()</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	<span class="built_in">float</span> *cumarr, <span class="built_in">sum</span>, maxsofar = <span class="number">0</span>;</span><br><span class="line">	cumarr = cumvec + <span class="number">1</span>;</span><br><span class="line">	cumarr[-<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		cumarr[i] = cumarr[i - <span class="number">1</span>] = x[i];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j = i; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">sum</span> = cumarr[j] - cumarr[i - <span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">sum</span> &gt; maxsofar)</span><br><span class="line">				maxsofar = <span class="built_in">sum</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> maxsofar;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://miao.su/images/2019/02/06/002802166a8db3e3f21b2.png" alt="002802166a8db3e3f21b2.png"></p>
 <ol start="3">
 <li>分治法</li>
@@ -591,7 +626,7 @@
 <li>Step1:将向量x划分为两个大小近似相等的子向量a和b</li>
 <li>Step2:分别递归地找出a、b中连续子向量中的最大和为ma,mb</li>
 <li>Step3:mx=max(ma,mb,mc)，其中mc=max(sum(x[i..n/2-1]))<br>   +max(sum(x[n/2..j]))</li>
-<li>该算法时间复制度为O(nlogn)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">float maxfun(float a, float b)</span><br><span class="line">&#123;</span><br><span class="line">	return a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#define max(a, b) maxfun(a, b)</span><br><span class="line"></span><br><span class="line">float alg3()</span><br><span class="line">&#123;</span><br><span class="line">	return recmax(0, n-1);</span><br><span class="line">&#125;</span><br><span class="line">float recmax(int l, int u)</span><br><span class="line">&#123;</span><br><span class="line">	int i, m;</span><br><span class="line">	float lmax, rmax, sum;</span><br><span class="line">    if (l &gt; u)  /* zero elements */</span><br><span class="line">		return 0;</span><br><span class="line">    if (l == u)  /* one element */</span><br><span class="line">		return max(0, x[l]);</span><br><span class="line">    m = (l+u) / 2;</span><br><span class="line">// find max crossing to left</span><br><span class="line">    lmax = sum = 0;</span><br><span class="line">    for(i = m; i &gt;= l; i--)&#123;</span><br><span class="line">    	sum += x[i];</span><br><span class="line">    	if(sum &gt; lmax)</span><br><span class="line">    		lmax = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    rmax = sum = 0;</span><br><span class="line">    for(i = m+1; i &lt;= u; i++)&#123;</span><br><span class="line">    	sum += x[i];</span><br><span class="line">    	if(sum &gt; rmax)</span><br><span class="line">    		rmax = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    return max(lmax + rmax, max(recmax(l, m),recmax(m+1, u)));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>该算法时间复制度为O(nlogn)<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> maxfun(<span class="built_in">float</span> a, <span class="built_in">float</span> b)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#<span class="built_in">define</span> <span class="built_in">max</span>(a, b) maxfun(a, b)</span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span> alg3()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">return</span> recmax(<span class="number">0</span>, n-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">float</span> recmax(int l, int u)</span><br><span class="line">&#123;</span><br><span class="line">	int i, m;</span><br><span class="line">	<span class="built_in">float</span> <span class="built_in">lmax</span>, rmax, <span class="built_in">sum</span>;</span><br><span class="line">    <span class="keyword">if</span> (l &gt; u)  <span class="comment">/* zero elements */</span></span><br><span class="line">		<span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (l == u)  <span class="comment">/* one element */</span></span><br><span class="line">		<span class="built_in">return</span> <span class="built_in">max</span>(<span class="number">0</span>, x[l]);</span><br><span class="line">    m = (l+u) / <span class="number">2</span>;</span><br><span class="line">// find <span class="built_in">max</span> crossing to left</span><br><span class="line">    <span class="built_in">lmax</span> = <span class="built_in">sum</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = m; i &gt;= l; i--)&#123;</span><br><span class="line">    	<span class="built_in">sum</span> += x[i];</span><br><span class="line">    	<span class="keyword">if</span>(<span class="built_in">sum</span> &gt; <span class="built_in">lmax</span>)</span><br><span class="line">    		<span class="built_in">lmax</span> = <span class="built_in">sum</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    rmax = <span class="built_in">sum</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = m+<span class="number">1</span>; i &lt;= u; i++)&#123;</span><br><span class="line">    	<span class="built_in">sum</span> += x[i];</span><br><span class="line">    	<span class="keyword">if</span>(<span class="built_in">sum</span> &gt; rmax)</span><br><span class="line">    		rmax = <span class="built_in">sum</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">max</span>(<span class="built_in">lmax</span> + rmax, <span class="built_in">max</span>(recmax(l, m),recmax(m+<span class="number">1</span>, u)));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="https://miao.su/images/2019/02/06/6e66abc1b99eb1ca53f5b.png" alt="6e66abc1b99eb1ca53f5b.png"></p>
@@ -607,7 +642,7 @@
 </li>
 <li>该算法时间复制度为O(n)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 第一种</span><br><span class="line">float alg4()</span><br><span class="line">&#123;   int i;</span><br><span class="line">    float maxsofar = 0, maxendinghere = 0;</span><br><span class="line">    for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        if (maxendinghere &lt; 0)</span><br><span class="line">            maxendinghere = 0;</span><br><span class="line">        if (maxsofar &lt; maxendinghere)</span><br><span class="line">            maxsofar = maxendinghere;</span><br><span class="line">    &#125;</span><br><span class="line">	return maxsofar;</span><br><span class="line">&#125;</span><br><span class="line">//第二种</span><br><span class="line">#define maxmac(a, b) ((a) &gt; (b) ? (a) : (b) )</span><br><span class="line">float alg4b()</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    float maxsofar = 0, maxendinghere = 0;</span><br><span class="line">    for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        maxendinghere = maxmac(maxendinghere, 0);</span><br><span class="line">       	maxsofar = maxmac(maxsofar, maxendinghere);&#125;</span><br><span class="line">    return maxsofar;</span><br><span class="line">&#125;</span><br><span class="line">//第三种</span><br><span class="line">float maxfun(float a, float b)</span><br><span class="line">&#123;</span><br><span class="line">	return a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line">float alg4c()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">    float maxsofar = 0, maxendinghere = 0;</span><br><span class="line">    for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        maxendinghere = maxfun(maxendinghere, 0);</span><br><span class="line">        maxsofar = maxfun(maxsofar, maxendinghere);&#125;</span><br><span class="line">    return maxsofar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">alg4</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> maxsofar = <span class="number">0</span>, maxendinghere = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        <span class="keyword">if</span> (maxendinghere &lt; <span class="number">0</span>)</span><br><span class="line">            maxendinghere = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (maxsofar &lt; maxendinghere)</span><br><span class="line">            maxsofar = maxendinghere;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> maxsofar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxmac(a, b) ((a) &gt; (b) ? (a) : (b) )</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">alg4b</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> maxsofar = <span class="number">0</span>, maxendinghere = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        maxendinghere = maxmac(maxendinghere, <span class="number">0</span>);</span><br><span class="line">       	maxsofar = maxmac(maxsofar, maxendinghere);&#125;</span><br><span class="line">    <span class="keyword">return</span> maxsofar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">maxfun</span><span class="params">(<span class="keyword">float</span> a, <span class="keyword">float</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">alg4c</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> maxsofar = <span class="number">0</span>, maxendinghere = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        maxendinghere += x[i];</span><br><span class="line">        maxendinghere = maxfun(maxendinghere, <span class="number">0</span>);</span><br><span class="line">        maxsofar = maxfun(maxsofar, maxendinghere);&#125;</span><br><span class="line">    <span class="keyword">return</span> maxsofar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://miao.su/images/2019/02/06/c5842130e737d8e40b19b.png" alt="c5842130e737d8e40b19b.png"></p>
 <p><img src="https://miao.su/images/2019/02/06/69187e7d0998d2283145d.png" alt="69187e7d0998d2283145d.png"></p>
 <p><strong>实际运行时间对比</strong><br><img src="https://miao.su/images/2019/02/06/b3a83625ae2d718055723.png" alt="b3a83625ae2d718055723.png"></p>
@@ -651,6 +686,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1199,8 +1246,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1217,7 +1264,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1235,12 +1615,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1260,15 +1638,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1323,6 +1701,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1331,6 +1729,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

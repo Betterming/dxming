@@ -357,6 +357,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -365,6 +373,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -547,8 +582,8 @@
 
       
         <p>这个系统非常简单，主要目的是练习python的基本操作<br><a id="more"></a><br><br></p>
-<p>下面是主要功能:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> 名片管理系统 V0.01</span><br><span class="line">1. 添加一个新名片</span><br><span class="line">2. 删除一个名片</span><br><span class="line">3. 修改一个名片</span><br><span class="line">4. 查询一个名片</span><br><span class="line">5. 显示所有名片</span><br><span class="line">6. 保存名片</span><br><span class="line">7. 退出系统</span><br></pre></td></tr></table></figure></p>
-<p><br><br>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">card_infors = []</span><br><span class="line"></span><br><span class="line">def print_menu():</span><br><span class="line">    &quot;&apos;完成打印功能菜单&apos;&quot;</span><br><span class="line">    print(&quot;=&quot; * 50)</span><br><span class="line">    print(&quot;   名片管理系统 V0.01&quot;)</span><br><span class="line">    print(&quot;1. 添加一个新名片&quot;)</span><br><span class="line">    print(&quot;2. 删除一个名片&quot;)</span><br><span class="line">    print(&quot;3. 修改一个名片&quot;)</span><br><span class="line">    print(&quot;4. 查询一个名片&quot;)</span><br><span class="line">    print(&quot;5. 显示所有名片&quot;)</span><br><span class="line">    print(&quot;6. 保存名片&quot;)</span><br><span class="line">    print(&quot;7. 退出系统&quot;)</span><br><span class="line">    print(&quot;=&quot; * 50)</span><br><span class="line"></span><br><span class="line">def add_new_card_infor():</span><br><span class="line">    &quot;&apos;完成添加一个新名片&apos;&quot;</span><br><span class="line">    new_name = input(&quot;请输入新的名字:&quot;)</span><br><span class="line">    new_qq = input(&quot;请输入新的QQ:&quot;)</span><br><span class="line">    new_weixin = input(&quot;请输入新的微信:&quot;)</span><br><span class="line">    new_addr = input(&quot;请输入新的住址:&quot;)</span><br><span class="line"></span><br><span class="line">    #定义一个新的字典,用来存储一个新的名片</span><br><span class="line">    new_infor = &#123;&#125;5</span><br><span class="line">    new_infor[&apos;name&apos;] = new_name</span><br><span class="line">    new_infor[&apos;qq&apos;] = new_qq</span><br><span class="line">    new_infor[&apos;weixin&apos;] = new_weixin</span><br><span class="line">    new_infor[&apos;addr&apos;] = new_addr</span><br><span class="line"></span><br><span class="line">    #将一个字典,添加到列表中</span><br><span class="line">    global card_infors</span><br><span class="line">    card_infors.append(new_infor)</span><br><span class="line"></span><br><span class="line">    #print(card_infors)# for test</span><br><span class="line"></span><br><span class="line">def find_card_infor():</span><br><span class="line">    &quot;&quot;&quot;用来查询一个名片&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    global card_infors</span><br><span class="line"></span><br><span class="line">    find_name = input(&quot;请输入要查找的姓名:&quot;)</span><br><span class="line">    find_flag = 0#默认表示没有找到</span><br><span class="line">    for temp in card_infors:</span><br><span class="line">        if find_name == temp[&quot;name&quot;]:</span><br><span class="line">            print(&quot;%s\t%s\t%s\t%s&quot;%(temp[&apos;name&apos;], temp[&apos;qq&apos;], temp[&apos;weixin&apos;], temp[&apos;addr&apos;]))</span><br><span class="line">            find_flag=1#表示找到了</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">    #判断是否找到了</span><br><span class="line">    if find_flag == 0:</span><br><span class="line">        print(&quot;查无此人....&quot;)</span><br><span class="line"></span><br><span class="line">def show_all_infor():</span><br><span class="line">    &quot;&quot;&quot;显示所有的名片信息&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    global card_infors</span><br><span class="line"></span><br><span class="line">    print(&quot;姓名\tQQ\t微信\t住址&quot;)</span><br><span class="line">    for temp in card_infors:</span><br><span class="line">        print(&quot;%s\t%s\t%s\t%s&quot;%(temp[&apos;name&apos;], temp[&apos;qq&apos;], temp[&apos;weixin&apos;], temp[&apos;addr&apos;]))</span><br><span class="line"></span><br><span class="line">def save_2_file():</span><br><span class="line">    &quot;&quot;&quot;把已经添加的信息保存到文件中&quot;&quot;&quot;</span><br><span class="line">    f = open(&quot;backup.data&quot;, &quot;w&quot;)</span><br><span class="line"></span><br><span class="line">    f.write(str(card_infors))</span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def load_infor():</span><br><span class="line"></span><br><span class="line">    global card_infors</span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        f = open(&quot;backup.data&quot;)</span><br><span class="line"></span><br><span class="line">        card_infors = eval(f.read())</span><br><span class="line"></span><br><span class="line">        f.close()</span><br><span class="line">    except Exception:</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    &quot;&quot;&quot;完成对整个程序的控制&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    #恢复(加载)之前的数据到程序中</span><br><span class="line">    load_infor()</span><br><span class="line">#刚开始启动程序就会加载内容，所以刚开始由于没有back.data文件会报错</span><br><span class="line">#但第二次运行时由于前面已经创建了文件不会报错，所以在load_infor()</span><br><span class="line">#函数中使用try，Exception</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    #1. 打印功能提示</span><br><span class="line">    print_menu()</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line"></span><br><span class="line">        #2. 获取用户的输入</span><br><span class="line">        num = int(input(&quot;请输入操作序号:&quot;))</span><br><span class="line"></span><br><span class="line">        #3. 根据用户的数据执行相应的功能</span><br><span class="line">        if num==1:</span><br><span class="line">            add_new_card_infor()</span><br><span class="line">        elif num==2:</span><br><span class="line">            pass</span><br><span class="line">        elif num==3:</span><br><span class="line">            pass</span><br><span class="line">        elif num==4:</span><br><span class="line">            find_card_infor()</span><br><span class="line">        elif num==5:</span><br><span class="line">            show_all_infor()</span><br><span class="line">        elif num==6:</span><br><span class="line">            save_2_file()</span><br><span class="line">        elif num==7:</span><br><span class="line">            break</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;输入有误,请重新输入&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        print(&quot;&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;: //用于测试中，当调用别的模块时，值为别的模块名字符串，调用自己时为&quot;__main__&quot;</span><br><span class="line">    #调用主函数</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<p>下面是主要功能:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> 名片管理系统 V0<span class="number">.01</span></span><br><span class="line"><span class="number">1.</span> 添加一个新名片</span><br><span class="line"><span class="number">2.</span> 删除一个名片</span><br><span class="line"><span class="number">3.</span> 修改一个名片</span><br><span class="line"><span class="number">4.</span> 查询一个名片</span><br><span class="line"><span class="number">5.</span> 显示所有名片</span><br><span class="line"><span class="number">6.</span> 保存名片</span><br><span class="line"><span class="number">7.</span> 退出系统</span><br></pre></td></tr></table></figure></p>
+<p><br><br>代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">card_infors = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_menu</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"'完成打印功能菜单'"</span></span><br><span class="line">    print(<span class="string">"="</span> * <span class="number">50</span>)</span><br><span class="line">    print(<span class="string">"   名片管理系统 V0.01"</span>)</span><br><span class="line">    print(<span class="string">"1. 添加一个新名片"</span>)</span><br><span class="line">    print(<span class="string">"2. 删除一个名片"</span>)</span><br><span class="line">    print(<span class="string">"3. 修改一个名片"</span>)</span><br><span class="line">    print(<span class="string">"4. 查询一个名片"</span>)</span><br><span class="line">    print(<span class="string">"5. 显示所有名片"</span>)</span><br><span class="line">    print(<span class="string">"6. 保存名片"</span>)</span><br><span class="line">    print(<span class="string">"7. 退出系统"</span>)</span><br><span class="line">    print(<span class="string">"="</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_new_card_infor</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"'完成添加一个新名片'"</span></span><br><span class="line">    new_name = input(<span class="string">"请输入新的名字:"</span>)</span><br><span class="line">    new_qq = input(<span class="string">"请输入新的QQ:"</span>)</span><br><span class="line">    new_weixin = input(<span class="string">"请输入新的微信:"</span>)</span><br><span class="line">    new_addr = input(<span class="string">"请输入新的住址:"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义一个新的字典,用来存储一个新的名片</span></span><br><span class="line">    new_infor = &#123;&#125;<span class="number">5</span></span><br><span class="line">    new_infor[<span class="string">'name'</span>] = new_name</span><br><span class="line">    new_infor[<span class="string">'qq'</span>] = new_qq</span><br><span class="line">    new_infor[<span class="string">'weixin'</span>] = new_weixin</span><br><span class="line">    new_infor[<span class="string">'addr'</span>] = new_addr</span><br><span class="line"></span><br><span class="line">    <span class="comment">#将一个字典,添加到列表中</span></span><br><span class="line">    <span class="keyword">global</span> card_infors</span><br><span class="line">    card_infors.append(new_infor)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#print(card_infors)# for test</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_card_infor</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""用来查询一个名片"""</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> card_infors</span><br><span class="line"></span><br><span class="line">    find_name = input(<span class="string">"请输入要查找的姓名:"</span>)</span><br><span class="line">    find_flag = <span class="number">0</span><span class="comment">#默认表示没有找到</span></span><br><span class="line">    <span class="keyword">for</span> temp <span class="keyword">in</span> card_infors:</span><br><span class="line">        <span class="keyword">if</span> find_name == temp[<span class="string">"name"</span>]:</span><br><span class="line">            print(<span class="string">"%s\t%s\t%s\t%s"</span>%(temp[<span class="string">'name'</span>], temp[<span class="string">'qq'</span>], temp[<span class="string">'weixin'</span>], temp[<span class="string">'addr'</span>]))</span><br><span class="line">            find_flag=<span class="number">1</span><span class="comment">#表示找到了</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#判断是否找到了</span></span><br><span class="line">    <span class="keyword">if</span> find_flag == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"查无此人...."</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_all_infor</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""显示所有的名片信息"""</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> card_infors</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"姓名\tQQ\t微信\t住址"</span>)</span><br><span class="line">    <span class="keyword">for</span> temp <span class="keyword">in</span> card_infors:</span><br><span class="line">        print(<span class="string">"%s\t%s\t%s\t%s"</span>%(temp[<span class="string">'name'</span>], temp[<span class="string">'qq'</span>], temp[<span class="string">'weixin'</span>], temp[<span class="string">'addr'</span>]))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_2_file</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""把已经添加的信息保存到文件中"""</span></span><br><span class="line">    f = open(<span class="string">"backup.data"</span>, <span class="string">"w"</span>)</span><br><span class="line"></span><br><span class="line">    f.write(str(card_infors))</span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_infor</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> card_infors</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = open(<span class="string">"backup.data"</span>)</span><br><span class="line"></span><br><span class="line">        card_infors = eval(f.read())</span><br><span class="line"></span><br><span class="line">        f.close()</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""完成对整个程序的控制"""</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#恢复(加载)之前的数据到程序中</span></span><br><span class="line">    load_infor()</span><br><span class="line"><span class="comment">#刚开始启动程序就会加载内容，所以刚开始由于没有back.data文件会报错</span></span><br><span class="line"><span class="comment">#但第二次运行时由于前面已经创建了文件不会报错，所以在load_infor()</span></span><br><span class="line"><span class="comment">#函数中使用try，Exception</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#1. 打印功能提示</span></span><br><span class="line">    print_menu()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment">#2. 获取用户的输入</span></span><br><span class="line">        num = int(input(<span class="string">"请输入操作序号:"</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment">#3. 根据用户的数据执行相应的功能</span></span><br><span class="line">        <span class="keyword">if</span> num==<span class="number">1</span>:</span><br><span class="line">            add_new_card_infor()</span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">3</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">4</span>:</span><br><span class="line">            find_card_infor()</span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">5</span>:</span><br><span class="line">            show_all_infor()</span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">6</span>:</span><br><span class="line">            save_2_file()</span><br><span class="line">        <span class="keyword">elif</span> num==<span class="number">7</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"输入有误,请重新输入"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        print(<span class="string">""</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>: //用于测试中，当调用别的模块时，值为别的模块名字符串，调用自己时为<span class="string">"__main__"</span></span><br><span class="line">    <span class="comment">#调用主函数</span></span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
 <p><strong>&emsp;&emsp;该项目是学习过程中，参照学习视频所做的练习题</strong></p>
 
       
@@ -585,6 +620,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1107,8 +1154,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1125,7 +1172,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1143,12 +1523,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1168,15 +1546,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1231,6 +1609,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1239,6 +1637,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

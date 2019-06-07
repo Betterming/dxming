@@ -360,6 +360,14 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
@@ -368,6 +376,33 @@
 
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -570,30 +605,30 @@
 <li>行首缩进，换行</li>
 <li>特殊字符输入</li>
 </ul>
-<h3 id="1-字体常见设置：斜体，加粗，删除线"><a href="#1-字体常见设置：斜体，加粗，删除线" class="headerlink" title="(1) 字体常见设置：斜体，加粗，删除线"></a>(1) 字体常见设置：斜体，加粗，删除线</h3><p>&emsp;&emsp; 用一对单星号把要处理的文字包起来就会呈现斜体；用一对双星号把要处理的文字包起来就会呈现加粗；用一对双波浪线把要处理的文字包起来就会呈现斜体。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*感觉萌萌哒*</span><br><span class="line">**感觉萌萌哒**</span><br><span class="line">***感觉萌萌哒***</span><br><span class="line">~~ 感觉萌萌哒~~</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-字体常见设置：斜体，加粗，删除线"><a href="#1-字体常见设置：斜体，加粗，删除线" class="headerlink" title="(1) 字体常见设置：斜体，加粗，删除线"></a>(1) 字体常见设置：斜体，加粗，删除线</h3><p>&emsp;&emsp; 用一对单星号把要处理的文字包起来就会呈现斜体；用一对双星号把要处理的文字包起来就会呈现加粗；用一对双波浪线把要处理的文字包起来就会呈现斜体。<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">*感觉萌萌哒*</span></span><br><span class="line">*<span class="strong">*感觉萌萌哒*</span><span class="strong">*</span></span><br><span class="line"><span class="strong">*</span>*<span class="strong">*感觉萌萌哒*</span>*<span class="strong">*</span></span><br><span class="line"><span class="strong">~~ 感觉萌萌哒~~</span></span><br></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p><em>感觉萌萌哒</em><br><strong>感觉萌萌哒</strong><br><strong><em>感觉萌萌哒</em></strong><br><del>感觉萌萌哒</del></p>
-<h3 id="2-字体深度设置：字体，字号，颜色，背景色"><a href="#2-字体深度设置：字体，字号，颜色，背景色" class="headerlink" title="(2) 字体深度设置：字体，字号，颜色，背景色"></a>(2) 字体深度设置：字体，字号，颜色，背景色</h3><p>markdown本身不支持修改字体、字号与颜色等功能，但是使用内嵌HTML的方法来实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face=&quot;微软雅黑&quot;&gt;感觉萌萌哒&lt;/font&gt;</span><br><span class="line">&lt;font color=#0000ff size=5 face=&quot;黑体&quot;&gt;感觉萌萌哒&lt;/font&gt;</span><br><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=yellow&gt;感觉萌萌哒&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-字体深度设置：字体，字号，颜色，背景色"><a href="#2-字体深度设置：字体，字号，颜色，背景色" class="headerlink" title="(2) 字体深度设置：字体，字号，颜色，背景色"></a>(2) 字体深度设置：字体，字号，颜色，背景色</h3><p>markdown本身不支持修改字体、字号与颜色等功能，但是使用内嵌HTML的方法来实现。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">face</span>=<span class="string">"微软雅黑"</span>&gt;</span>感觉萌萌哒<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">#0000ff</span> <span class="attr">size</span>=<span class="string">5</span> <span class="attr">face</span>=<span class="string">"黑体"</span>&gt;</span>感觉萌萌哒<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">bgcolor</span>=<span class="string">yellow</span>&gt;</span>感觉萌萌哒<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p><font face="微软雅黑">感觉萌萌哒</font></p>
 <p><font color="#0000ff" size="5" face="黑体">感觉萌萌哒</font></p>
 <table><tr><td bgcolor="yellow">感觉萌萌哒</td></tr></table>
 
 <p><strong>注意</strong>：Size：字体大小，范围是1到7，浏览器默认值是3。</p>
-<h3 id="3-分级标题"><a href="#3-分级标题" class="headerlink" title="(3) 分级标题"></a>(3) 分级标题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用#来实现分级标题，使用&lt;center&gt;&lt;/center&gt;来居中</span><br><span class="line"># 感觉萌萌哒</span><br><span class="line">## 感觉萌萌哒</span><br><span class="line">### 感觉萌萌哒</span><br><span class="line">### &lt;center&gt;感觉萌萌哒&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-分级标题"><a href="#3-分级标题" class="headerlink" title="(3) 分级标题"></a>(3) 分级标题</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用#来实现分级标题，使用&lt;center&gt;&lt;/center&gt;来居中</span><br><span class="line"># 感觉萌萌哒</span><br><span class="line">## 感觉萌萌哒</span><br><span class="line">### 感觉萌萌哒</span><br><span class="line">### &lt;center&gt;感觉萌萌哒&lt;/center&gt;</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<h1 id="感觉萌萌哒"><a href="#感觉萌萌哒" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h1><h2 id="感觉萌萌哒-1"><a href="#感觉萌萌哒-1" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h2><h3 id="感觉萌萌哒-2"><a href="#感觉萌萌哒-2" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h3><h3 id="感觉萌萌哒-3"><a href="#感觉萌萌哒-3" class="headerlink" title="感觉萌萌哒"></a><center>感觉萌萌哒</center></h3><h3 id="4-分割线"><a href="#4-分割线" class="headerlink" title="(4) 分割线"></a>(4) 分割线</h3><p>三个连续星号(*)、减号(-)、底线(_)来实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">---</span><br><span class="line">___</span><br></pre></td></tr></table></figure></p>
+<h1 id="感觉萌萌哒"><a href="#感觉萌萌哒" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h1><h2 id="感觉萌萌哒-1"><a href="#感觉萌萌哒-1" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h2><h3 id="感觉萌萌哒-2"><a href="#感觉萌萌哒-2" class="headerlink" title="感觉萌萌哒"></a>感觉萌萌哒</h3><h3 id="感觉萌萌哒-3"><a href="#感觉萌萌哒-3" class="headerlink" title="感觉萌萌哒"></a><center>感觉萌萌哒</center></h3><h3 id="4-分割线"><a href="#4-分割线" class="headerlink" title="(4) 分割线"></a>(4) 分割线</h3><p>三个连续星号(*)、减号(-)、底线(_)来实现<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">**<span class="strong">*</span></span><br><span class="line"><span class="strong">---</span></span><br><span class="line"><span class="strong">___</span></span><br></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <hr>
 <hr>
 <hr>
-<h3 id="5-链接"><a href="#5-链接" class="headerlink" title="(5) 链接"></a>(5) 链接</h3><p>a. 插入图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：![图片描述](图片本地或互联网url)</span><br><span class="line">例如：![女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-链接"><a href="#5-链接" class="headerlink" title="(5) 链接"></a>(5) 链接</h3><p>a. 插入图片<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：![<span class="string">图片描述</span>](<span class="link">图片本地或互联网url</span>)</span><br><span class="line">例如：![<span class="string">女神刘亦菲</span>](<span class="link">http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg</span>)</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><img src="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" alt="刘亦菲"></p>
-<p>b. 文字加链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[文字或(本地图片位置)](url)</span><br><span class="line">例如：[女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>b. 文字加链接<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[<span class="string">文字或(本地图片位置)</span>](<span class="link">url</span>)</span><br><span class="line">例如：[<span class="string">女神刘亦菲</span>](<span class="link">http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg</span>)</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><a href="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" target="_blank" rel="noopener">女神刘亦菲</a></p>
-<p>c. 图片加链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[![图片描述](图片互联网url或这本地相对链接)](url)</span><br><span class="line">例如：[![女神刘亦菲](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)](http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg)</span><br></pre></td></tr></table></figure></p>
+<p>c. 图片加链接<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：[<span class="string">![图片描述</span>](<span class="link">图片互联网url或这本地相对链接</span>)](<span class="link">url</span>)</span><br><span class="line">例如：[<span class="string">![女神刘亦菲</span>](<span class="link">http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg</span>)](<span class="link">http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg</span>)</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><a href="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" target="_blank" rel="noopener"><img src="http://imgup02.iefans.net/iefans/2018-08/15/10/15343018604507_0.jpg" alt="女神刘亦菲"></a></p>
-<h3 id="6-引用"><a href="#6-引用" class="headerlink" title="(6) 引用"></a>(6) 引用</h3><p> 在正文前使用&gt;符号和空格<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 感觉萌萌哒</span><br><span class="line">&gt;&gt; 感觉萌萌哒</span><br><span class="line">&gt;&gt;&gt; 感觉萌萌哒</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-引用"><a href="#6-引用" class="headerlink" title="(6) 引用"></a>(6) 引用</h3><p> 在正文前使用&gt;符号和空格<br> <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 感觉萌萌哒</span><br><span class="line"><span class="meta">&gt;&gt;</span> 感觉萌萌哒</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; 感觉萌萌哒</span><br></pre></td></tr></table></figure></p>
 <p> 效果如下：</p>
 <blockquote>
 <p>感觉萌萌哒</p>
@@ -604,14 +639,14 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<h3 id="7-列表"><a href="#7-列表" class="headerlink" title="(7) 列表"></a>(7) 列表</h3><p> 列表有两种：无序列表和有序列表<br> a. 无序列表: 使用 *，+，-，再加上一个空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是无序列表：</span><br><span class="line">- 萌萌哒一遍</span><br><span class="line">- 萌萌哒二遍</span><br><span class="line">- 萌萌哒三遍</span><br></pre></td></tr></table></figure></p>
+<h3 id="7-列表"><a href="#7-列表" class="headerlink" title="(7) 列表"></a>(7) 列表</h3><p> 列表有两种：无序列表和有序列表<br> a. 无序列表: 使用 *，+，-，再加上一个空格<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是无序列表：</span><br><span class="line"><span class="bullet">- </span>萌萌哒一遍</span><br><span class="line"><span class="bullet">- </span>萌萌哒二遍</span><br><span class="line"><span class="bullet">- </span>萌萌哒三遍</span><br></pre></td></tr></table></figure></p>
 <p>我是无序列表：</p>
 <ul>
 <li>萌萌哒一遍</li>
 <li>萌萌哒二遍</li>
 <li>萌萌哒三遍</li>
 </ul>
-<p>c. 有序列表：使用数字和一个英文句点，再加上一个空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是有序列表：</span><br><span class="line">1. 萌萌大</span><br><span class="line">2. 萌萌中</span><br><span class="line">3. 萌萌小</span><br></pre></td></tr></table></figure></p>
+<p>c. 有序列表：使用数字和一个英文句点，再加上一个空格<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我是有序列表：</span><br><span class="line"><span class="bullet">1. </span>萌萌大</span><br><span class="line"><span class="bullet">2. </span>萌萌中</span><br><span class="line"><span class="bullet">3. </span>萌萌小</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>我是有序列表：</p>
 <ol>
@@ -627,11 +662,11 @@
 <li style="list-style: none"><input type="checkbox"> 写代码</li>
 <li style="list-style: none"><input type="checkbox"> 上课</li>
 </ul>
-<h3 id="9-行首缩进，换行"><a href="#9-行首缩进，换行" class="headerlink" title="(9) 行首缩进，换行"></a>(9) 行首缩进，换行</h3><p>直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，&ensp; 代表半角空格，&emsp; 代表全角空格。换行：连续两个以上空格+回车或者<br><br>举个栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;你爱不爱我，我都是萌萌哒。&lt;br&gt;感觉萌萌哒&lt;br/&gt;萌萌哒</span><br></pre></td></tr></table></figure></p>
+<h3 id="9-行首缩进，换行"><a href="#9-行首缩进，换行" class="headerlink" title="(9) 行首缩进，换行"></a>(9) 行首缩进，换行</h3><p>直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，&ensp; 代表半角空格，&emsp; 代表全角空格。换行：连续两个以上空格+回车或者<br><br>举个栗子：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&amp;emsp</span>;<span class="variable">&amp;emsp</span>;你爱不爱我，我都是萌萌哒。<span class="params">&lt;br&gt;</span>感觉萌萌哒<span class="params">&lt;br/&gt;</span>萌萌哒</span><br></pre></td></tr></table></figure></p>
 <p>示例效果：</p>
 <p>&emsp;&emsp;你爱不爱我，我都是萌萌哒。<br>感觉萌萌哒<br>萌萌哒</p>
-<h3 id="10-特殊字符输入"><a href="#10-特殊字符输入" class="headerlink" title="(10) 特殊字符输入"></a>(10) 特殊字符输入</h3><p>a. 前面加反斜线\ 即可显示符号本身。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\\</span><br><span class="line">\*</span><br><span class="line">\.</span><br><span class="line">\_</span><br><span class="line">\-</span><br><span class="line">\#</span><br><span class="line">\&#123;\&#125;</span><br><span class="line">\!</span><br></pre></td></tr></table></figure></p>
-<p>效果如下：<br>\<br>*<br>.<br>_<br>-<br>#<br>{}<br>!<br>b. 特殊的转义字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">符号	说明	对应编码</span><br><span class="line">¶	段落符号   &amp;para;</span><br><span class="line">§	章节符	    &amp;sect;</span><br><span class="line">±	加减号	    &amp;plusmn;</span><br><span class="line">ƒ	function  &amp;fnof;</span><br><span class="line">√	根号	     &amp;radic;</span><br><span class="line">∞	无穷大	    &amp;infin;</span><br><span class="line">°	度	        &amp;deg;</span><br><span class="line">≠	不等号  	  &amp;ne;</span><br><span class="line">≡	恒等于	    &amp;equiv;</span><br><span class="line">≤	小于等于 	&amp;le;</span><br><span class="line">≥	大于等于 	&amp;ge;</span><br><span class="line">♠	黑桃      &amp;spades;</span><br><span class="line">♥	红桃  	  &amp;hearts;</span><br><span class="line">♣	梅花 	   &amp;clubs;</span><br><span class="line">♦	方块	   &amp;diams;</span><br><span class="line">举个栗子：</span><br><span class="line">黑桃&amp;spades;大于红桃&amp;hearts;大于梅花&amp;clubs;方块&amp;diams;</span><br><span class="line">不管是人民币&amp;yen;、欧元&amp;euro;、英磅&amp;pound;还是美元 &amp;dollar;，我都喜欢。</span><br></pre></td></tr></table></figure></p>
+<h3 id="10-特殊字符输入"><a href="#10-特殊字符输入" class="headerlink" title="(10) 特殊字符输入"></a>(10) 特殊字符输入</h3><p>a. 前面加反斜线\ 即可显示符号本身。<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">\\</span></span><br><span class="line"><span class="symbol">\*</span></span><br><span class="line"><span class="symbol">\.</span></span><br><span class="line"><span class="symbol">\_</span></span><br><span class="line"><span class="symbol">\-</span></span><br><span class="line"><span class="symbol">\#</span></span><br><span class="line"><span class="symbol">\&#123;</span><span class="symbol">\&#125;</span></span><br><span class="line"><span class="symbol">\!</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br>\<br>*<br>.<br>_<br>-<br>#<br>{}<br>!<br>b. 特殊的转义字符<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">符号	说明	对应编码</span><br><span class="line">¶	段落符号   <span class="variable">&amp;para</span>;</span><br><span class="line">§	章节符	    <span class="variable">&amp;sect</span>;</span><br><span class="line">±	加减号	    <span class="variable">&amp;plusmn</span>;</span><br><span class="line">ƒ	function  <span class="variable">&amp;fnof</span>;</span><br><span class="line">√	根号	     <span class="variable">&amp;radic</span>;</span><br><span class="line">∞	无穷大	    <span class="variable">&amp;infin</span>;</span><br><span class="line">°	度	        <span class="variable">&amp;deg</span>;</span><br><span class="line">≠	不等号  	  <span class="variable">&amp;ne</span>;</span><br><span class="line">≡	恒等于	    <span class="variable">&amp;equiv</span>;</span><br><span class="line">≤	小于等于 	<span class="variable">&amp;le</span>;</span><br><span class="line">≥	大于等于 	<span class="variable">&amp;ge</span>;</span><br><span class="line">♠	黑桃      <span class="variable">&amp;spades</span>;</span><br><span class="line">♥	红桃  	  <span class="variable">&amp;hearts</span>;</span><br><span class="line">♣	梅花 	   <span class="variable">&amp;clubs</span>;</span><br><span class="line">♦	方块	   <span class="variable">&amp;diams</span>;</span><br><span class="line">举个栗子：</span><br><span class="line">黑桃<span class="variable">&amp;spades</span>;大于红桃<span class="variable">&amp;hearts</span>;大于梅花<span class="variable">&amp;clubs</span>;方块<span class="variable">&amp;diams</span>;</span><br><span class="line">不管是人民币<span class="variable">&amp;yen</span>;、欧元<span class="variable">&amp;euro</span>;、英磅<span class="variable">&amp;pound</span>;还是美元 <span class="variable">&amp;dollar</span>;，我都喜欢。</span><br></pre></td></tr></table></figure></p>
 <p>效果：<br>黑桃&spades;大于红桃&hearts;大于梅花&clubs;方块&diams;<br>不管是人民币&yen;、欧元&euro;、英磅&pound;还是美元 &dollar;，我都喜欢。<br><strong>本特殊符号来源自该<a href="https://blog.csdn.net/vola9527/article/details/69948411" target="_blank" rel="noopener">博文</a></strong></p>
 <p>&emsp;&emsp;终于写完了第一个博客，作为一个糙老爷们用了这么多萌萌哒，我先吐会儿。。。。</p>
 <p>&emsp;&emsp;等我吐完了再来接着写第二篇哈。。。。</p>
@@ -676,6 +711,18 @@
       
 
       
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
       
       
 
@@ -1220,8 +1267,8 @@
     el: '#comments',
     verify: false,
     notify: false,
-    appId: 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-    appKey: 'QraQ5KvFraIq0iUhzsDG0sqE',
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
     placeholder: '来呀！快活呀！~',
     avatar: 'mm',
     meta: guest,
@@ -1238,7 +1285,340 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
 
 
 
@@ -1256,12 +1636,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
               .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1281,15 +1659,15 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': 'rXo08RXWhpfL5sTienl8p1ur-gzGzoHsz',
-                'X-LC-Key': 'QraQ5KvFraIq0iUhzsDG0sqE',
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
                 'Content-Type': 'application/json',
               },
               data: data
@@ -1344,6 +1722,26 @@ if ($('body').find('div.pdf').length) {
 
 
   
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
 
   
 
@@ -1352,6 +1750,25 @@ if ($('body').find('div.pdf').length) {
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 
