@@ -437,6 +437,433 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/284d6ace.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dxming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dxming">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/post/284d6ace.html" class="post-title-link" itemprop="url">Chap6_HashMapAndString</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-18 23:16:34" itemprop="dateCreated datePublished" datetime="2019-08-18T23:16:34+08:00">2019-08-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-19 00:00:10" itemprop="dateModified" datetime="2019-08-19T00:00:10+08:00">2019-08-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/284d6ace.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/284d6ace.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/284d6ace.html" class="leancloud_visitors" data-flag-title="Chap6_HashMapAndString">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="第六节：哈希表和字符串"><a href="#第六节：哈希表和字符串" class="headerlink" title="第六节：哈希表和字符串"></a>第六节：哈希表和字符串</h1><h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h2><p>&emsp;&emsp;哈希表(Hashtable，也叫散列表)，是根据关键字值(key)直接进行访问的数据结构，它通过把关键字值映射到表中一个位置(数组下标)来直接访问，以加快查找关键字值的速度。这个映射函数叫做哈希(散列)函数，存放记录的数组叫做哈希(散列)表。给定表M，存在函数f(key)，对任意的关键字值key，代入函数后若能得到包含该关键字的表中地址，称表M为哈希(Hash)表，函数f(key)为哈希(Hash)函数。</p>
+<ul>
+<li>1.当遇到负数或非常大的整数，如何进行哈希(映射)？如：-5、99999999、…</li>
+<li>2.当遇到字符串，如何进行哈希(映射)？如：abcdefg、XYZ、…</li>
+<li>3.当遇其他到无法直接映射的数据类型，如浮点数、数组、浮点数对象等等，如何进行哈希(映射)？如：1.2345、[1,2,3]、…<br><strong>解决</strong>:利用哈希函数，将关键字值(key)(大整数、字符串、浮点数等)转换为整数再对表长取余，从而关键字值被转换为哈希表的表长范围内的整数。采用<strong>除留取余法</strong></li>
+</ul>
+<p><strong>发生冲突</strong></p>
+<ul>
+<li>开放定址法 线性探测再散列，二次探测再散列</li>
+<li>在哈希法</li>
+<li>链地址法</li>
+<li>建立公共溢出区</li>
+</ul>
+<p><strong>在这里重点也是主要用链地址法</strong><br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/post/284d6ace.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/565e459b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dxming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dxming">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/post/565e459b.html" class="post-title-link" itemprop="url">Crawl_1_maoyan</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-12 23:24:20" itemprop="dateCreated datePublished" datetime="2019-06-12T23:24:20+08:00">2019-06-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-27 19:51:15" itemprop="dateModified" datetime="2019-06-27T19:51:15+08:00">2019-06-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Crawl/" itemprop="url" rel="index"><span itemprop="name">Crawl</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/565e459b.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/565e459b.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/565e459b.html" class="leancloud_visitors" data-flag-title="Crawl_1_maoyan">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="爬取猫眼TOP100榜"><a href="#爬取猫眼TOP100榜" class="headerlink" title="爬取猫眼TOP100榜"></a>爬取猫眼TOP100榜</h1><h2 id="1-爬取流程"><a href="#1-爬取流程" class="headerlink" title="1. 爬取流程"></a>1. 爬取流程</h2><p>主要有以下四步：</p>
+<ol>
+<li>爬取单页内容：利利⽤用requests请求⽬目标站点，得 到单个⽹网⻚页HTML代码，返回结果。 </li>
+<li>正则表达式分析：根据HTML代码分析得到电影的 名称、主演、上映时间、评分、 图⽚片链接等信息。 </li>
+<li>保存至文件：通过⽂文件的形式将结果保存，每 一部电影一个结果一行Json字符串，图片保存成jpg格式。</li>
+<li>开启循环及多线程：对多⻚页内容遍历，开启多线程提 ⾼高抓取速度。 </li>
+</ol>
+<h2 id="2-具体分析"><a href="#2-具体分析" class="headerlink" title="2. 具体分析"></a>2. 具体分析</h2><h3 id="1-爬取单页内容"><a href="#1-爬取单页内容" class="headerlink" title="1. 爬取单页内容"></a>1. 爬取单页内容</h3><p>观察到每页的页数有offset 这个变量来控制，100条数据，10页，每页10条，所以offset从0到9。以offset作为变量，先爬取单页，然后循环爬取所有页。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">base_url = <span class="string">'https://maoyan.com'</span></span><br><span class="line">url = <span class="string">'https://maoyan.com/board/4?offset='</span> + str(offset)</span><br><span class="line">html = get_one_page(url)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_one_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">return</span> response.text</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> RequestException:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure></p>
+<p>爬取部分通过requests中的get方法来实现，这是基本套路。正常情况下返回200状态码，非正常情况下返回None</p>
+<h3 id="2-正则表达式分析"><a href="#2-正则表达式分析" class="headerlink" title="2. 正则表达式分析"></a>2. 正则表达式分析</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_one_page</span><span class="params">(base_url, html)</span>:</span></span><br><span class="line">    pattern = re.compile(<span class="string">'&lt;dd&gt;.*?&lt;i.*?board-index.*?"&gt;(\d+)&lt;/i&gt;.*?href="(.*?)".*?data-src="(.*?)".*?data-val=.*?&gt;(.*?)&lt;/a&gt;.*?star"&gt;(.*?)&lt;/p&gt;'</span></span><br><span class="line">                         <span class="string">'.*?releasetime"&gt;(.*?)&lt;/p&gt;.*?score.*?integer"&gt;(.*?)&lt;/i&gt;.*?fraction"&gt;(.*?)&lt;/i&gt;.*?&lt;/dd&gt;'</span>, re.S)</span><br><span class="line">    items = re.findall(pattern, html)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">yield</span> &#123;</span><br><span class="line">            <span class="string">'index'</span>: item[<span class="number">0</span>],</span><br><span class="line">            <span class="string">'url'</span>: base_url + item[<span class="number">1</span>],</span><br><span class="line">            <span class="string">'image'</span>: item[<span class="number">2</span>],</span><br><span class="line">            <span class="string">'title'</span>: item[<span class="number">3</span>],</span><br><span class="line">            <span class="string">'actor'</span>: item[<span class="number">4</span>].strip()[<span class="number">3</span>:],</span><br><span class="line">            <span class="string">'time'</span>: item[<span class="number">5</span>].strip()[<span class="number">5</span>:],</span><br><span class="line">            <span class="string">'score'</span>: item[<span class="number">6</span>] + item[<span class="number">7</span>]</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>这部分主要是正则表达式的书写，对于学爬虫的童鞋，正则是基本功，既基础又重要，不会的自行谷歌。虽然对于网页的解析有很多中方法，比如BeautifulSoup，PyQuery等，会一些网页前端的知识就能掌握，但是别人问你学了爬虫会正则吗，你好意思说不会吗？模式串写好了，然后通过findall方法爬取所有符合模式串的字符串，并返回给items，这是一个列表。最后通过yield生成器生成一个字典返回</p>
+<h3 id="3-保存文件"><a href="#3-保存文件" class="headerlink" title="3. 保存文件"></a>3. 保存文件</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_file</span><span class="params">(content)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.txt'</span>,<span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 当在下面打印出来是中文汉字，而写成的文件出现编码格式则在json转换时出问题了</span></span><br><span class="line">        f.write(json.dumps(content, ensure_ascii=<span class="literal">False</span>) + <span class="string">'\n'</span>)  <span class="comment"># 每行字典转换成json，再加上'\n',最后写入到文件</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_image</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'Downloading'</span>, url)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            save_image(response.content)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> ConnectionError:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_image</span><span class="params">(content)</span>:</span></span><br><span class="line">    file_path = <span class="string">'&#123;0&#125;/&#123;1&#125;.&#123;2&#125;'</span>.format(os.getcwd() + <span class="string">r'/images/'</span>, md5(content).hexdigest(), <span class="string">'jpg'</span>)</span><br><span class="line">    print(file_path)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(file_path):</span><br><span class="line">        <span class="keyword">with</span> open(file_path, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(content)</span><br><span class="line">            f.close()</span><br></pre></td></tr></table></figure>
+<p>这部分其实是很简单，非常套路，不过要注意的是文件的编码问题，中文编码要用’utf-8’，当让还有其他编码，源码中可以找到。</p>
+<h3 id="4-开启循环及多线程"><a href="#4-开启循环及多线程" class="headerlink" title="4. 开启循环及多线程"></a>4. 开启循环及多线程</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pool = Pool()</span><br><span class="line">pool.map(main, [i*<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])</span><br></pre></td></tr></table></figure>
+<p>就是开一进程池，然后用调用map方法，写上循环次数搞定。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.exceptions <span class="keyword">import</span> RequestException</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool  <span class="comment"># 通过进程池实现多进程抓取</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_one_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">return</span> response.text</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> RequestException:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_one_page</span><span class="params">(base_url, html)</span>:</span></span><br><span class="line">    pattern = re.compile(<span class="string">'&lt;dd&gt;.*?&lt;i.*?board-index.*?"&gt;(\d+)&lt;/i&gt;.*?href="(.*?)".*?data-src="(.*?)".*?data-val=.*?&gt;(.*?)&lt;/a&gt;.*?star"&gt;(.*?)&lt;/p&gt;'</span></span><br><span class="line">                         <span class="string">'.*?releasetime"&gt;(.*?)&lt;/p&gt;.*?score.*?integer"&gt;(.*?)&lt;/i&gt;.*?fraction"&gt;(.*?)&lt;/i&gt;.*?&lt;/dd&gt;'</span>, re.S)</span><br><span class="line">    items = re.findall(pattern, html)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">yield</span> &#123;</span><br><span class="line">            <span class="string">'index'</span>: item[<span class="number">0</span>],</span><br><span class="line">            <span class="string">'url'</span>: base_url + item[<span class="number">1</span>],</span><br><span class="line">            <span class="string">'image'</span>: item[<span class="number">2</span>],</span><br><span class="line">            <span class="string">'title'</span>: item[<span class="number">3</span>],</span><br><span class="line">            <span class="string">'actor'</span>: item[<span class="number">4</span>].strip()[<span class="number">3</span>:],</span><br><span class="line">            <span class="string">'time'</span>: item[<span class="number">5</span>].strip()[<span class="number">5</span>:],</span><br><span class="line">            <span class="string">'score'</span>: item[<span class="number">6</span>] + item[<span class="number">7</span>]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_file</span><span class="params">(content)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.txt'</span>,<span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 当在下面打印出来是中文汉字，而写成的文件出现编码格式则在json转换时出问题了</span></span><br><span class="line">        f.write(json.dumps(content, ensure_ascii=<span class="literal">False</span>) + <span class="string">'\n'</span>)  <span class="comment"># 每行字典转换成json，再加上'\n',最后写入到文件</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_image</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'Downloading'</span>, url)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            save_image(response.content)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> ConnectionError:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_image</span><span class="params">(content)</span>:</span></span><br><span class="line">    file_path = <span class="string">'&#123;0&#125;/&#123;1&#125;.&#123;2&#125;'</span>.format(os.getcwd() + <span class="string">r'/images/'</span>, md5(content).hexdigest(), <span class="string">'jpg'</span>)</span><br><span class="line">    print(file_path)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(file_path):</span><br><span class="line">        <span class="keyword">with</span> open(file_path, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(content)</span><br><span class="line">            f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(offset)</span>:</span></span><br><span class="line">    base_url = <span class="string">'https://maoyan.com'</span></span><br><span class="line">    url = <span class="string">'https://maoyan.com/board/4?offset='</span> + str(offset)</span><br><span class="line">    html = get_one_page(url)</span><br><span class="line">    <span class="comment"># print(html)</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> parse_one_page(base_url, html):</span><br><span class="line">        print(item)</span><br><span class="line">        write_to_file(item)</span><br><span class="line">        download_image(item[<span class="string">'image'</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># for i in range(10):</span></span><br><span class="line">    <span class="comment">#     main(i*10)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 先构造一个进程池，然后使用map方法，让进程进入进程池</span></span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(main, [i*<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/d4f32829.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -482,12 +909,24 @@
                 
               
 
-              <time title="创建时间：2019-06-07 13:24:41 / 修改时间：14:19:13" itemprop="dateCreated datePublished" datetime="2019-06-07T13:24:41+08:00">2019-06-07</time>
+              <time title="创建时间：2019-06-07 13:24:41" itemprop="dateCreated datePublished" datetime="2019-06-07T13:24:41+08:00">2019-06-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-18 23:18:11" itemprop="dateModified" datetime="2019-08-18T23:18:11+08:00">2019-08-18</time>
               
             
           </span>
@@ -1007,425 +1446,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/ea08c047.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dxming">
-      <meta itemprop="description" content="Coding Changes the World">
-      <meta itemprop="image" content="/images/jj.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dxming">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/post/ea08c047.html" class="post-title-link" itemprop="url">Chap2_StackQueue</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-26 10:53:28" itemprop="dateCreated datePublished" datetime="2019-05-26T10:53:28+08:00">2019-05-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-06 23:07:16" itemprop="dateModified" datetime="2019-06-06T23:07:16+08:00">2019-06-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/post/ea08c047.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/post/ea08c047.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-            <span id="/post/ea08c047.html" class="leancloud_visitors" data-flag-title="Chap2_StackQueue">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>视频：<a href="https://www.bilibili.com/video/av36288901" target="_blank" rel="noopener">https://www.bilibili.com/video/av36288901</a></p>
-</blockquote>
-<h1 id="第二节：栈，队列，堆"><a href="#第二节：栈，队列，堆" class="headerlink" title="第二节：栈，队列，堆"></a>第二节：栈，队列，堆</h1><h2 id="1-基础："><a href="#1-基础：" class="headerlink" title="1. 基础："></a>1. 基础：</h2><blockquote>
-<p>栈，先进后出的线性表</p>
-<ul>
-<li>s.push(item);        //将item压入栈顶</li>
-<li>s.pop();            //删除栈顶的元素，但不会返回</li>
-<li>s.top();            //返回栈顶的元素，但不会删除</li>
-<li>s.size();            //返回栈中元素的个数</li>
-<li>s.empty();            //检查栈是否为空，如果为空返回true，否则返回false </li>
-</ul>
-</blockquote>
-<blockquote>
-<p>队列，先进先出的线性表。</p>
-<ul>
-<li>q.push(item)           //将item压入队列尾部</li>
-<li>q.pop()                //删除队首元素，但不返回</li>
-<li>q.front()              //返回队首元素，但不删除</li>
-<li>q.back()               //返回队尾元素，但不删除</li>
-<li>q.size()               //返回队列中元素的个数</li>
-<li>q.empty()              //检查队列是否为空，如果为空返回true，否则返回false
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/post/ea08c047.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </li></ul></blockquote></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/5bf81e17.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dxming">
-      <meta itemprop="description" content="Coding Changes the World">
-      <meta itemprop="image" content="/images/jj.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dxming">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/post/5bf81e17.html" class="post-title-link" itemprop="url">DFS和BFS的一个应用</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-21 13:29:01 / 修改时间：13:46:57" itemprop="dateCreated datePublished" datetime="2019-05-21T13:29:01+08:00">2019-05-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/post/5bf81e17.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/post/5bf81e17.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-            <span id="/post/5bf81e17.html" class="leancloud_visitors" data-flag-title="DFS和BFS的一个应用">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>视频：<a href="https://www.bilibili.com/video/av36288901" target="_blank" rel="noopener">https://www.bilibili.com/video/av36288901</a></p>
-</blockquote>
-<h2 id="1-题目：LeetCode-207-Course-Schedule"><a href="#1-题目：LeetCode-207-Course-Schedule" class="headerlink" title="1.题目：LeetCode 207.Course Schedule"></a>1.题目：LeetCode 207.Course Schedule</h2><blockquote>
-<p>现在你总共有 n 门课需要选，记为 0 到 n-1。<br>在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们: [0,1]<br>给定课程总量以及它们的先决条件，判断是否可能完成所有课程的学习？<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/post/5bf81e17.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></blockquote></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1474,7 +1494,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1503,7 +1523,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1638,7 +1660,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">59</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

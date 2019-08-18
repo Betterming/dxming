@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/jj.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/jj.png?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第六节：哈希表和字符串1. 基础&amp;emsp;&amp;emsp;哈希表(Hashtable，也叫散列表)，是根据关键字值(key)直接进行访问的数据结构，它通过把关键字值映射到表中一个位置(数组下标)来直接访问，以加快查找关键字值的速度。这个映射函数叫做哈希(散列)函数，存放记录的数组叫做哈希(散列)表。给定表M，存在函数f(key)，对任意的关键字值key，代入函数后若能得到包含该关键字的表中地址，称表">
+<meta name="keywords" content="HashMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chap6_HashMapAndString">
+<meta property="og:url" content="http://looby.coding.me/betterming/post/284d6ace.html">
+<meta property="og:site_name" content="dxming">
+<meta property="og:description" content="第六节：哈希表和字符串1. 基础&amp;emsp;&amp;emsp;哈希表(Hashtable，也叫散列表)，是根据关键字值(key)直接进行访问的数据结构，它通过把关键字值映射到表中一个位置(数组下标)来直接访问，以加快查找关键字值的速度。这个映射函数叫做哈希(散列)函数，存放记录的数组叫做哈希(散列)表。给定表M，存在函数f(key)，对任意的关键字值key，代入函数后若能得到包含该关键字的表中地址，称表">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T16:00:10.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chap6_HashMapAndString">
+<meta name="twitter:description" content="第六节：哈希表和字符串1. 基础&amp;emsp;&amp;emsp;哈希表(Hashtable，也叫散列表)，是根据关键字值(key)直接进行访问的数据结构，它通过把关键字值映射到表中一个位置(数组下标)来直接访问，以加快查找关键字值的速度。这个映射函数叫做哈希(散列)函数，存放记录的数组叫做哈希(散列)表。给定表M，存在函数f(key)，对任意的关键字值key，代入函数后若能得到包含该关键字的表中地址，称表">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="dxming" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://looby.coding.me/betterming/post/284d6ace">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Chap6_HashMapAndString | dxming</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dxming</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-阅读">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/reading/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>阅读</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-随笔">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/notes/" rel="section"><i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>随笔</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://looby.coding.me/betterming/post/284d6ace.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dxming">
+      <meta itemprop="description" content="Coding Changes the World">
+      <meta itemprop="image" content="/images/jj.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dxming">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Chap6_HashMapAndString
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-18 23:16:34" itemprop="dateCreated datePublished" datetime="2019-08-18T23:16:34+08:00">2019-08-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-19 00:00:10" itemprop="dateModified" datetime="2019-08-19T00:00:10+08:00">2019-08-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/post/284d6ace.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/284d6ace.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/post/284d6ace.html" class="leancloud_visitors" data-flag-title="Chap6_HashMapAndString">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第六节：哈希表和字符串"><a href="#第六节：哈希表和字符串" class="headerlink" title="第六节：哈希表和字符串"></a>第六节：哈希表和字符串</h1><h2 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h2><p>&emsp;&emsp;哈希表(Hashtable，也叫散列表)，是根据关键字值(key)直接进行访问的数据结构，它通过把关键字值映射到表中一个位置(数组下标)来直接访问，以加快查找关键字值的速度。这个映射函数叫做哈希(散列)函数，存放记录的数组叫做哈希(散列)表。给定表M，存在函数f(key)，对任意的关键字值key，代入函数后若能得到包含该关键字的表中地址，称表M为哈希(Hash)表，函数f(key)为哈希(Hash)函数。</p>
+<ul>
+<li>1.当遇到负数或非常大的整数，如何进行哈希(映射)？如：-5、99999999、…</li>
+<li>2.当遇到字符串，如何进行哈希(映射)？如：abcdefg、XYZ、…</li>
+<li>3.当遇其他到无法直接映射的数据类型，如浮点数、数组、浮点数对象等等，如何进行哈希(映射)？如：1.2345、[1,2,3]、…<br><strong>解决</strong>:利用哈希函数，将关键字值(key)(大整数、字符串、浮点数等)转换为整数再对表长取余，从而关键字值被转换为哈希表的表长范围内的整数。采用<strong>除留取余法</strong></li>
+</ul>
+<p><strong>发生冲突</strong></p>
+<ul>
+<li>开放定址法 线性探测再散列，二次探测再散列</li>
+<li>在哈希法</li>
+<li>链地址法</li>
+<li>建立公共溢出区</li>
+</ul>
+<p><strong>在这里重点也是主要用链地址法</strong><br><a id="more"></a></p>
+<h2 id="2-预备知识"><a href="#2-预备知识" class="headerlink" title="2. 预备知识"></a>2. 预备知识</h2><blockquote>
+<ol>
+<li>关键点: key -&gt; hash_key -&gt; 挂链头指针 -&gt; found_value<pre><code>格式转换    哈希函数        挂链
+</code></pre></li>
+<li>STL: map: 不但能判断在不在map中，还有知道映射位置可以将string映射到int,用find查找有无元素，用迭代器遍历元素<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str1 = <span class="string">"abc"</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; hash_map;</span><br><span class="line">hash_map[str1] = <span class="number">123</span>;</span><br><span class="line">hash_map.find(str1) != hash_map.end()   <span class="comment">//表示str在hash_map中</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">it-&gt;first.c_str <span class="comment">// first表示key值，c_str表示char转换成string</span></span><br><span class="line">it-&gt;second<span class="comment">//表示value值</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p><strong>地址法创建哈希表</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	ListNode *next;</span><br><span class="line">	ListNode(<span class="keyword">int</span> x) :val(x), next(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 由key到hash_key</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hash_func</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> table_len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> key % table_len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法来创建挂链</span></span><br><span class="line"><span class="comment">// node为插入的节点，经过hash_func变成int hash_key,经过hash_table再到原节点下一个节点：node-&gt;next，</span></span><br><span class="line"><span class="comment">// 最后哈希表中装的指针为node即hash_table[hash_key] = node</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(ListNode *hash_table[], ListNode *node, <span class="keyword">int</span> table_len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> hash_key = hash_func(node-&gt;val, table_len);</span><br><span class="line">	node-&gt;next = hash_table[hash_key];  </span><br><span class="line">	hash_table[hash_key] = node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(ListNode *hash_table[], <span class="keyword">int</span> value, <span class="keyword">int</span> table_len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> hash_key = hash_func(value, table_len);</span><br><span class="line">	ListNode *head = hash_table[hash_key];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (head) &#123;</span><br><span class="line">		<span class="keyword">if</span> (head-&gt;val == value) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		head = head-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> table_len = <span class="number">11</span>;  <span class="comment">// 表长一般为质数，使数据分散，产生冲突少一些</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> test_len = <span class="number">8</span>;</span><br><span class="line">	ListNode *hash_table[table_len] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;ListNode *&gt; hash_node_vec;</span><br><span class="line">	<span class="keyword">int</span> test[test_len] = &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">150</span>, <span class="number">500</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; test_len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		hash_node_vec.push_back(<span class="keyword">new</span> ListNode(test[i]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; hash_node_vec.size(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		insert(hash_table, hash_node_vec[i], table_len);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hash table:\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; table_len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[%d]:"</span>, i);</span><br><span class="line">		ListNode *head = hash_table[i];</span><br><span class="line">		<span class="keyword">while</span> (head) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"-&gt;%d"</span>, head-&gt;val);</span><br><span class="line">			head = head-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Test search:\n"</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (search(hash_table, i, table_len)) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d is in the hash table.\n"</span>);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d is not in the hash table.\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-例题"><a href="#3-例题" class="headerlink" title="3. 例题"></a>3. 例题</h2><h3 id="3-1-LeetCode409-Longest-Palindrome"><a href="#3-1-LeetCode409-Longest-Palindrome" class="headerlink" title="3.1 LeetCode409.Longest Palindrome"></a>3.1 LeetCode409.Longest Palindrome</h3><p>给定一个包含大写字母和小写字母的字符串，找到通过这些字母构造成的最长的回文串。<br>在构造过程中，请注意区分大小写。比如 “Aa” 不能当做一个回文字符串。<br>注意:<br>假设字符串的长度不会超过 1010。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"><span class="section">输入:</span></span><br><span class="line"><span class="string">"abccccdd"</span></span><br><span class="line"><span class="section">输出:</span></span><br><span class="line">7</span><br><span class="line"><span class="section">解释:</span></span><br><span class="line">我们可以构造的最长的回文串是<span class="string">"dccaccd"</span>, 它的长度是 7。</span><br></pre></td></tr></table></figure></p>
+<p><strong>思路</strong>：对于给定字符串，</p>
+<ol>
+<li>字符数量为偶数时，全部使用</li>
+<li>奇数时，丢掉一个，其余全部使用</li>
+<li>若有剩余字符，随便用一个放中间</li>
+</ol>
+<p>统计包含给定字符串中最长子串</p>
+<ol>
+<li>利用hash_map统计字符数量</li>
+<li>设置最长回文串偶数字符偶数字符长度为max_length=0；</li>
+<li>设置是否是否有中心点 标记flag=0;</li>
+<li>遍历每一个字符，字符数字符数为count，若count为偶数，<br> max_length+=count；若count为奇数，max_length+=count–1，flag=1；</li>
+<li>最终最长回文子串长度:max_length+flag。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> char_map[<span class="number">128</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="keyword">int</span> max_len = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">			char_map[s[i]]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">128</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (char_map[i] % <span class="number">2</span> == <span class="number">0</span>) max_len += char_map[i];</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				max_len += char_map[i] - <span class="number">1</span>;</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span>  max_len + flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Solution solve;</span><br><span class="line">	<span class="built_in">string</span> s = <span class="string">"abccccddaa"</span>;</span><br><span class="line">	<span class="keyword">int</span> result = solve.longestPalindrome(s);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, result);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-LeetCode290-Word-Pattern"><a href="#3-2-LeetCode290-Word-Pattern" class="headerlink" title="3.2 LeetCode290.Word Pattern"></a>3.2 LeetCode290.Word Pattern</h3><p>给定一种规律 pattern 和一个字符串 str ，判断 str 是否遵循相同的规律。<br>这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">示例<span class="number">1</span>:</span><br><span class="line">输入: <span class="attr">pattern</span> = <span class="string">"abba"</span>, <span class="attr">str</span> = <span class="string">"dog cat cat dog"</span></span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="number">2</span>:</span><br><span class="line">输入:<span class="attr">pattern</span> = <span class="string">"abba"</span>, <span class="attr">str</span> = <span class="string">"dog cat cat fish"</span></span><br><span class="line">输出: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="number">3</span>:</span><br><span class="line">输入: <span class="attr">pattern</span> = <span class="string">"aaaa"</span>, <span class="attr">str</span> = <span class="string">"dog cat cat dog"</span></span><br><span class="line">输出: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="number">4</span>:</span><br><span class="line">输入: <span class="attr">pattern</span> = <span class="string">"abba"</span>, <span class="attr">str</span> = <span class="string">"dog dog dog dog"</span></span><br><span class="line">输出: <span class="literal">false</span></span><br><span class="line">说明:</span><br><span class="line">你可以假设 pattern 只包含小写字母， str 包含了由单个空格分隔的小写字母。</span><br></pre></td></tr></table></figure></p>
+<p><strong>思路</strong>：考虑几种情况</p>
+<ol>
+<li>当拆解出一个单词，若单词出现，则当前单词对应的pattern字符必为该单词曾经对应的pattern字符</li>
+<li>当拆解出一个单词，若单词没有出现时，则对应字符也应该未出现。</li>
+<li>单词个数应该与pattern字符数匹配。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">wordPattern</span><span class="params">(<span class="built_in">string</span> pattern, <span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">char</span>&gt; mp;  <span class="comment">// 单词到字符的映射</span></span><br><span class="line">		<span class="keyword">int</span> pos = <span class="number">0</span>;  <span class="comment">// 指向pattern当前字符</span></span><br><span class="line">		<span class="built_in">string</span> word;  <span class="comment">// 保存str拆下来的临时单词</span></span><br><span class="line">		str.push_back(<span class="string">' '</span>);  <span class="comment">// str尾部push一个空格， 使得最后一个单词也能和其他单词一样被拆分出来</span></span><br><span class="line">		<span class="keyword">char</span> used[<span class="number">128</span>] = &#123; <span class="number">0</span> &#125;;  <span class="comment">// 判断pattern字符是否出现，判断单词是否出现直接用mp.find(word) == mp.end();</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (str[i] != <span class="string">' '</span>) &#123;</span><br><span class="line">				word += str[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (pos == pattern.length()) <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 分割出来的单词没有字符可对应时直接false</span></span><br><span class="line">				<span class="keyword">if</span> (mp.find(word) == mp.end()) &#123;  <span class="comment">// 分割出来的单词如果没有出现，判断对此时对应的字符是否出现</span></span><br><span class="line">					<span class="keyword">if</span> (used[pattern[pos]]) <span class="keyword">return</span> <span class="literal">false</span>;   </span><br><span class="line">					</span><br><span class="line">					<span class="comment">// 当对应的字符未出现时，要做映射，改变used</span></span><br><span class="line">					mp[word] = pattern[pos];  </span><br><span class="line">					used[pattern[pos]] = <span class="number">1</span>;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (mp[word] != pattern[pos]) &#123;  <span class="comment">// 分割出来的单词已经出现，但是对应的字符与pos当前对应的字符不匹配时直接返回false</span></span><br><span class="line">						<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				pos++;</span><br><span class="line">				word = <span class="string">""</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (pos != pattern.size()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">string</span> pattern = <span class="string">"abba"</span>;</span><br><span class="line">	<span class="built_in">string</span> str = <span class="string">"dog cat cat dog"</span>;</span><br><span class="line">	Solution solve;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, solve.wordPattern(pattern, str));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-LeetCode49-Group-Anagrams"><a href="#3-3-LeetCode49-Group-Anagrams" class="headerlink" title="3.3 LeetCode49.Group Anagrams"></a>3.3 LeetCode49.Group Anagrams</h3><p>给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: [<span class="string">"eat"</span>, <span class="string">"tea"</span>, <span class="string">"tan"</span>, <span class="string">"ate"</span>, <span class="string">"nat"</span>, <span class="string">"bat"</span>],</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [<span class="string">"ate"</span>,<span class="string">"eat"</span>,<span class="string">"tea"</span>],</span><br><span class="line">  [<span class="string">"nat"</span>,<span class="string">"tan"</span>],</span><br><span class="line">  [<span class="string">"bat"</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">说明：</span><br><span class="line">所有输入均为小写字母。</span><br><span class="line">不考虑答案输出的顺序。</span><br></pre></td></tr></table></figure></p>
+<p><strong>思路</strong>：哈希表以内部进行排序的单词为key, 以字符串向量vector<string> 为value<br>设置字符串到字符向量的哈希表anagram，遍历字符串向量strs中的单词strs[i];<br>1) 设置临时变量str = strs[i],对str进行排序<br>2) 若str未出现在anagram中，设置str到一个空字符串向量的映射。<br>3) 将strs[i] 添加至字符串向量anagram[str]中，<br>遍历哈希表anagram，将全部key对应的value push到最终结果种树</string></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &gt; anagram;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &gt; result;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.size(); i++) &#123;</span><br><span class="line">			<span class="built_in">string</span> str = strs[i];</span><br><span class="line">			sort(str.begin(), str.end());</span><br><span class="line">			<span class="keyword">if</span> (anagram.find(str) == anagram.end()) &#123;</span><br><span class="line">				<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; item;</span><br><span class="line">				anagram[str] = item;</span><br><span class="line">			&#125;</span><br><span class="line">			anagram[str].push_back(strs[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &gt;::iterator it;</span><br><span class="line">		<span class="keyword">for</span> (it = anagram.begin(); it != anagram.end(); it++) &#123;</span><br><span class="line">			result.push_back((*it).second);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; strs;</span><br><span class="line">	strs.push_back(<span class="string">"eat"</span>);</span><br><span class="line">	strs.push_back(<span class="string">"tea"</span>);</span><br><span class="line">	strs.push_back(<span class="string">"tan"</span>);</span><br><span class="line">	strs.push_back(<span class="string">"ate"</span>);</span><br><span class="line">	strs.push_back(<span class="string">"nat"</span>);</span><br><span class="line">	strs.push_back(<span class="string">"bat"</span>);</span><br><span class="line">	Solution solve;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; &gt; result</span><br><span class="line">		= solve.groupAnagrams(strs);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.size(); i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; result[i].size(); j++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"[%s]"</span>, result[i][j].c_str());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-LeetCode3-Longest-Substring-Without-Repeating-Characters"><a href="#3-4-LeetCode3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3.4 LeetCode3.Longest Substring Without Repeating Characters"></a>3.4 LeetCode3.Longest Substring Without Repeating Characters</h3><p>给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"><span class="section">输入: "abcabcbb"</span></span><br><span class="line"><span class="section">输出: 3</span></span><br><span class="line"><span class="section">解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。</span></span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line"><span class="section">输入: "bbbbb"</span></span><br><span class="line"><span class="section">输出: 1</span></span><br><span class="line"><span class="section">解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。</span></span><br><span class="line">示例 3:</span><br><span class="line"></span><br><span class="line"><span class="section">输入: "pwwkew"</span></span><br><span class="line"><span class="section">输出: 3</span></span><br><span class="line"><span class="section">解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。</span></span><br><span class="line">请注意，你的答案必须是 子串 的长度，<span class="string">"pwke"</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+<p><strong>思路</strong>：使用双指针窗口的方式，记录中间的单词，返回最大的长度<br>有几个重要的数据结构：<br>begin, i(双指针窗口)， word: 记录begin，i之间未重复字符串<br>result: 记录变化的word中最大长度<br>char_map[128]：用于判重,记录begin,i之间的字符个数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> char_map[<span class="number">128</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="built_in">string</span> word = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">while</span> (i &lt; s.length()) &#123;</span><br><span class="line">			char_map[s[i]]++;</span><br><span class="line">			<span class="keyword">if</span> (char_map[s[i]] == <span class="number">1</span>) &#123; <span class="comment">// 若s[i]只在前面出现一次</span></span><br><span class="line">				word += s[i];          <span class="comment">// word更新</span></span><br><span class="line">				<span class="keyword">if</span> (result &lt; word.length()) &#123;  <span class="comment">// 更新 result</span></span><br><span class="line">					result = word.length();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">while</span> (begin &lt; i &amp;&amp; char_map[s[i]] &gt; <span class="number">1</span>) &#123;  <span class="comment">// 当s[i]在前面已经出现时，跟新char_map[]，begin至到char_map[]中该重复的字符减为1为止</span></span><br><span class="line">					char_map[s[begin]]--;</span><br><span class="line">					begin++;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// 更新word</span></span><br><span class="line">				word = <span class="string">""</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = begin; j &lt;= i; j++) &#123;</span><br><span class="line">					word += s[j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution1</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">string</span> word = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">int</span> char_map[<span class="number">128</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">			char_map[s[i]]++;</span><br><span class="line">			<span class="keyword">if</span> (char_map[s[i]] == <span class="number">1</span>) &#123;</span><br><span class="line">				word += s[i];</span><br><span class="line">				<span class="keyword">if</span> (result &lt; word.length()) &#123;</span><br><span class="line">					result = word.length();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">while</span> (begin &lt; i &amp;&amp; char_map[s[i]] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">					char_map[s[begin]]--;</span><br><span class="line">					begin++;</span><br><span class="line">				&#125;</span><br><span class="line">				word = <span class="string">""</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = begin; j &lt;= i; j++) &#123;</span><br><span class="line">					word += s[j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> s = <span class="string">"abcbadab"</span>;</span><br><span class="line">	Solution solve;</span><br><span class="line">	<span class="comment">// Solution1 solve;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, solve.lengthOfLongestSubstring(s));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-LeetCode187-Repeated-DNA-Sequences"><a href="#3-5-LeetCode187-Repeated-DNA-Sequences" class="headerlink" title="3.5.LeetCode187.Repeated DNA Sequences"></a>3.5.LeetCode187.Repeated DNA Sequences</h3><p>所有 DNA 由一系列缩写为 A，C，G 和 T 的核苷酸组成，例如：“ACGAATTCCG”。在研究 DNA 时，识别 DNA 中的重复序列有时会对研究非常有帮助。<br>编写一个函数来查找 DNA 分子中所有出现超多一次的10个字母长的序列（子串）。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: <span class="attr">s</span> = <span class="string">"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"</span></span><br><span class="line">输出: [<span class="string">"AAAAACCCCC"</span>, <span class="string">"CCCCCAAAAA"</span>]</span><br></pre></td></tr></table></figure></p>
+<p><strong>思路</strong>：</p>
+<ol>
+<li>枚举DNA所有长度为10的子串，将其插入map&lt;string, int&gt; str_map中;遍历map,将出现次数超过1次的子串都放进result中</li>
+<li>对ACGT四个字符编码<a href="二进制编码为00，01，10，11">0,1,2,3</a>,所以长度为10的子串可以用20bit的整数表示，比如：<br>11010101010000000000=873472 ，<ul>
+<li>用g_hash_map[1048576];1048576=2^10，表示所有长度为10的DNA序列的出现次数</li>
+<li>DNA前10个字符使用左移位运算转换成整数key，g_hash_map[key]++;</li>
+<li>DNA从第11字符开始，遇到一个字符即将key右移2位，并且将新的DNA字符s[i]转换成整数，或到最高位，g_hash_map[key]++;</li>
+<li>遍历哈希表g_hash_map,若g_hash_map[i]&gt;1， 将从低位到高位转换10个字符的DNA序列，push到result中</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; findRepeatedDnaSequences(<span class="built_in">string</span> s) &#123;</span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; str_map;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">			<span class="built_in">string</span> word = s.substr(i, <span class="number">10</span>);  <span class="comment">// 求i字符串字串函数，i为word的结束位置，10为子串大小</span></span><br><span class="line">			<span class="keyword">if</span> (str_map.find(word) != str_map.end()) &#123;</span><br><span class="line">				str_map[word] += <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				str_map[word] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">		<span class="keyword">for</span> (it = str_map.begin(); it != str_map.end(); it++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (it-&gt;second &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				result.push_back(it-&gt;first);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> g_hash_map[<span class="number">1048576</span>] = &#123; <span class="number">0</span> &#125;;  <span class="comment">// 太大用全局变量</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution1</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; findRepeatedDnaSequences(<span class="built_in">string</span> s) &#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">		<span class="keyword">if</span> (s.length() &lt; <span class="number">10</span>) <span class="keyword">return</span> result;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// g_hash_map初始化</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1048576</span>; i++) &#123;</span><br><span class="line">			g_hash_map[i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> char_map[<span class="number">128</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		char_map[<span class="string">'A'</span>] = <span class="number">0</span>;</span><br><span class="line">		char_map[<span class="string">'C'</span>] = <span class="number">1</span>;</span><br><span class="line">		char_map[<span class="string">'G'</span>] = <span class="number">2</span>;</span><br><span class="line">		char_map[<span class="string">'T'</span>] = <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">9</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			key = (key &lt;&lt; <span class="number">2</span>) + char_map[s[i]];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		g_hash_map[key] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">10</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">			key = key &gt;&gt; <span class="number">2</span>;</span><br><span class="line">			key = key | (char_map[s[i]] &lt;&lt; <span class="number">18</span>);</span><br><span class="line">			g_hash_map[key]++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1048576</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (g_hash_map[i] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				result.push_back(int2DNA(i));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="built_in">string</span> <span class="title">int2DNA</span><span class="params">(<span class="keyword">int</span> DNA)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> DNA_CHAR[] = &#123; <span class="string">'A'</span>, <span class="string">'C'</span>, <span class="string">'G'</span>, <span class="string">'T'</span> &#125;;</span><br><span class="line">		<span class="built_in">string</span> str;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			str += DNA_CHAR[DNA &amp; <span class="number">3</span>];</span><br><span class="line">			DNA = DNA &gt;&gt; <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> str;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> s = <span class="string">"AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"</span>;</span><br><span class="line">	<span class="comment">//Solution solve;</span></span><br><span class="line">	Solution1 solve;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; result = solve.findRepeatedDnaSequences(s);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.size(); i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, result[i].c_str());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-LeetCode76-Minimum-Window-Substring"><a href="#3-6-LeetCode76-Minimum-Window-Substring" class="headerlink" title="3.6 LeetCode76.Minimum Window Substring"></a>3.6 LeetCode76.Minimum Window Substring</h3><p>给定一个字符串 S 和一个字符串 T，请在 S 中找出包含 T 所有字母的最小子串。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: <span class="attr">S</span> = <span class="string">"ADOBECODEBANC"</span>, <span class="attr">T</span> = <span class="string">"ABC"</span></span><br><span class="line">输出: <span class="string">"BANC"</span></span><br><span class="line">说明：</span><br><span class="line"></span><br><span class="line">如果 S 中不存这样的子串，则返回空字符串 <span class="string">""</span>。</span><br><span class="line">如果 S 中存在这样的子串，我们保证它是唯一的答案。</span><br></pre></td></tr></table></figure></p>
+<p><strong>思路</strong>:</p>
+<ol>
+<li>map_t,map_s两个数组，记录t字符数量，s当前窗口的字符数量</li>
+<li>begin, i双指针窗口</li>
+<li>i移动，每移动一个字符检查是否可以更新窗口的结果（找到最小的包含T中各个字符的窗口）</li>
+<li>i指针向后逐个扫描逐个扫描逐个扫描逐个扫描字符串中的字符，在这个过程中，循环检查begin指针是否可以向前移动:<ul>
+<li>如果当前begin指向的字符T中没出现，直接前移前移前移前移begin；</li>
+<li>如果begin指向的字符T中出现了，但是当前区间窗口中的该字符数量足够，向前移动begin，并更新map_s；</li>
+<li>否则不能移动begin，跳出检查</li>
+</ul>
+</li>
+</ol>
+<p>在整个过程中，使用begin与i维护一个窗口，该窗口中的子串满足题目条件(包含T中所有字符)，窗口线性向前滑动，整体时间复杂度为O(n)O</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isWindow</span><span class="params">(<span class="keyword">int</span> map_s[], <span class="keyword">int</span> <span class="keyword">map_t</span>[], <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;<span class="keyword">vec_t</span>)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">vec_t</span>.size(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (map_s[<span class="keyword">vec_t</span>[i]] &lt; <span class="keyword">map_t</span>[<span class="keyword">vec_t</span>[i]]) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="built_in">string</span> <span class="title">minWindow</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">const</span> <span class="keyword">int</span> MAX_LEN = <span class="number">128</span>;</span><br><span class="line">		<span class="keyword">int</span> <span class="keyword">map_t</span>[MAX_LEN] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="keyword">int</span> map_s[MAX_LEN] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="keyword">vec_t</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t.length(); i++)&#123;</span><br><span class="line">			<span class="keyword">map_t</span>[t[i]]++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAX_LEN; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">map_t</span>[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">vec_t</span>.push_back(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">string</span> result;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">			map_s[s[i]]++;</span><br><span class="line">			<span class="keyword">while</span> (begin &lt; i) &#123;</span><br><span class="line">				<span class="keyword">char</span> begin_ch = s[begin];</span><br><span class="line">				<span class="keyword">if</span> (<span class="keyword">map_t</span>[begin_ch] == <span class="number">0</span>) &#123;  <span class="comment">// 如果begin_ch不在map_t中，begin移动</span></span><br><span class="line">					begin++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (map_s[begin_ch] &gt; <span class="keyword">map_t</span>[begin_ch]) &#123;</span><br><span class="line">					map_s[begin_ch]--;</span><br><span class="line">					begin++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;  <span class="comment">// 当begin不能移动时，直接跳出循环</span></span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (isWindow(map_s, <span class="keyword">map_t</span>, <span class="keyword">vec_t</span>)) &#123;  <span class="comment">// 能进入到这的窗口是，s中begin指向t中一个字符且begin所指字符满足map_s[begin_ch] &lt;= map_t[begin_ch], i从1开始且大于begin</span></span><br><span class="line">				<span class="keyword">int</span> newWindowLen = i - begin + <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span> (result == <span class="string">""</span> || result.length() &gt; newWindowLen) &#123;</span><br><span class="line">					result = s.substr(begin, newWindowLen);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	Solution solve;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">string</span> result = solve.minWindow(<span class="string">"ADOBECODEBANC"</span>, <span class="string">"ABC"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, result.c_str());</span><br><span class="line">	result = solve.minWindow(<span class="string">"MADOBCCABEC"</span>, <span class="string">"ABCC"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, result.c_str());</span><br><span class="line">	result = solve.minWindow(<span class="string">"aa"</span>, <span class="string">"aa"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, result.c_str());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/565e459b.html" rel="next" title="Crawl_1_maoyan">
+                <i class="fa fa-chevron-left"></i> Crawl_1_maoyan
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jj.png" alt="dxming">
+            
+              <p class="site-author-name" itemprop="name">dxming</p>
+              <div class="site-description motion-element" itemprop="description">Coding Changes the World</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Betterming" title="GitHub &rarr; https://github.com/Betterming" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qq_32074689" title="CSDN &rarr; https://blog.csdn.net/qq_32074689" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:2652214420@qq.com" title="E-Mail &rarr; mailto:2652214420@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://xq99.me/" title="https://xq99.me/" rel="noopener" target="_blank">冰水鉴心</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zgcr1991.com/" title="https://www.zgcr1991.com/" rel="noopener" target="_blank">记忆碎片</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第六节：哈希表和字符串"><span class="nav-text">第六节：哈希表和字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基础"><span class="nav-text">1. 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-预备知识"><span class="nav-text">2. 预备知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-例题"><span class="nav-text">3. 例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-LeetCode409-Longest-Palindrome"><span class="nav-text">3.1 LeetCode409.Longest Palindrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-LeetCode290-Word-Pattern"><span class="nav-text">3.2 LeetCode290.Word Pattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-LeetCode49-Group-Anagrams"><span class="nav-text">3.3 LeetCode49.Group Anagrams</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-LeetCode3-Longest-Substring-Without-Repeating-Characters"><span class="nav-text">3.4 LeetCode3.Longest Substring Without Repeating Characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-LeetCode187-Repeated-DNA-Sequences"><span class="nav-text">3.5.LeetCode187.Repeated DNA Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-LeetCode76-Minimum-Window-Substring"><span class="nav-text">3.6 LeetCode76.Minimum Window Substring</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dxming</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+    appKey: 'c2xf9umX12LNH4eM3vaHiV4g',
+    placeholder: '来呀！快活呀！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.1.1"></script>
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'qilO4c8MBdJwLofDNDqHsBM1-gzGzoHsz',
+                'X-LC-Key': 'c2xf9umX12LNH4eM3vaHiV4g',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '500px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 18970,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+</html>
