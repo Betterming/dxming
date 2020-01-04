@@ -90,8 +90,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>BFS</tag>
         <tag>DFS</tag>
+        <tag>BFS</tag>
       </tags>
   </entry>
   <entry>
@@ -161,9 +161,9 @@
         <category>Algorithm</category>
       </categories>
       <tags>
+        <tag>AVL</tag>
         <tag>Traversal</tag>
         <tag>Order</tag>
-        <tag>AVL</tag>
       </tags>
   </entry>
   <entry>
@@ -311,10 +311,10 @@
         <category>Algorithm</category>
       </categories>
       <tags>
-        <tag>BST</tag>
-        <tag>PAT</tag>
         <tag>Traversal</tag>
         <tag>Order</tag>
+        <tag>BST</tag>
+        <tag>PAT</tag>
       </tags>
   </entry>
   <entry>

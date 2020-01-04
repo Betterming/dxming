@@ -253,9 +253,9 @@
       <category term="LeetCode" scheme="http://looby.coding.me/betterming/categories/LeetCode/"/>
     
     
-      <category term="BFS" scheme="http://looby.coding.me/betterming/tags/BFS/"/>
-    
       <category term="DFS" scheme="http://looby.coding.me/betterming/tags/DFS/"/>
+    
+      <category term="BFS" scheme="http://looby.coding.me/betterming/tags/BFS/"/>
     
   </entry>
   
@@ -403,11 +403,11 @@
       <category term="Algorithm" scheme="http://looby.coding.me/betterming/categories/Algorithm/"/>
     
     
+      <category term="AVL" scheme="http://looby.coding.me/betterming/tags/AVL/"/>
+    
       <category term="Traversal" scheme="http://looby.coding.me/betterming/tags/Traversal/"/>
     
       <category term="Order" scheme="http://looby.coding.me/betterming/tags/Order/"/>
-    
-      <category term="AVL" scheme="http://looby.coding.me/betterming/tags/AVL/"/>
     
   </entry>
   
